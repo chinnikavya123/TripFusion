@@ -3,11 +3,14 @@ function getElement(id){
 }
 
 function isValidEmail(email){
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
 }
 
 function clearFieldError(id){
-    const errorElement=getElement(`${id}-error`);
+    const errorElement=getElement(
+        `${id}-error`
+    );
 
     if(errorElement){
         errorElement.textContent="";
@@ -16,16 +19,22 @@ function clearFieldError(id){
     const input=getElement(id);
 
     if(input){
-        input.classList.remove("input-error");
+        input.classList.remove(
+            "input-error"
+        );
     }
 }
 
 function showFieldError(id,message){
     const input=getElement(id);
-    const errorElement=getElement(`${id}-error`);
+    const errorElement=getElement(
+        `${id}-error`
+    );
 
     if(input){
-        input.classList.add("input-error");
+        input.classList.add(
+            "input-error"
+        );
     }
 
     if(errorElement){
@@ -34,37 +43,69 @@ function showFieldError(id,message){
 }
 
 function clearFormErrors(form){
-    form.querySelectorAll("input").forEach((input)=>{
-        input.classList.remove("input-error");
-    });
+    form.querySelectorAll("input")
+        .forEach((input)=>{
+            input.classList.remove(
+                "input-error"
+            );
+        });
 
-    form.querySelectorAll(".field-error").forEach((element)=>{
+    form.querySelectorAll(
+        ".field-error"
+    ).forEach((element)=>{
         element.textContent="";
     });
 }
 
-function showMessage(element,message,type){
+function showMessage(
+    element,
+    message,
+    type
+){
+    if(!element){
+        return;
+    }
+
     element.textContent=message;
-    element.className=`auth-message ${type}`;
+    element.className=
+        `auth-message ${type||""}`;
 }
 
-function setButtonLoading(button,isLoading,loadingText,normalText){
+function setButtonLoading(
+    button,
+    isLoading,
+    loadingText,
+    normalText
+){
+    if(!button){
+        return;
+    }
+
     button.disabled=isLoading;
+
     button.textContent=isLoading
         ?loadingText
         :normalText;
 }
 
 async function parseResponse(response){
-    const contentType=response.headers.get("content-type")||"";
+    const contentType=
+        response.headers.get(
+            "content-type"
+        )||"";
 
-    if(contentType.includes("application/json")){
+    if(
+        contentType.includes(
+            "application/json"
+        )
+    ){
         return response.json();
     }
 
     return{
         success:false,
-        message:"The server returned an invalid response."
+        message:
+            "The server returned an invalid response."
     };
 }
 
@@ -78,11 +119,6 @@ function saveLoggedInUser(result){
         );
     }
 
-    /*
-     * The secure authentication mechanism is the HTTP-only cookie.
-     * Saving the token is useful only as an optional fallback for
-     * environments that block local development cookies.
-     */
     if(result.token){
         localStorage.setItem(
             "tripfusion_token",
@@ -91,27 +127,78 @@ function saveLoggedInUser(result){
     }
 }
 
+async function fetchWithTimeout(
+    url,
+    options={},
+    timeout=35000
+){
+    const controller=
+        new AbortController();
+
+    const timeoutId=setTimeout(()=>{
+        controller.abort();
+    },timeout);
+
+    try{
+        return await fetch(
+            url,
+            {
+                ...options,
+                signal:controller.signal
+            }
+        );
+    }finally{
+        clearTimeout(timeoutId);
+    }
+}
+
 async function registerUser(event){
     event.preventDefault();
 
     const form=event.currentTarget;
-    const messageElement=getElement("register-message");
-    const submitButton=getElement("register-button");
+
+    const messageElement=getElement(
+        "register-message"
+    );
+
+    const submitButton=getElement(
+        "register-button"
+    );
 
     clearFormErrors(form);
-    showMessage(messageElement,"","");
 
-    const fullName=getElement("register-name").value.trim();
-    const email=getElement("register-email")
+    showMessage(
+        messageElement,
+        "",
+        ""
+    );
+
+    const fullName=getElement(
+        "register-name"
+    ).value.trim();
+
+    const email=getElement(
+        "register-email"
+    )
         .value
         .trim()
         .toLowerCase();
-    const phone=getElement("register-phone").value.trim();
-    const password=getElement("register-password").value;
+
+    const phone=getElement(
+        "register-phone"
+    ).value.trim();
+
+    const password=getElement(
+        "register-password"
+    ).value;
+
     const confirmPassword=getElement(
         "register-confirm-password"
     ).value;
-    const acceptedTerms=getElement("register-terms").checked;
+
+    const acceptedTerms=getElement(
+        "register-terms"
+    ).checked;
 
     let hasError=false;
 
@@ -133,7 +220,10 @@ async function registerUser(event){
         hasError=true;
     }
 
-    if(phone&&!/^[0-9+\-\s]{7,15}$/.test(phone)){
+    if(
+        phone&&
+        !/^[0-9+\-\s]{7,15}$/.test(phone)
+    ){
         showFieldError(
             "register-phone",
             "Please enter a valid phone number."
@@ -181,30 +271,50 @@ async function registerUser(event){
         "Create Account"
     );
 
-    try{
-        const response=await fetch(
-            `${API_BASE_URL}/auth/register`,
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Accept":"application/json"
-                },
-                credentials:"include",
-                body:JSON.stringify({
-                    fullName,
-                    email,
-                    phone,
-                    password,
-                    country:"India",
-                    preferredCurrency:"INR"
-                })
-            }
-        );
+    let redirecting=false;
 
-        const result=await parseResponse(response);
+    try{
+        const response=
+            await fetchWithTimeout(
+                `${API_BASE_URL}/auth/register`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+                        "Accept":
+                            "application/json"
+                    },
+
+                    credentials:"include",
+
+                    body:JSON.stringify({
+                        fullName,
+                        email,
+                        phone,
+                        password,
+                        country:"India",
+                        preferredCurrency:"INR"
+                    })
+                },
+                35000
+            );
+
+        const result=
+            await parseResponse(response);
 
         if(!response.ok){
+            if(
+                result.requiresVerification&&
+                result.data?.email
+            ){
+                sessionStorage.setItem(
+                    "tripfusion_verification_email",
+                    result.data.email
+                );
+            }
+
             throw new Error(
                 result.message||
                 "Registration failed. Please try again."
@@ -212,32 +322,52 @@ async function registerUser(event){
         }
 
         sessionStorage.setItem(
-    "tripfusion_verification_email",
-    email
-);
+            "tripfusion_verification_email",
+            result.data?.email||email
+        );
 
-showMessage(
-    messageElement,
-    "OTP sent successfully. Redirecting to verification...",
-    "success"
-);
-
-setTimeout(()=>{
-    window.location.href="./verify-otp.html";
-},900);
-    }catch(error){
         showMessage(
             messageElement,
-            error.message,
-            "error"
+            "OTP sent successfully. Redirecting to verification...",
+            "success"
         );
 
-        setButtonLoading(
-            submitButton,
-            false,
-            "Creating Account...",
-            "Create Account"
+        redirecting=true;
+
+        setTimeout(()=>{
+            window.location.href=
+                "./verify-otp.html";
+        },900);
+    }catch(error){
+        let message=error.message;
+
+        if(error.name==="AbortError"){
+            message=
+                "Registration took too long. The email service may still be starting. Please try again after a few moments.";
+        }
+
+        if(
+            error instanceof TypeError&&
+            error.message.includes("fetch")
+        ){
+            message=
+                "Unable to reach the TripFusion server. Please check your connection and try again.";
+        }
+
+        showMessage(
+            messageElement,
+            message,
+            "error"
         );
+    }finally{
+        if(!redirecting){
+            setButtonLoading(
+                submitButton,
+                false,
+                "Creating Account...",
+                "Create Account"
+            );
+        }
     }
 }
 
@@ -245,18 +375,37 @@ async function loginUser(event){
     event.preventDefault();
 
     const form=event.currentTarget;
-    const messageElement=getElement("login-message");
-    const submitButton=getElement("login-button");
+
+    const messageElement=getElement(
+        "login-message"
+    );
+
+    const submitButton=getElement(
+        "login-button"
+    );
 
     clearFormErrors(form);
-    showMessage(messageElement,"","");
 
-    const email=getElement("login-email")
+    showMessage(
+        messageElement,
+        "",
+        ""
+    );
+
+    const email=getElement(
+        "login-email"
+    )
         .value
         .trim()
         .toLowerCase();
-    const password=getElement("login-password").value;
-    const rememberUser=getElement("remember-user").checked;
+
+    const password=getElement(
+        "login-password"
+    ).value;
+
+    const rememberUser=getElement(
+        "remember-user"
+    ).checked;
 
     let hasError=false;
 
@@ -289,53 +438,66 @@ async function loginUser(event){
         "Login"
     );
 
-    try{
-        const response=await fetch(
-            `${API_BASE_URL}/auth/login`,
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Accept":"application/json"
-                },
-                credentials:"include",
-                body:JSON.stringify({
-                    email,
-                    password
-                })
-            }
-        );
+    let redirecting=false;
 
-        const result=await parseResponse(response);
+    try{
+        const response=
+            await fetchWithTimeout(
+                `${API_BASE_URL}/auth/login`,
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json",
+                        "Accept":
+                            "application/json"
+                    },
+
+                    credentials:"include",
+
+                    body:JSON.stringify({
+                        email,
+                        password
+                    })
+                },
+                30000
+            );
+
+        const result=
+            await parseResponse(response);
 
         if(!response.ok){
-    if(
-        response.status===403&&
-        result.requiresVerification
-    ){
-        sessionStorage.setItem(
-            "tripfusion_verification_email",
-            result.data?.email||email
-        );
+            if(
+                response.status===403&&
+                result.requiresVerification
+            ){
+                sessionStorage.setItem(
+                    "tripfusion_verification_email",
+                    result.data?.email||email
+                );
 
-        showMessage(
-            messageElement,
-            "Your email is not verified. Redirecting...",
-            "error"
-        );
+                showMessage(
+                    messageElement,
+                    "Your email is not verified. Redirecting...",
+                    "error"
+                );
 
-        setTimeout(()=>{
-            window.location.href="./verify-otp.html";
-        },900);
+                redirecting=true;
 
-        return;
-    }
+                setTimeout(()=>{
+                    window.location.href=
+                        "./verify-otp.html";
+                },900);
 
-    throw new Error(
-        result.message||
-        "Login failed. Please check your credentials."
-    );
-}
+                return;
+            }
+
+            throw new Error(
+                result.message||
+                "Login failed. Please check your credentials."
+            );
+        }
 
         saveLoggedInUser(result);
 
@@ -356,71 +518,111 @@ async function loginUser(event){
             "success"
         );
 
+        redirecting=true;
+
         setTimeout(()=>{
-            window.location.href="./planner.html";
+            window.location.href=
+                "./planner.html";
         },800);
     }catch(error){
+        let message=error.message;
+
+        if(error.name==="AbortError"){
+            message=
+                "Login took too long. Please try again.";
+        }
+
+        if(
+            error instanceof TypeError&&
+            error.message.includes("fetch")
+        ){
+            message=
+                "Unable to reach the TripFusion server. Please try again shortly.";
+        }
+
         showMessage(
             messageElement,
-            error.message,
+            message,
             "error"
         );
-
-        setButtonLoading(
-            submitButton,
-            false,
-            "Logging In...",
-            "Login"
-        );
+    }finally{
+        if(!redirecting){
+            setButtonLoading(
+                submitButton,
+                false,
+                "Logging In...",
+                "Login"
+            );
+        }
     }
 }
 
 function initializePasswordToggles(){
-    document.querySelectorAll(".password-toggle")
+    document
+        .querySelectorAll(
+            ".password-toggle"
+        )
         .forEach((button)=>{
-            button.addEventListener("click",()=>{
-                const input=getElement(
-                    button.dataset.target
-                );
+            button.addEventListener(
+                "click",
+                ()=>{
+                    const input=getElement(
+                        button.dataset.target
+                    );
 
-                if(!input){
-                    return;
+                    if(!input){
+                        return;
+                    }
+
+                    const isVisible=
+                        input.type==="text";
+
+                    input.type=isVisible
+                        ?"password"
+                        :"text";
+
+                    button.textContent=isVisible
+                        ?"Show"
+                        :"Hide";
                 }
-
-                const passwordIsVisible=
-                    input.type==="text";
-
-                input.type=passwordIsVisible
-                    ?"password"
-                    :"text";
-
-                button.textContent=passwordIsVisible
-                    ?"Show"
-                    :"Hide";
-            });
+            );
         });
 }
 
 function initializeInputCleanup(){
-    document.querySelectorAll(".auth-field input")
+    document
+        .querySelectorAll(
+            ".auth-field input"
+        )
         .forEach((input)=>{
-            input.addEventListener("input",()=>{
-                clearFieldError(input.id);
-            });
+            input.addEventListener(
+                "input",
+                ()=>{
+                    clearFieldError(
+                        input.id
+                    );
+                }
+            );
         });
 }
 
 function initializeSavedEmail(){
-    const emailInput=getElement("login-email");
-    const rememberInput=getElement("remember-user");
+    const emailInput=getElement(
+        "login-email"
+    );
+
+    const rememberInput=getElement(
+        "remember-user"
+    );
 
     if(!emailInput||!rememberInput){
         return;
     }
 
-    const savedEmail=localStorage.getItem(
-        "tripfusion_saved_email"
-    );
+    const savedEmail=
+        localStorage.getItem(
+            "tripfusion_saved_email"
+        );
 
     if(savedEmail){
         emailInput.value=savedEmail;
@@ -428,25 +630,33 @@ function initializeSavedEmail(){
     }
 }
 
-document.addEventListener("DOMContentLoaded",()=>{
-    initializePasswordToggles();
-    initializeInputCleanup();
-    initializeSavedEmail();
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+        initializePasswordToggles();
+        initializeInputCleanup();
+        initializeSavedEmail();
 
-    const registerForm=getElement("register-form");
-    const loginForm=getElement("login-form");
-
-    if(registerForm){
-        registerForm.addEventListener(
-            "submit",
-            registerUser
+        const registerForm=getElement(
+            "register-form"
         );
-    }
 
-    if(loginForm){
-        loginForm.addEventListener(
-            "submit",
-            loginUser
+        const loginForm=getElement(
+            "login-form"
         );
+
+        if(registerForm){
+            registerForm.addEventListener(
+                "submit",
+                registerUser
+            );
+        }
+
+        if(loginForm){
+            loginForm.addEventListener(
+                "submit",
+                loginUser
+            );
+        }
     }
-});
+);
