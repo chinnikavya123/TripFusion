@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "seed": "node scripts/seed.js",
     "images": "node scripts/updateDestinationImages.js",
-    "test:sms":"node scripts/testSms.js"
+    "test:sms": "node scripts/testSms.js"
   },
   "keywords": [
     "travel",
@@ -32,6 +32,7 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.9.1",
     "morgan": "^1.10.0",
+    "nodemailer": "^9.0.4",
     "resend": "^6.18.1",
     "twilio": "^6.0.2"
   },
