@@ -491,13 +491,47 @@ async function sendTripDetailsEmail({
         </html>
     `;
 
-    const info=await transporter.sendMail({
-        from:getSender(),
-        to:user.email,
-        subject:
-            `${destinationName} Trip Plan | TripFusion`,
-        html
-    });
+    let info;
+
+    try{
+        info=await transporter.sendMail({
+            from:getSender(),
+            to:user.email,
+            subject:
+                `${destinationName} Trip Plan | TripFusion`,
+            html
+        });
+    }catch(error){
+        console.error(
+            "Trip email sending failed:",
+            {
+                code:error.code,
+                command:error.command,
+                message:error.message
+            }
+        );
+
+        if(error.code==="EAUTH"){
+            throw new Error(
+                "Gmail authentication failed. Check GMAIL_USER and GMAIL_APP_PASSWORD."
+            );
+        }
+
+        if(
+            error.code==="ETIMEDOUT"||
+            error.code==="ESOCKET"||
+            error.code==="ECONNECTION"
+        ){
+            throw new Error(
+                "The Gmail server did not respond. Please try again shortly."
+            );
+        }
+
+        throw new Error(
+            error.message||
+            "Unable to send trip details by email."
+        );
+    }
 
     console.log(
         "Trip email sent:",

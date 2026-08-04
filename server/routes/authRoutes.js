@@ -5,13 +5,11 @@ const{
     login,
     logout,
     getCurrentUser,
-    verifyEmailOTP,
-    resendEmailOTP,
     requestPasswordReset,
-verifyPasswordResetOTP,
-resetPassword,
-updateProfile,
-changePassword
+    verifyPasswordResetOTP,
+    resetPassword,
+    updateProfile,
+    changePassword
 }=require("../controllers/authController");
 
 const{
@@ -20,17 +18,14 @@ const{
 
 const router=express.Router();
 
-router.post("/register",register);
-router.post("/login",login);
-
 router.post(
-    "/verify-email",
-    verifyEmailOTP
+    "/register",
+    register
 );
 
 router.post(
-    "/resend-verification-otp",
-    resendEmailOTP
+    "/login",
+    login
 );
 
 router.post(
@@ -60,7 +55,15 @@ router.put(
     changePassword
 );
 
-router.post("/logout",logout);
-router.get("/me",protect,getCurrentUser);
+router.post(
+    "/logout",
+    logout
+);
+
+router.get(
+    "/me",
+    protect,
+    getCurrentUser
+);
 
 module.exports=router;

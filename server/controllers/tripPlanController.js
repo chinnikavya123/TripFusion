@@ -155,19 +155,30 @@ const emailTripPlan=asyncHandler(async(req,res)=>{
         });
     }
 
-    const emailResult=await sendTripDetailsEmail({
-        user:req.user,
-        tripPlan
-    });
+    try{
+        await sendTripDetailsEmail({
+            user:req.user,
+            tripPlan
+        });
 
-    res.status(200).json({
-        success:true,
-        message:
-            `Trip details were sent to ${req.user.email}`,
-        data:{
-            emailId:emailResult?.id||null
-        }
-    });
+        return res.status(200).json({
+            success:true,
+            message:
+                `Trip details were sent to ${req.user.email}`
+        });
+    }catch(emailError){
+        console.error(
+            "Trip email controller error:",
+            emailError
+        );
+
+        return res.status(502).json({
+            success:false,
+            message:
+                emailError.message||
+                "Unable to send trip details by email"
+        });
+    }
 });
 
 const smsTripPlan=asyncHandler(async(req,res)=>{

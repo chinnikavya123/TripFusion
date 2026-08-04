@@ -25,8 +25,12 @@ function clearFieldError(id){
     }
 }
 
-function showFieldError(id,message){
+function showFieldError(
+    id,
+    message
+){
     const input=getElement(id);
+
     const errorElement=getElement(
         `${id}-error`
     );
@@ -67,6 +71,7 @@ function showMessage(
     }
 
     element.textContent=message;
+
     element.className=
         `auth-message ${type||""}`;
 }
@@ -104,6 +109,7 @@ async function parseResponse(response){
 
     return{
         success:false,
+
         message:
             "The server returned an invalid response."
     };
@@ -130,7 +136,7 @@ function saveLoggedInUser(result){
 async function fetchWithTimeout(
     url,
     options={},
-    timeout=35000
+    timeout=30000
 ){
     const controller=
         new AbortController();
@@ -222,11 +228,12 @@ async function registerUser(event){
 
     if(
         phone&&
-        !/^[0-9+\-\s]{7,15}$/.test(phone)
+        !/^(\+91)?[6-9]\d{9}$/
+            .test(phone)
     ){
         showFieldError(
             "register-phone",
-            "Please enter a valid phone number."
+            "Please enter a valid Indian mobile number."
         );
 
         hasError=true;
@@ -283,6 +290,7 @@ async function registerUser(event){
                     headers:{
                         "Content-Type":
                             "application/json",
+
                         "Accept":
                             "application/json"
                     },
@@ -298,37 +306,24 @@ async function registerUser(event){
                         preferredCurrency:"INR"
                     })
                 },
-                35000
+                30000
             );
 
         const result=
             await parseResponse(response);
 
         if(!response.ok){
-            if(
-                result.requiresVerification&&
-                result.data?.email
-            ){
-                sessionStorage.setItem(
-                    "tripfusion_verification_email",
-                    result.data.email
-                );
-            }
-
             throw new Error(
                 result.message||
                 "Registration failed. Please try again."
             );
         }
 
-        sessionStorage.setItem(
-            "tripfusion_verification_email",
-            result.data?.email||email
-        );
+        saveLoggedInUser(result);
 
         showMessage(
             messageElement,
-            "OTP sent successfully. Redirecting to verification...",
+            "Registration successful. Redirecting...",
             "success"
         );
 
@@ -336,14 +331,16 @@ async function registerUser(event){
 
         setTimeout(()=>{
             window.location.href=
-                "./verify-otp.html";
-        },900);
+                "./planner.html";
+        },800);
     }catch(error){
-        let message=error.message;
+        let message=
+            error.message||
+            "Registration failed.";
 
         if(error.name==="AbortError"){
             message=
-                "Registration took too long. The email service may still be starting. Please try again after a few moments.";
+                "Registration took too long. Please try again.";
         }
 
         if(
@@ -351,7 +348,7 @@ async function registerUser(event){
             error.message.includes("fetch")
         ){
             message=
-                "Unable to reach the TripFusion server. Please check your connection and try again.";
+                "Unable to reach the TripFusion server. Please try again shortly.";
         }
 
         showMessage(
@@ -450,6 +447,7 @@ async function loginUser(event){
                     headers:{
                         "Content-Type":
                             "application/json",
+
                         "Accept":
                             "application/json"
                     },
@@ -468,31 +466,6 @@ async function loginUser(event){
             await parseResponse(response);
 
         if(!response.ok){
-            if(
-                response.status===403&&
-                result.requiresVerification
-            ){
-                sessionStorage.setItem(
-                    "tripfusion_verification_email",
-                    result.data?.email||email
-                );
-
-                showMessage(
-                    messageElement,
-                    "Your email is not verified. Redirecting...",
-                    "error"
-                );
-
-                redirecting=true;
-
-                setTimeout(()=>{
-                    window.location.href=
-                        "./verify-otp.html";
-                },900);
-
-                return;
-            }
-
             throw new Error(
                 result.message||
                 "Login failed. Please check your credentials."
@@ -525,7 +498,9 @@ async function loginUser(event){
                 "./planner.html";
         },800);
     }catch(error){
-        let message=error.message;
+        let message=
+            error.message||
+            "Login failed.";
 
         if(error.name==="AbortError"){
             message=
