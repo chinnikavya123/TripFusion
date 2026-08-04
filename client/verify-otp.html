@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <title>Verify Email | TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/auth.css">
+</head>
+
+<body class="auth-body">
+
+    <header class="navbar auth-navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <a href="./login.html" class="auth-home-link">
+            Back to Login
+        </a>
+    </header>
+
+    <main class="otp-page">
+
+        <section class="otp-card">
+
+            <div class="otp-icon">
+                ✉
+            </div>
+
+            <p class="otp-label">
+                EMAIL VERIFICATION
+            </p>
+
+            <h1>Enter your OTP</h1>
+
+            <p class="otp-description">
+                We sent a six-digit verification code to
+                <strong id="verification-email"></strong>.
+            </p>
+
+            <form id="otp-form">
+
+                <label for="otp-input">
+                    Verification Code
+                </label>
+
+                <input
+                    type="text"
+                    id="otp-input"
+                    inputmode="numeric"
+                    maxlength="6"
+                    placeholder="000000"
+                    autocomplete="one-time-code"
+                    required
+                >
+
+                <p
+                    id="otp-message"
+                    class="auth-message"
+                ></p>
+
+                <button
+                    type="submit"
+                    id="verify-otp-button"
+                    class="auth-submit-button"
+                >
+                    Verify Email
+                </button>
+
+            </form>
+
+            <div class="otp-resend-area">
+                <span>Did not receive the code?</span>
+
+                <button
+                    type="button"
+                    id="resend-otp-button"
+                >
+                    Resend OTP
+                </button>
+            </div>
+
+            <p
+                id="resend-message"
+                class="auth-message"
+            ></p>
+
+        </section>
+
+    </main>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/verify-otp.js"></script>
+
+</body>
+</html>

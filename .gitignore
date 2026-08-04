@@ -1,0 +1,77 @@
+# =========================
+# Backend
+# =========================
+server/node_modules/
+server/.env
+server/*.log
+server/logs/
+server/coverage/
+server/.cache/
+
+# Database temporary files
+server/*.db
+server/*.db-shm
+server/*.db-wal
+
+# Python files, if any
+server/__pycache__/
+server/**/*.pyc
+*.pyc
+__pycache__/
+
+# =========================
+# Frontend
+# =========================
+client/node_modules/
+client/.env
+client/dist/
+client/build/
+client/.cache/
+
+# =========================
+# Root-level dependencies
+# =========================
+node_modules/
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Keep example environment files
+!.env.example
+!server/.env.example
+!client/.env.example
+
+# =========================
+# Logs
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Editor and system files
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Deployment folders
+# =========================
+.vercel/
+.render/
+.netlify/
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.swp
+*.swo

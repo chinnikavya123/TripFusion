@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Explore travel destinations across India with TripFusion."
+    >
+
+    <title>Explore Destinations | TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/destination.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <button
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="./index.html">Home</a>
+
+            <a
+                href="./destinations.html"
+                class="active"
+            >
+                Destinations
+            </a>
+
+            <a href="./planner.html">Planner</a>
+    <a href="./my-trips.html">My Trips</a>
+    <a href="./wishlist.html">Wishlist</a>
+    <a href="./profile.html">Profile</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a
+                href="./login.html"
+                class="login-button"
+            >
+                Login
+            </a>
+
+            <a
+                href="./register.html"
+                class="register-button"
+            >
+                Get Started
+            </a>
+        </div>
+    </header>
+
+    <main class="destinations-page">
+
+        <section class="destinations-hero">
+
+            <p>EXPLORE INDIA</p>
+
+            <h1>
+                Find your next unforgettable destination
+            </h1>
+
+            <span>
+                Browse beaches, hill stations, heritage locations,
+                adventure destinations and peaceful nature escapes.
+            </span>
+
+        </section>
+
+        <section class="destination-controls">
+
+            <div class="search-control">
+
+                <label for="search-input">
+                    Search
+                </label>
+
+                <input
+                    id="search-input"
+                    type="text"
+                    placeholder="Search by destination, city or state"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="filter-control">
+
+                <label for="category-filter">
+                    Category
+                </label>
+
+                <select id="category-filter">
+                    <option value="">All Categories</option>
+                    <option value="Beach">Beach</option>
+                    <option value="Hill Station">
+                        Hill Station
+                    </option>
+                    <option value="Heritage">Heritage</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Nature">Nature</option>
+                    <option value="Wildlife">Wildlife</option>
+                    <option value="Pilgrimage">Pilgrimage</option>
+                    <option value="Honeymoon">Honeymoon</option>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Weekend Getaway">
+                        Weekend Getaway
+                    </option>
+                </select>
+
+            </div>
+
+            <div class="filter-control">
+
+                <label for="sort-filter">
+                    Sort By
+                </label>
+
+                <select id="sort-filter">
+                    <option value="newest">
+                        Recently Added
+                    </option>
+
+                    <option value="rating">
+                        Highest Rated
+                    </option>
+
+                    <option value="priceLow">
+                        Price: Low to High
+                    </option>
+
+                    <option value="priceHigh">
+                        Price: High to Low
+                    </option>
+
+                    <option value="nameAsc">
+                        Name: A to Z
+                    </option>
+
+                    <option value="nameDesc">
+                        Name: Z to A
+                    </option>
+                </select>
+
+            </div>
+
+        </section>
+
+        <section class="destination-results-section">
+
+            <div class="results-header">
+
+                <h2>
+                    Available destinations
+                </h2>
+
+                <p id="results-text">
+                    Loading destinations...
+                </p>
+
+            </div>
+
+            <div
+                id="loading-message"
+                class="loading-message"
+            >
+                Loading destinations...
+            </div>
+
+            <div
+                id="empty-message"
+                class="empty-message"
+                style="display:none"
+            >
+                No destinations match your filters.
+            </div>
+
+            <div
+                id="destinations-container"
+                class="destination-grid"
+            ></div>
+
+            <div
+                id="pagination-container"
+                class="pagination-container"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="footer-content">
+
+            <div>
+                <a
+                    href="./index.html"
+                    class="logo footer-logo"
+                >
+                    TripFusion 
+                </a>
+
+                <p>
+                    Explore, plan and experience smarter journeys.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <a href="./index.html">Home</a>
+                <a href="./destinations.html">Destinations</a>
+                <a href="./my-trips.html">My Trips</a>
+                <a href="#">Planner</a>
+                <a href="#">Contact</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 TripFusion. Built by Chinni Kavya Sri.
+        </div>
+
+    </footer>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/destinations.js"></script>
+
+</body>
+</html>

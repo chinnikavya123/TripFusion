@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <title>Trip Details | TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <nav class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./destinations.html">Destinations</a>
+            <a href="./planner.html">Planner</a>
+            <a href="./my-trips.html" class="active">My Trips</a>
+            <a href="./wishlist.html">Wishlist</a>
+            <a href="./profile.html">Profile</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button
+                type="button"
+                id="logout-button"
+                class="login-button"
+            >
+                Logout
+            </button>
+            <div class="nav-actions">
+    <button
+        type="button"
+        id="download-pdf-button"
+        class="primary-button"
+    >
+        Download PDF
+    </button>
+
+    <button
+        type="button"
+        id="email-trip-button"
+        class="primary-button"
+    >
+        Email Trip Details
+    </button>
+
+    <button
+        type="button"
+        id="sms-trip-button"
+        class="secondary-action-button"
+    >
+        Send SMS Summary
+    </button>
+
+    <button
+        type="button"
+        id="logout-button"
+        class="login-button"
+    >
+        Logout
+    </button>
+</div>
+        </div>
+    </header>
+
+    <main class="trip-details-page">
+
+        <section
+            id="trip-details-loading"
+            class="trip-details-message"
+        >
+            Loading trip details...
+        </section>
+
+        <section
+            id="trip-details-error"
+            class="trip-details-message trip-details-error"
+            style="display:none"
+        ></section>
+        <p
+    id="notification-message"
+    class="notification-message"
+></p>
+        <div id="trip-details-container"></div>
+
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            © 2026 TripFusion. Built by Chinni Kavya Sri.
+        </div>
+    </footer>
+
+    <script src="./js/config.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="./js/trip-details.js"></script>
+
+</body>
+</html>

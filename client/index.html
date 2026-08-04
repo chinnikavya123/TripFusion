@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="TripFusion is an AI-powered travel planning platform."
+    >
+
+    <title>TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <button class="menu-button" id="menu-button">
+            ☰
+        </button>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="#home">Home</a>
+            <a href="#destinations">Destinations</a>
+            <a href="./planner.html">Planner</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+            <a href="./my-trips.html">My Trips</a>
+            <a href="./wishlist.html">Wishlist</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="./login.html" class="login-button">
+    Login
+</a>
+
+<a href="./register.html" class="register-button">
+    Get Started
+</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+                <p class="hero-label">
+                    AI-POWERED TRAVEL PLANNING
+                </p>
+
+                <h1>
+                    Plan smarter.
+                    <span>Travel better.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Discover destinations, generate personalized itineraries,
+                    manage travel budgets, and explore safer journeys with
+                    TripFusion.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="./planner.html" class="primary-button">
+                        Plan My Trip
+                    </a>
+
+                    <button class="secondary-button">
+                        Explore Destinations
+                    </button>
+                </div>
+
+                <div class="server-card">
+                    <span
+                        class="status-dot"
+                        id="status-dot"
+                    ></span>
+
+                    <p id="server-status">
+                        Checking backend connection...
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <div class="search-field">
+                    <label for="destination">
+                        Destination
+                    </label>
+
+                    <input
+                        type="text"
+                        id="destination"
+                        placeholder="Where do you want to go?"
+                    >
+                </div>
+
+                <div class="search-field">
+                    <label for="start-date">
+                        Start Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="start-date"
+                    >
+                </div>
+
+                <div class="search-field">
+                    <label for="travelers">
+                        Travelers
+                    </label>
+
+                    <select id="travelers">
+                        <option value="1">1 Traveler</option>
+                        <option value="2">2 Travelers</option>
+                        <option value="3">3 Travelers</option>
+                        <option value="4">4 Travelers</option>
+                        <option value="5">5+ Travelers</option>
+                    </select>
+                </div>
+
+                <button class="search-button">
+                    Search Trips
+                </button>
+
+            </div>
+
+        </section>
+
+        <section class="destinations-section" id="destinations">
+
+            <div class="section-heading">
+                <p>POPULAR DESTINATIONS</p>
+
+                <h2>
+                    Explore unforgettable places
+                </h2>
+
+                <span>
+                    Discover beaches, hill stations, heritage locations,
+                    and hidden travel experiences.
+                </span>
+            </div>
+
+            <div class="destination-grid">
+
+                <article class="destination-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2"
+                        alt="Goa beach"
+                    >
+
+                    <div class="destination-content">
+                        <div class="destination-top">
+                            <h3>Goa</h3>
+                            <span>4.8 ★</span>
+                        </div>
+
+                        <p>
+                            Beaches, nightlife, water sports, and Portuguese
+                            heritage.
+                        </p>
+
+                        <button>Explore Goa</button>
+                    </div>
+                </article>
+
+                <article class="destination-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23"
+                        alt="Manali mountains"
+                    >
+
+                    <div class="destination-content">
+                        <div class="destination-top">
+                            <h3>Manali</h3>
+                            <span>4.7 ★</span>
+                        </div>
+
+                        <p>
+                            Snowy mountains, adventure activities, and scenic
+                            valleys.
+                        </p>
+
+                        <button>Explore Manali</button>
+                    </div>
+                </article>
+
+                <article class="destination-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1599661046289-e31897846e41"
+                        alt="Jaipur palace"
+                    >
+
+                    <div class="destination-content">
+                        <div class="destination-top">
+                            <h3>Jaipur</h3>
+                            <span>4.6 ★</span>
+                        </div>
+
+                        <p>
+                            Royal palaces, forts, markets, and rich Rajasthani
+                            culture.
+                        </p>
+
+                        <button>Explore Jaipur</button>
+                    </div>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="planner-section" id="planner">
+
+            <div class="planner-content">
+                <p class="section-label">
+                    SMART TRAVEL ASSISTANT
+                </p>
+
+                <h2>
+                    Let AI create your perfect itinerary
+                </h2>
+
+                <p>
+                    Enter your destination, budget, travel dates, and
+                    interests. TripFusion will generate a complete
+                    day-wise travel plan.
+                </p>
+
+                <ul>
+                    <li>Day-wise itinerary</li>
+                    <li>Budget breakdown</li>
+                    <li>Hotel and food suggestions</li>
+                    <li>Travel safety information</li>
+                    <li>Packing checklist</li>
+                </ul>
+
+                <button class="primary-button">
+                    Generate My Itinerary
+                </button>
+            </div>
+
+            <div class="planner-card">
+                <div>
+                    <span>Destination</span>
+                    <strong>Kerala</strong>
+                </div>
+
+                <div>
+                    <span>Duration</span>
+                    <strong>5 Days</strong>
+                </div>
+
+                <div>
+                    <span>Budget</span>
+                    <strong>₹35,000</strong>
+                </div>
+
+                <div>
+                    <span>Travel Style</span>
+                    <strong>Nature & Relaxation</strong>
+                </div>
+
+                <div class="planner-result">
+                    AI itinerary ready
+                </div>
+            </div>
+
+        </section>
+
+        <section class="features-section" id="features">
+
+            <div class="section-heading">
+                <p>WHY TRIPFUSION</p>
+
+                <h2>
+                    Everything needed for your journey
+                </h2>
+            </div>
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+                    <div class="feature-icon">AI</div>
+                    <h3>Smart Itineraries</h3>
+                    <p>
+                        Personalized travel plans based on budget,
+                        destination, and interests.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">₹</div>
+                    <h3>Budget Tracking</h3>
+                    <p>
+                        Plan and monitor travel expenses with clear
+                        category-wise insights.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">⌖</div>
+                    <h3>Local Experiences</h3>
+                    <p>
+                        Discover food walks, hidden attractions, cultural
+                        activities, and local guides.
+                    </p>
+                </article>
+
+                <article class="feature-card">
+                    <div class="feature-icon">✓</div>
+                    <h3>Travel Safety</h3>
+                    <p>
+                        Access safety tips, emergency contacts, and important
+                        destination information.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="contact-section" id="contact">
+
+            <div>
+                <p class="section-label">
+                    START YOUR JOURNEY
+                </p>
+
+                <h2>
+                    Ready to plan your next trip?
+                </h2>
+
+                <p>
+                    Create personalized itineraries and manage your entire
+                    journey in one place.
+                </p>
+            </div>
+
+            <button class="primary-button">
+                Get Started Free
+            </button>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="footer-content">
+            <div>
+                <a href="./index.html" class="logo footer-logo">
+                    TripFusion 
+                </a>
+
+                <p>
+                    AI-powered travel planning made simple.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#destinations">Destinations</a>
+                <a href="#planner">Planner</a>
+                <a href="#features">Features</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 TripFusion. Built by Chinni Kavya Sri.
+        </div>
+
+    </footer>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/home.js"></script>
+
+</body>
+</html>

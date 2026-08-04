@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Create your TripFusion travel account."
+    >
+
+    <title>Create Account | TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/auth.css">
+</head>
+
+<body class="auth-body">
+
+    <header class="navbar auth-navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <a href="./index.html" class="auth-home-link">
+            ← Back to Home
+        </a>
+    </header>
+
+    <main class="auth-page">
+
+        <section class="auth-visual register-visual">
+            <div class="auth-visual-overlay">
+                <p class="auth-label">
+                    START YOUR JOURNEY
+                </p>
+
+                <h1>
+                    Create memorable trips with TripFusion
+                </h1>
+
+                <p>
+                    Build personalized itineraries, save destinations,
+                    manage budgets and organize every part of your journey.
+                </p>
+
+                <div class="auth-benefits">
+                    <div>
+                        <span>✓</span>
+                        Personalized trip planning
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Saved trips and destinations
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Budget-friendly recommendations
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="auth-form-section">
+
+            <div class="auth-card">
+
+                <div class="auth-heading">
+                    <p>CREATE ACCOUNT</p>
+                    <h2>Join TripFusion</h2>
+
+                    <span>
+                        Enter your information to start planning trips.
+                    </span>
+                </div>
+
+                <form id="register-form" novalidate>
+
+                    <div class="auth-field">
+                        <label for="register-name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="register-name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            minlength="2"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            id="register-name-error"
+                        ></small>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="register-email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="register-email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                        <small
+                            class="field-error"
+                            id="register-email-error"
+                        ></small>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="register-phone">
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="register-phone"
+                            placeholder="Enter your phone number"
+                            autocomplete="tel"
+                            maxlength="15"
+                        >
+
+                        <small
+                            class="field-error"
+                            id="register-phone-error"
+                        ></small>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="register-password">
+                            Password
+                        </label>
+
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="register-password"
+                                placeholder="Minimum 8 characters"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="register-password"
+                                aria-label="Show or hide password"
+                            >
+                                Show
+                            </button>
+                        </div>
+
+                        <small
+                            class="field-error"
+                            id="register-password-error"
+                        ></small>
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="register-confirm-password">
+                            Confirm Password
+                        </label>
+
+                        <div class="password-wrapper">
+                            <input
+                                type="password"
+                                id="register-confirm-password"
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="register-confirm-password"
+                                aria-label="Show or hide password"
+                            >
+                                Show
+                            </button>
+                        </div>
+
+                        <small
+                            class="field-error"
+                            id="register-confirm-password-error"
+                        ></small>
+                    </div>
+
+                    <label class="terms-field">
+                        <input
+                            type="checkbox"
+                            id="register-terms"
+                            required
+                        >
+
+                        <span>
+                            I agree to the Terms of Service and Privacy
+                            Policy.
+                        </span>
+                    </label>
+
+                    <p
+                        id="register-message"
+                        class="auth-message"
+                    ></p>
+
+                    <button
+                        type="submit"
+                        id="register-button"
+                        class="auth-submit-button"
+                    >
+                        Create Account
+                    </button>
+
+                </form>
+
+                <p class="auth-switch">
+                    Already have an account?
+
+                    <a href="./login.html">
+                        Login
+                    </a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/auth.js"></script>
+
+</body>
+</html>

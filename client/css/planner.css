@@ -1,0 +1,310 @@
+.planner-page{
+    background:#f5f7fb;
+    min-height:100vh;
+    padding-top:82px;
+}
+
+.planner-hero{
+    background:
+        linear-gradient(
+            rgba(8,47,80,0.84),
+            rgba(8,47,80,0.84)
+        ),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee")
+        center/cover;
+    color:white;
+    padding:90px 7% 120px;
+    text-align:center;
+}
+
+.planner-hero p,
+.form-heading p,
+.planner-preview-card>p,
+.itinerary-heading p{
+    color:#74d5d5;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.planner-hero h1{
+    font-size:50px;
+    margin:12px auto;
+}
+
+.planner-hero span{
+    color:#e5edf3;
+    display:block;
+    margin:auto;
+    max-width:760px;
+}
+
+.planner-layout{
+    align-items:start;
+    display:grid;
+    gap:28px;
+    grid-template-columns:minmax(0,1.5fr) minmax(300px,0.6fr);
+    margin:-70px auto 0;
+    max-width:1250px;
+    padding:0 7% 90px;
+    position:relative;
+}
+
+.planner-form-card,
+.planner-preview-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:32px;
+}
+
+.form-heading h2,
+.planner-preview-card h2{
+    font-size:30px;
+    margin:8px 0 25px;
+}
+
+.planner-form-grid{
+    display:grid;
+    gap:20px;
+    grid-template-columns:repeat(2,1fr);
+}
+
+.planner-field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.planner-field label,
+.interest-section legend{
+    font-size:14px;
+    font-weight:700;
+}
+
+.planner-field input,
+.planner-field select{
+    background:#f8fafc;
+    border:1px solid var(--border);
+    border-radius:10px;
+    min-height:48px;
+    padding:0 14px;
+}
+
+.full-width{
+    grid-column:1/-1;
+}
+
+.interest-section{
+    border:1px solid var(--border);
+    border-radius:12px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    padding:18px;
+}
+
+.interest-section legend{
+    padding:0 8px;
+}
+
+.interest-section label{
+    align-items:center;
+    background:#f3f7f9;
+    border-radius:20px;
+    display:flex;
+    gap:7px;
+    padding:8px 12px;
+}
+
+.planner-submit-button{
+    margin-top:24px;
+    width:100%;
+}
+
+.planner-message{
+    margin-top:16px;
+}
+
+.planner-message.error{
+    color:var(--danger);
+}
+
+.planner-preview-card{
+    position:sticky;
+    top:105px;
+}
+
+.preview-item{
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+}
+
+.preview-item span{
+    color:var(--text-secondary);
+}
+
+.preview-item strong{
+    max-width:55%;
+    text-align:right;
+}
+
+.itinerary-section{
+    margin:0 auto;
+    max-width:1250px;
+    padding:0 7% 100px;
+}
+
+.itinerary-heading{
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.itinerary-heading p{
+    color:var(--secondary);
+}
+
+.itinerary-heading h2{
+    font-size:38px;
+    margin:8px 0;
+}
+
+.itinerary-heading span{
+    color:var(--text-secondary);
+}
+
+.budget-breakdown{
+    display:grid;
+    gap:15px;
+    grid-template-columns:repeat(5,1fr);
+    margin-bottom:35px;
+}
+
+.budget-breakdown article{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    padding:18px;
+}
+
+.budget-breakdown span{
+    color:var(--text-secondary);
+    font-size:13px;
+}
+
+.budget-breakdown strong{
+    color:var(--primary);
+    font-size:18px;
+    margin-top:5px;
+}
+
+.itinerary-container{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.itinerary-day-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    display:grid;
+    gap:22px;
+    grid-template-columns:100px 1fr;
+    padding:25px;
+}
+
+.day-number{
+    align-items:center;
+    background:var(--primary);
+    border-radius:12px;
+    color:white;
+    display:flex;
+    font-weight:800;
+    justify-content:center;
+    min-height:90px;
+}
+
+.day-content h3{
+    margin-bottom:13px;
+}
+
+.day-schedule{
+    color:var(--text-secondary);
+    display:grid;
+    gap:7px;
+}
+
+.day-schedule strong{
+    color:var(--text-primary);
+}
+
+@media(max-width:1000px){
+    .planner-layout{
+        grid-template-columns:1fr;
+    }
+
+    .planner-preview-card{
+        position:static;
+    }
+
+    .budget-breakdown{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+    .planner-page{
+        padding-top:72px;
+    }
+
+    .planner-hero{
+        padding:75px 5% 105px;
+    }
+
+    .planner-hero h1{
+        font-size:36px;
+    }
+
+    .planner-layout{
+        padding-left:5%;
+        padding-right:5%;
+    }
+
+    .planner-form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full-width{
+        grid-column:auto;
+    }
+
+    .budget-breakdown{
+        grid-template-columns:1fr;
+    }
+
+    .itinerary-day-card{
+        grid-template-columns:1fr;
+    }
+
+    .day-number{
+        min-height:55px;
+    }
+}
+
+.save-trip-wrapper{
+    margin-top:30px;
+    text-align:center;
+}
+
+.planner-message.success{
+    color:var(--success);
+    margin-top:12px;
+}

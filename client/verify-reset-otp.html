@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <title>Verify Reset OTP | TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/auth.css">
+</head>
+
+<body class="auth-body">
+
+    <header class="navbar auth-navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <a
+            href="./forgot-password.html"
+            class="auth-home-link"
+        >
+            ← Change Email
+        </a>
+    </header>
+
+    <main class="otp-page">
+
+        <section class="otp-card">
+
+            <div class="otp-icon">
+                ✉
+            </div>
+
+            <p class="otp-label">
+                PASSWORD RESET
+            </p>
+
+            <h1>Verify reset OTP</h1>
+
+            <p class="otp-description">
+                Enter the six-digit OTP sent to
+                <strong id="reset-email-display"></strong>.
+            </p>
+
+            <form id="reset-otp-form">
+
+                <label for="reset-otp-input">
+                    Reset Verification Code
+                </label>
+
+                <input
+                    type="text"
+                    id="reset-otp-input"
+                    inputmode="numeric"
+                    maxlength="6"
+                    placeholder="000000"
+                    autocomplete="one-time-code"
+                    required
+                >
+
+                <p
+                    id="reset-otp-message"
+                    class="auth-message"
+                ></p>
+
+                <button
+                    type="submit"
+                    id="verify-reset-otp-button"
+                    class="auth-submit-button"
+                >
+                    Verify OTP
+                </button>
+
+            </form>
+
+            <p class="auth-switch">
+                Need another OTP?
+
+                <a href="./forgot-password.html">
+                    Request Again
+                </a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/verify-reset-otp.js"></script>
+
+</body>
+</html>

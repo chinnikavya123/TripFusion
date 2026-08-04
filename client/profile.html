@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <title>My Profile | TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <nav class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./destinations.html">Destinations</a>
+            <a href="./planner.html">Planner</a>
+            <a href="./my-trips.html">My Trips</a>
+            <a href="./wishlist.html">Wishlist</a>
+            <a href="./profile.html" class="active">Profile</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button
+                type="button"
+                id="logout-button"
+                class="login-button"
+            >
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="profile-page">
+
+        <section class="profile-hero">
+            <p>MY ACCOUNT</p>
+            <h1>Profile and account settings</h1>
+            <span>
+                Manage your personal details and security settings.
+            </span>
+        </section>
+
+        <section class="profile-layout">
+
+            <aside class="profile-summary-card">
+
+                <div
+                    id="profile-avatar"
+                    class="profile-avatar"
+                >
+                    U
+                </div>
+
+                <h2 id="profile-display-name">
+                    Loading...
+                </h2>
+
+                <p id="profile-display-email"></p>
+
+                <span
+                    id="profile-verification-badge"
+                    class="verification-badge"
+                >
+                    Checking verification
+                </span>
+
+                <div class="profile-stat">
+                    <span>Saved Trips</span>
+                    <strong id="profile-trip-count">0</strong>
+                </div>
+
+                <div class="profile-stat">
+                    <span>Member Since</span>
+                    <strong id="profile-member-since">—</strong>
+                </div>
+
+            </aside>
+
+            <div class="profile-main-column">
+
+                <section class="profile-form-card">
+
+                    <div class="profile-section-heading">
+                        <p>PERSONAL INFORMATION</p>
+                        <h2>Edit profile</h2>
+                    </div>
+
+                    <form id="profile-form">
+
+                        <div class="profile-form-grid">
+
+                            <div class="auth-field">
+                                <label for="profile-name">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="profile-name"
+                                    required
+                                >
+                            </div>
+
+                            <div class="auth-field">
+                                <label for="profile-email">
+                                    Email
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="profile-email"
+                                    disabled
+                                >
+                            </div>
+
+                            <div class="auth-field">
+                                <label for="profile-phone">
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="profile-phone"
+                                    placeholder="+919876543210"
+                                >
+                            </div>
+
+                            <div class="auth-field">
+                                <label for="profile-country">
+                                    Country
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="profile-country"
+                                >
+                            </div>
+
+                            <div class="auth-field full-width">
+                                <label for="profile-currency">
+                                    Preferred Currency
+                                </label>
+
+                                <select id="profile-currency">
+                                    <option value="INR">INR</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="GBP">GBP</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <p
+                            id="profile-message"
+                            class="auth-message"
+                        ></p>
+
+                        <button
+                            type="submit"
+                            id="update-profile-button"
+                            class="primary-button"
+                        >
+                            Save Changes
+                        </button>
+
+                    </form>
+
+                </section>
+
+                <section class="profile-form-card">
+
+                    <div class="profile-section-heading">
+                        <p>ACCOUNT SECURITY</p>
+                        <h2>Change password</h2>
+                    </div>
+
+                    <form id="change-password-form">
+
+                        <div class="auth-field">
+                            <label for="current-password">
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="current-password"
+                                required
+                            >
+                        </div>
+
+                        <div class="auth-field">
+                            <label for="profile-new-password">
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="profile-new-password"
+                                minlength="8"
+                                required
+                            >
+                        </div>
+
+                        <div class="auth-field">
+                            <label for="profile-confirm-password">
+                                Confirm New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="profile-confirm-password"
+                                required
+                            >
+                        </div>
+
+                        <p
+                            id="password-message"
+                            class="auth-message"
+                        ></p>
+
+                        <button
+                            type="submit"
+                            id="change-password-button"
+                            class="primary-button"
+                        >
+                            Change Password
+                        </button>
+
+                    </form>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/profile.js"></script>
+
+</body>
+</html>

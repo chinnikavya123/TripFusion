@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="View and manage your saved TripFusion destinations."
+    >
+
+    <title>My Wishlist | TripFusion</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/destination.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="./index.html" class="logo">
+            TripFusion 
+        </a>
+
+        <nav class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./destinations.html">Destinations</a>
+            <a href="./planner.html">Planner</a>
+            <a href="./my-trips.html">My Trips</a>
+
+            <a
+                href="./wishlist.html"
+                class="active"
+            >
+                Wishlist
+            </a>
+
+            <a href="./profile.html">Profile</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button
+                type="button"
+                id="logout-button"
+                class="login-button"
+            >
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="wishlist-page">
+
+        <section class="wishlist-hero">
+
+            <div class="wishlist-hero-content">
+
+                <p class="wishlist-eyebrow">
+                    SAVED DESTINATIONS
+                </p>
+
+                <h1>Your travel wishlist</h1>
+
+                <span>
+                    Keep all your favourite destinations in one place,
+                    compare them and start planning when you are ready.
+                </span>
+
+            </div>
+
+        </section>
+
+        <section class="wishlist-content">
+
+            <div class="wishlist-toolbar">
+
+                <div>
+                    <p class="wishlist-section-label">
+                        YOUR COLLECTION
+                    </p>
+
+                    <h2>Favourite destinations</h2>
+
+                    <p id="wishlist-count">
+                        Loading your saved destinations...
+                    </p>
+                </div>
+
+                <div class="wishlist-toolbar-actions">
+
+                    <a
+                        href="./destinations.html"
+                        class="wishlist-secondary-link"
+                    >
+                        Browse More
+                    </a>
+
+                    <a
+                        href="./planner.html"
+                        class="primary-button"
+                    >
+                        Plan a Trip
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div
+                id="wishlist-loading"
+                class="wishlist-status-card"
+            >
+                <div class="wishlist-loader"></div>
+
+                <p>Loading your wishlist...</p>
+            </div>
+
+            <div
+                id="wishlist-empty"
+                class="wishlist-empty"
+                style="display:none"
+            >
+                <div class="wishlist-empty-icon">
+                    ♡
+                </div>
+
+                <h2>Your wishlist is empty</h2>
+
+                <p>
+                    Explore destinations and click the heart icon to
+                    save the places you would love to visit.
+                </p>
+
+                <a
+                    href="./destinations.html"
+                    class="primary-button"
+                >
+                    Explore Destinations
+                </a>
+            </div>
+
+            <div
+                id="wishlist-container"
+                class="wishlist-grid"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            © 2026 TripFusion. Built by Chinni Kavya Sri.
+        </div>
+    </footer>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/wishlist.js"></script>
+
+</body>
+</html>
