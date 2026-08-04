@@ -2089,3 +2089,203 @@
         align-items:flex-start;
     }
 }
+
+/* =====================================================
+   USEFUL PLACES NEARBY
+===================================================== */
+
+.nearby-places-section{
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    border-radius:22px;
+    box-shadow:0 16px 40px rgba(15,76,129,0.10);
+    margin:32px auto 48px;
+    max-width:1380px;
+    padding:30px;
+    width:calc(100% - 48px);
+}
+
+.nearby-places-header{
+    border-bottom:1px solid #e5ebf1;
+    margin-bottom:24px;
+    padding-bottom:20px;
+}
+
+.nearby-places-header .section-label{
+    color:#23aeb5;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:2.5px;
+    margin:0 0 8px;
+    text-transform:uppercase;
+}
+
+.nearby-places-header h2{
+    color:#10213a;
+    font-size:30px;
+    line-height:1.25;
+    margin:0 0 10px;
+}
+
+.nearby-places-subtitle{
+    color:#64748b;
+    font-size:15px;
+    line-height:1.6;
+    margin:0;
+    max-width:760px;
+}
+
+.nearby-places-grid{
+    display:grid;
+    gap:18px;
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0,1fr)
+        );
+}
+
+.nearby-place-card{
+    align-items:flex-start;
+    background:
+        linear-gradient(
+            180deg,
+            #f9fcff 0%,
+            #eef6fb 100%
+        );
+    border:1px solid #dce7ef;
+    border-radius:18px;
+    display:flex;
+    gap:14px;
+    min-height:190px;
+    padding:20px;
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nearby-place-card:hover{
+    box-shadow:
+        0 12px 28px
+        rgba(15,76,129,0.14);
+    transform:translateY(-4px);
+}
+
+.nearby-place-icon{
+    align-items:center;
+    background:#ffffff;
+    border:1px solid #dbe5ec;
+    border-radius:12px;
+    display:flex;
+    flex-shrink:0;
+    font-size:28px;
+    height:52px;
+    justify-content:center;
+    width:52px;
+}
+
+.nearby-place-content{
+    display:flex;
+    flex:1;
+    flex-direction:column;
+    min-width:0;
+}
+
+.nearby-place-content h3{
+    color:#172033;
+    font-size:18px;
+    margin:0 0 8px;
+}
+
+.nearby-place-content p{
+    color:#64748b;
+    font-size:14px;
+    line-height:1.6;
+    margin:0 0 16px;
+}
+
+.nearby-place-link{
+    align-items:center;
+    color:#14558b;
+    display:inline-flex;
+    font-size:14px;
+    font-weight:700;
+    margin-top:auto;
+    text-decoration:none;
+}
+
+.nearby-place-link:hover{
+    text-decoration:underline;
+}
+
+.nearby-map-action{
+    border-top:1px solid #e5ebf1;
+    display:flex;
+    justify-content:flex-end;
+    margin-top:24px;
+    padding-top:20px;
+}
+
+.nearby-main-map-link{
+    background:#14558b;
+    border:1px solid #14558b;
+    border-radius:12px;
+    color:#ffffff;
+    display:inline-flex;
+    font-size:15px;
+    font-weight:700;
+    padding:13px 22px;
+    text-decoration:none;
+}
+
+.nearby-main-map-link:hover{
+    background:#0f4777;
+    border-color:#0f4777;
+}
+
+.nearby-places-empty{
+    color:#64748b;
+    grid-column:1/-1;
+    padding:24px;
+    text-align:center;
+}
+
+@media(max-width:1100px){
+    .nearby-places-grid{
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+}
+
+@media(max-width:620px){
+    .nearby-places-section{
+        border-radius:16px;
+        margin:22px auto 34px;
+        padding:20px;
+        width:calc(100% - 28px);
+    }
+
+    .nearby-places-header h2{
+        font-size:24px;
+    }
+
+    .nearby-places-grid{
+        grid-template-columns:1fr;
+    }
+
+    .nearby-place-card{
+        min-height:auto;
+    }
+
+    .nearby-map-action{
+        justify-content:stretch;
+    }
+
+    .nearby-main-map-link{
+        justify-content:center;
+        width:100%;
+    }
+}

@@ -102,6 +102,18 @@ const packingProgressFill=document.getElementById(
     "packing-progress-fill"
 );
 
+const nearbyPlacesContainer=document.getElementById(
+    "nearby-places-container"
+);
+
+const nearbyPlacesTitle=document.getElementById(
+    "nearby-places-title"
+);
+
+const openDestinationMap=document.getElementById(
+    "open-destination-map"
+);
+
 let packingItems=[];
 
 const fallbackImage=
@@ -664,6 +676,163 @@ function clearNotification(){
     notificationMessage.className=
         "notification-message";
     notificationMessage.style.display="none";
+}
+
+function createGoogleMapsSearchURL(
+    searchType,
+    destinationName
+){
+    const query=
+        `${searchType} near ${destinationName}`;
+
+    return(
+        "https://www.google.com/maps/search/?api=1&query="+
+        encodeURIComponent(query)
+    );
+}
+
+function createDestinationMapURL(
+    destinationName
+){
+    return(
+        "https://www.google.com/maps/search/?api=1&query="+
+        encodeURIComponent(destinationName)
+    );
+}
+
+function renderNearbyPlaces(trip){
+    if(!nearbyPlacesContainer){
+        return;
+    }
+
+    const destination=trip.destination||{};
+
+    const destinationName=[
+        trip.destinationName,
+        destination.city,
+        destination.state
+    ]
+        .filter(Boolean)
+        .join(", ");
+
+    if(!destinationName){
+        nearbyPlacesContainer.innerHTML=`
+            <p class="nearby-places-empty">
+                Destination information is unavailable.
+            </p>
+        `;
+
+        return;
+    }
+
+    const places=[
+        {
+            title:"Nearby Hotels",
+            description:
+                "Find hotels and accommodation near your destination.",
+            icon:"🏨",
+            search:"Hotels"
+        },
+        {
+            title:"Restaurants",
+            description:
+                "Explore restaurants and local food options nearby.",
+            icon:"🍽️",
+            search:"Restaurants"
+        },
+        {
+            title:"Hospitals",
+            description:
+                "Locate hospitals and emergency medical services.",
+            icon:"🏥",
+            search:"Hospitals"
+        },
+        {
+            title:"ATMs",
+            description:
+                "Find nearby ATMs and banking services.",
+            icon:"🏧",
+            search:"ATMs"
+        },
+        {
+            title:"Petrol Pumps",
+            description:
+                "Locate fuel stations near your destination.",
+            icon:"⛽",
+            search:"Petrol pumps"
+        },
+        {
+            title:"Railway Stations",
+            description:
+                "Find nearby railway stations and transport links.",
+            icon:"🚆",
+            search:"Railway stations"
+        },
+        {
+            title:"Bus Stations",
+            description:
+                "Locate nearby bus stations and bus terminals.",
+            icon:"🚌",
+            search:"Bus stations"
+        },
+        {
+            title:"Airports",
+            description:
+                "Find airports near your saved destination.",
+            icon:"✈️",
+            search:"Airports"
+        }
+    ];
+
+    nearbyPlacesContainer.innerHTML=
+        places.map((place)=>{
+            const mapsURL=
+                createGoogleMapsSearchURL(
+                    place.search,
+                    destinationName
+                );
+
+            return`
+                <article class="nearby-place-card">
+                    <div class="nearby-place-icon">
+                        ${place.icon}
+                    </div>
+
+                    <div class="nearby-place-content">
+                        <h3>
+                            ${escapeHTML(place.title)}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                place.description
+                            )}
+                        </p>
+
+                        <a
+                            href="${mapsURL}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="nearby-place-link"
+                        >
+                            View on Google Maps
+                        </a>
+                    </div>
+                </article>
+            `;
+        }).join("");
+
+    if(nearbyPlacesTitle){
+        nearbyPlacesTitle.textContent=
+            `Useful places near ${destinationName}`;
+    }
+
+    if(openDestinationMap){
+        openDestinationMap.href=
+            createDestinationMapURL(
+                destinationName
+            );
+    }
 }
 
 function createBudgetCards(
@@ -1516,6 +1685,10 @@ async function loadTripDetails(){
         renderTripDetails(
             loadedTrip
         );
+
+        renderNearbyPlaces(
+    loadedTrip
+);
 
         if(loadingElement){
             loadingElement.style.display=
