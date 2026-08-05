@@ -500,6 +500,19 @@ function createSlug(value){
         .replace(/^-|-$/g,"");
 }
 
+function createHotelImageURL(
+    destination,
+    hotelNumber
+){
+    const seed=createSlug(
+        `${destination}-hotel-${hotelNumber}`
+    );
+
+    return(
+        `https://picsum.photos/seed/${seed}/900/600`
+    );
+}
+
 function createHotelsForDestination(config){
     const slug=createSlug(
         config.destination
