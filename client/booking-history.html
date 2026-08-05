@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
+
+    <title>Booking History | TripFusion</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/booking-history.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a
+            href="./index.html"
+            class="logo"
+        >
+            TripFusion
+        </a>
+
+        <nav class="nav-links">
+            <a href="./index.html">Home</a>
+            <a href="./destinations.html">Destinations</a>
+            <a href="./planner.html">Planner</a>
+            <a href="./my-trips.html">My Trips</a>
+            <a href="./hotels.html">Hotels</a>
+            <a
+                href="./booking-history.html"
+                class="active"
+            >
+                Booking History
+            </a>
+            <a href="./wishlist.html">Wishlist</a>
+            <a href="./profile.html">Profile</a>
+        </nav>
+
+        <div class="nav-actions">
+            <button
+                type="button"
+                id="logout-button"
+                class="login-button"
+            >
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="booking-history-page">
+
+        <section class="booking-history-header">
+            <p class="booking-history-label">
+                YOUR RESERVATIONS
+            </p>
+
+            <h1>
+                Booking History
+            </h1>
+
+            <p>
+                View upcoming, completed, cancelled and removed bookings.
+            </p>
+        </section>
+
+        <section class="booking-history-tabs">
+
+            <button
+                type="button"
+                class="booking-tab active"
+                data-filter="all"
+            >
+                All
+            </button>
+
+            <button
+                type="button"
+                class="booking-tab"
+                data-filter="upcoming"
+            >
+                Upcoming
+            </button>
+
+            <button
+                type="button"
+                class="booking-tab"
+                data-filter="completed"
+            >
+                Completed
+            </button>
+
+            <button
+                type="button"
+                class="booking-tab"
+                data-filter="cancelled"
+            >
+                Cancelled
+            </button>
+
+            <button
+                type="button"
+                class="booking-tab"
+                data-filter="deleted"
+            >
+                Removed
+            </button>
+
+        </section>
+
+        <section
+            id="booking-history-loading"
+            class="booking-history-message"
+        >
+            Loading booking history...
+        </section>
+
+        <section
+            id="booking-history-error"
+            class="booking-history-message booking-history-error"
+            style="display:none"
+        ></section>
+
+        <section
+            id="booking-history-empty"
+            class="booking-history-message"
+            style="display:none"
+        >
+            No bookings were found.
+        </section>
+
+        <section
+            id="booking-history-list"
+            class="booking-history-grid"
+        ></section>
+
+    </main>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/booking-history.js"></script>
+    <script src="./js/chat-assistant.js"></script>
+
+</body>
+</html>
