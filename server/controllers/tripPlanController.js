@@ -6,10 +6,6 @@ const{
     sendTripDetailsEmail
 }=require("../services/emailService");
 
-const{
-    sendTripSummarySMS
-}=require("../services/smsService");
-
 const createTripPlan=asyncHandler(async(req,res)=>{
     const{
         destinationId,
@@ -201,11 +197,6 @@ const smsTripPlan=asyncHandler(async(req,res)=>{
                 "No phone number is registered with your account"
         });
     }
-
-    const smsResult=await sendTripSummarySMS({
-        user:req.user,
-        tripPlan
-    });
 
     res.status(200).json({
         success:true,

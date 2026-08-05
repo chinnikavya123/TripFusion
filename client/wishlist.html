@@ -43,14 +43,33 @@
 </nav>
 
         <div class="nav-actions">
-            <button
-                type="button"
-                id="logout-button"
-                class="login-button"
-            >
-                Logout
-            </button>
-        </div>
+
+    <a
+        href="./login.html"
+        class="login-button"
+        data-auth="login"
+    >
+        Login
+    </a>
+
+    <a
+        href="./register.html"
+        class="register-button"
+        data-auth="register"
+    >
+        Register
+    </a>
+
+    <button
+        type="button"
+        class="login-button"
+        data-auth="logout"
+        style="display:none"
+    >
+        Logout
+    </button>
+
+</div>
     </header>
 
     <main class="wishlist-page">

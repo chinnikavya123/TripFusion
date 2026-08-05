@@ -18,10 +18,6 @@ const downloadPdfButton=document.getElementById(
     "download-pdf-button"
 );
 
-const smsTripButton=document.getElementById(
-    "sms-trip-button"
-);
-
 const weatherButton=document.getElementById(
     "weather-button"
 );
@@ -1988,86 +1984,6 @@ budgetButton?.addEventListener(
         scrollToSection(
             "budget-section"
         );
-    }
-);
-
-smsTripButton?.addEventListener(
-    "click",
-    async()=>{
-        if(!currentTripId){
-            showNotification(
-                "Trip information has not loaded yet.",
-                "error"
-            );
-
-            return;
-        }
-
-        const originalText=
-            smsTripButton.textContent;
-
-        smsTripButton.disabled=true;
-
-        smsTripButton.textContent=
-            "Sending SMS...";
-
-        clearNotification();
-
-        try{
-            const response=await fetch(
-                `${API_BASE_URL}/trip-plans/${
-                    encodeURIComponent(
-                        currentTripId
-                    )
-                }/sms`,
-                {
-                    method:"POST",
-                    credentials:"include",
-                    headers:getAuthHeaders()
-                }
-            );
-
-            const result=await response.json();
-
-            if(response.status===401){
-                window.location.href=
-                    "./login.html";
-
-                return;
-            }
-
-            if(!response.ok){
-                throw new Error(
-                    result.message||
-                    "Unable to send the SMS summary."
-                );
-            }
-
-            showNotification(
-                result.message||
-                "SMS summary sent successfully.",
-                "success"
-            );
-
-            smsTripButton.textContent=
-                "SMS Sent";
-        }catch(error){
-            console.error(
-                "SMS sending error:",
-                error
-            );
-
-            showNotification(
-                error.message||
-                "Unable to send the SMS summary.",
-                "error"
-            );
-
-            smsTripButton.textContent=
-                originalText;
-        }finally{
-            smsTripButton.disabled=false;
-        }
     }
 );
 
