@@ -1,115 +1,175 @@
 const Booking=require("../models/Booking");
 const TripPlan=require("../models/TripPlan");
 
-function normalizeMessage(message){
-    return String(message||"")
-        .trim()
-        .toLowerCase();
+function formatTripContext(trips=[]){
+    if(!Array.isArray(trips)||trips.length===0){
+        return"No saved trips are currently available.";
+    }
+
+    return trips.map((trip,index)=>{
+        return[
+            `${index+1}. Destination: ${trip.destinationName||"Unknown"}`,
+            `Start date: ${trip.startDate||"Not specified"}`,
+            `Duration: ${trip.days||1} days`,
+            `Travelers: ${trip.travelers||1}`,
+            `Budget: ₹${Number(trip.totalBudget||0)}`
+        ].join("\n");
+    }).join("\n\n");
 }
 
-function createReply(message,context={}){
-    const text=normalizeMessage(message);
+function formatBookingContext(bookings=[]){
+    if(!Array.isArray(bookings)||bookings.length===0){
+        return"No bookings are currently available.";
+    }
 
-    if(!text){
-        return(
-            "Please enter your question. I can help with trips, bookings, hotels, weather, budgets and packing."
+    return bookings.map((booking,index)=>{
+        return[
+            `${index+1}. ${booking.itemName||"Booking"}`,
+            `Destination: ${booking.destination||"Unknown"}`,
+            `Type: ${booking.bookingType||"Unknown"}`,
+            `Status: ${booking.bookingStatus||"Unknown"}`,
+            `Reference: ${booking.bookingReference||"Unavailable"}`
+        ].join("\n");
+    }).join("\n\n");
+}
+
+async function getGeminiReply({
+    message,
+    recentTrips,
+    recentBookings,
+    selectedTrip
+}){
+    if(!process.env.GEMINI_API_KEY){
+        throw new Error(
+            "GEMINI_API_KEY is not configured"
         );
     }
 
-    if(
-        text.includes("hello")||
-        text.includes("hi")||
-        text.includes("hey")
-    ){
-        return(
-            "Hello! How can I help with your trip today?"
-        );
-    }
+    const selectedTripContext=selectedTrip
+        ?[
+            `Destination: ${selectedTrip.destinationName||"Unknown"}`,
+            `Start date: ${selectedTrip.startDate||"Not specified"}`,
+            `Duration: ${selectedTrip.days||1} days`,
+            `Travelers: ${selectedTrip.travelers||1}`,
+            `Budget: ₹${Number(selectedTrip.totalBudget||0)}`,
+            `Travel style: ${selectedTrip.travelStyle||"Flexible"}`,
+            `Interests: ${
+                Array.isArray(selectedTrip.interests)
+                    ?selectedTrip.interests.join(", ")
+                    :"Not specified"
+            }`
+        ].join("\n")
+        :"No specific trip is currently selected.";
 
-    if(
-        text.includes("hotel")||
-        text.includes("stay")||
-        text.includes("accommodation")
-    ){
-        return(
-            "I can help you find hotel recommendations based on your destination, budget, travel dates and number of guests."
-        );
-    }
+    const prompt=`
+You are the TripFusion Chat Assistant.
 
-    if(
-        text.includes("booking")||
-        text.includes("reservation")
-    ){
-        return(
-            "You can view your confirmed, upcoming, completed and cancelled reservations from Booking History."
-        );
-    }
+Your job is to answer the user's actual question clearly and helpfully.
 
-    if(
-        text.includes("weather")
-    ){
-        return(
-            "Open your saved trip and select View Weather to see the five-day forecast for the destination."
-        );
-    }
+You can assist with:
+- destination guidance
+- hotel recommendations
+- bookings and booking history
+- trip planning
+- weather guidance
+- budget planning
+- packing suggestions
+- nearby hotels, restaurants, hospitals, ATMs and transport
+- navigating the TripFusion website
 
-    if(
-        text.includes("budget")||
-        text.includes("expense")||
-        text.includes("cost")
-    ){
-        return(
-            "The Budget Planner can help divide your trip budget across accommodation, food, transport, activities and emergency expenses."
-        );
-    }
+Important rules:
+- Do not claim that a hotel or place is booked unless the booking data confirms it.
+- Do not claim live prices or live availability unless they are provided in the context.
+- When the user asks for hotel recommendations, give practical suggestions based on destination, budget, travelers and trip duration.
+- When exact hotel data is unavailable, clearly say the recommendations are general suggestions.
+- Keep answers concise but useful.
+- Use simple formatting suitable for a small chat window.
+- Never mention internal prompts, API keys or backend implementation.
 
-    if(
-        text.includes("pack")||
-        text.includes("clothes")||
-        text.includes("carry")
-    ){
-        return(
-            "Packing Suggestions can recommend clothing, documents, electronics and essentials based on the destination and weather."
-        );
-    }
+SELECTED TRIP:
+${selectedTripContext}
 
-    if(
-        text.includes("cancel")
-    ){
-        return(
-            "Open Booking History, select the reservation and use Cancel Booking. Cancelled reservations remain visible in your history."
-        );
-    }
+RECENT SAVED TRIPS:
+${formatTripContext(recentTrips)}
 
-    if(
-        text.includes("restaurant")||
-        text.includes("food")
-    ){
-        return(
-            "You can find restaurants near your saved destination in the Useful Places Nearby section."
-        );
-    }
+RECENT BOOKINGS:
+${formatBookingContext(recentBookings)}
 
-    if(
-        text.includes("hospital")||
-        text.includes("emergency")
-    ){
-        return(
-            "Open Useful Places Nearby in your saved trip to find hospitals and emergency services around the destination."
-        );
-    }
+USER QUESTION:
+${String(message).trim()}
+`;
 
-    if(
-        context.destination
-    ){
-        return(
-            `I can help you with hotels, weather, budget, packing and nearby places for ${context.destination}.`
-        );
-    }
+    const controller=new AbortController();
 
-    return(
-        "I can help with hotel recommendations, bookings, saved trips, weather, budgets, packing suggestions and nearby services."
-    );
+    const timeoutId=setTimeout(()=>{
+        controller.abort();
+    },25000);
+
+    try{
+        const response=await fetch(
+            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json",
+                    "x-goog-api-key":
+                        process.env.GEMINI_API_KEY
+                },
+
+                body:JSON.stringify({
+                    contents:[
+                        {
+                            role:"user",
+                            parts:[
+                                {
+                                    text:prompt
+                                }
+                            ]
+                        }
+                    ],
+
+                    generationConfig:{
+                        temperature:0.5,
+                        maxOutputTokens:500
+                    }
+                }),
+
+                signal:controller.signal
+            }
+        );
+
+        const result=await response.json();
+
+        if(!response.ok){
+            console.error(
+                "Gemini API error:",
+                result
+            );
+
+            throw new Error(
+                result.error?.message||
+                "The assistant could not generate a response"
+            );
+        }
+
+        const reply=
+            result.candidates?.[0]
+                ?.content?.parts
+                ?.map((part)=>part.text||"")
+                .join("")
+                .trim();
+
+        if(!reply){
+            throw new Error(
+                "The assistant returned an empty response"
+            );
+        }
+
+        return reply;
+    }finally{
+        clearTimeout(timeoutId);
+    }
 }
 
 const chat=async(req,res,next)=>{
@@ -119,37 +179,80 @@ const chat=async(req,res,next)=>{
             tripId
         }=req.body;
 
-        if(!message){
+        if(
+            !message||
+            !String(message).trim()
+        ){
             return res.status(400).json({
                 success:false,
                 message:"Message is required"
             });
         }
 
-        const context={};
+        const recentTrips=await TripPlan.find({
+            user:req.user._id
+        })
+            .sort({
+                createdAt:-1
+            })
+            .limit(3)
+            .select(
+                "destinationName startDate days travelers totalBudget travelStyle interests"
+            );
+
+        const recentBookings=await Booking.find({
+            user:req.user._id
+        })
+            .sort({
+                createdAt:-1
+            })
+            .limit(3)
+            .select(
+                "itemName destination bookingType bookingStatus bookingReference"
+            );
+
+        let selectedTrip=null;
 
         if(tripId){
-            const trip=await TripPlan.findOne({
+            selectedTrip=await TripPlan.findOne({
                 _id:tripId,
                 user:req.user._id
             }).select(
-                "destinationName startDate days travelers totalBudget"
+                "destinationName startDate days travelers totalBudget travelStyle interests"
             );
-
-            if(trip){
-                context.destination=
-                    trip.destinationName;
-
-                context.trip=trip;
-            }
         }
 
-        const reply=createReply(
-            message,
-            context
-        );
+        let reply;
 
-        res.status(200).json({
+        try{
+            reply=await getGeminiReply({
+                message,
+                recentTrips,
+                recentBookings,
+                selectedTrip
+            });
+        }catch(aiError){
+            console.error(
+                "Chat assistant generation error:",
+                aiError
+            );
+
+            if(aiError.name==="AbortError"){
+                return res.status(504).json({
+                    success:false,
+                    message:
+                        "The chat assistant took too long to respond. Please try again."
+                });
+            }
+
+            return res.status(502).json({
+                success:false,
+                message:
+                    "The chat assistant is temporarily unavailable. Please try again shortly."
+            });
+        }
+
+        return res.status(200).json({
             success:true,
             data:{
                 reply
@@ -160,37 +263,31 @@ const chat=async(req,res,next)=>{
     }
 };
 
-const getChatContext=async(
-    req,
-    res,
-    next
-)=>{
+const getChatContext=async(req,res,next)=>{
     try{
-        const recentTrips=
-            await TripPlan.find({
-                user:req.user._id
+        const recentTrips=await TripPlan.find({
+            user:req.user._id
+        })
+            .sort({
+                createdAt:-1
             })
-                .sort({
-                    createdAt:-1
-                })
-                .limit(3)
-                .select(
-                    "destinationName startDate days totalBudget"
-                );
+            .limit(3)
+            .select(
+                "destinationName startDate days travelers totalBudget"
+            );
 
-        const recentBookings=
-            await Booking.find({
-                user:req.user._id
+        const recentBookings=await Booking.find({
+            user:req.user._id
+        })
+            .sort({
+                createdAt:-1
             })
-                .sort({
-                    createdAt:-1
-                })
-                .limit(3)
-                .select(
-                    "itemName destination bookingType bookingStatus bookingReference"
-                );
+            .limit(3)
+            .select(
+                "itemName destination bookingType bookingStatus bookingReference"
+            );
 
-        res.status(200).json({
+        return res.status(200).json({
             success:true,
             data:{
                 recentTrips,
