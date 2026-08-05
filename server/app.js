@@ -16,6 +16,9 @@ const bookingRoutes=require(
 const chatRoutes=require(
     "./routes/chatRoutes"
 );
+const hotelRoutes=require(
+    "./routes/hotelRoutes"
+);
 
 const{
     notFound,
@@ -81,6 +84,10 @@ app.use(
 app.use(
     "/api/chat",
     chatRoutes
+);
+app.use(
+    "/api/hotels",
+    hotelRoutes
 );
 
 app.use(notFound);

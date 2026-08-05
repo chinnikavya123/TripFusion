@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hotel Recommendations | TripFusion</title>
+
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/dashboard.css">
+<link rel="stylesheet" href="./css/hotels.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<a href="./index.html" class="logo">
+TripFusion
+</a>
+
+<nav class="nav-links">
+
+<a href="./index.html">Home</a>
+<a href="./destinations.html">Destinations</a>
+<a href="./planner.html">Planner</a>
+<a href="./my-trips.html">My Trips</a>
+<a href="./wishlist.html">Wishlist</a>
+<a href="./profile.html">Profile</a>
+
+</nav>
+
+</header>
+
+<section class="hotel-page">
+
+<div class="hotel-header">
+
+<h1>
+Recommended Hotels
+</h1>
+
+<p>
+Choose the perfect hotel for your trip.
+</p>
+
+</div>
+
+<div class="hotel-filter-bar">
+
+<input
+type="text"
+id="destination-input"
+placeholder="Destination">
+
+<select id="sort-select">
+
+<option value="">
+Sort By
+</option>
+
+<option value="rating">
+Highest Rating
+</option>
+
+<option value="price-low">
+Lowest Price
+</option>
+
+<option value="price-high">
+Highest Price
+</option>
+
+</select>
+
+<button id="search-hotels-button">
+
+Search
+
+</button>
+
+</div>
+
+<div class="hotel-disclaimer">
+    Demo recommendations — prices and availability are shown for project demonstration and are not live hotel inventory.
+</div>
+
+<div
+id="hotel-list"
+class="hotel-grid"
+>
+
+</div>
+
+</section>
+
+<script src="./js/config.js"></script>
+<script src="./js/hotels.js"></script>
+
+</body>
+
+</html>

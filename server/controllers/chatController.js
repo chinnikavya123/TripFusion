@@ -134,7 +134,7 @@ ${String(message).trim()}
                     ],
 
                     generationConfig:{
-    maxOutputTokens:1500,
+    maxOutputTokens:5000,
 
     thinkingConfig:{
         thinkingLevel:"low"
