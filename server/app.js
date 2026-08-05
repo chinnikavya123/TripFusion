@@ -9,8 +9,13 @@ const destinationRoutes=require("./routes/destinationRoutes");
 const tripPlanRoutes=require("./routes/tripPlanRoutes");
 const wishlistRoutes=require("./routes/wishlistRoutes");
 const reviewRoutes=require("./routes/reviewRoutes");
-
 const healthRoutes=require("./routes/healthRoutes");
+const bookingRoutes=require(
+    "./routes/bookingRoutes"
+);
+const chatRoutes=require(
+    "./routes/chatRoutes"
+);
 
 const{
     notFound,
@@ -69,6 +74,14 @@ app.use("/api/destinations",destinationRoutes);
 app.use("/api/trip-plans",tripPlanRoutes);
 app.use("/api/wishlist",wishlistRoutes);
 app.use("/api/reviews",reviewRoutes);
+app.use(
+    "/api/bookings",
+    bookingRoutes
+);
+app.use(
+    "/api/chat",
+    chatRoutes
+);
 
 app.use(notFound);
 app.use(errorHandler);
