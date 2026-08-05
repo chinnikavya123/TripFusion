@@ -726,63 +726,87 @@ function renderNearbyPlaces(trip){
     }
 
     const places=[
-        {
-            title:"Nearby Hotels",
-            description:
-                "Find hotels and accommodation near your destination.",
-            icon:"🏨",
-            search:"Hotels"
-        },
-        {
-            title:"Restaurants",
-            description:
-                "Explore restaurants and local food options nearby.",
-            icon:"🍽️",
-            search:"Restaurants"
-        },
-        {
-            title:"Hospitals",
-            description:
-                "Locate hospitals and emergency medical services.",
-            icon:"🏥",
-            search:"Hospitals"
-        },
-        {
-            title:"ATMs",
-            description:
-                "Find nearby ATMs and banking services.",
-            icon:"🏧",
-            search:"ATMs"
-        },
-        {
-            title:"Petrol Pumps",
-            description:
-                "Locate fuel stations near your destination.",
-            icon:"⛽",
-            search:"Petrol pumps"
-        },
-        {
-            title:"Railway Stations",
-            description:
-                "Find nearby railway stations and transport links.",
-            icon:"🚆",
-            search:"Railway stations"
-        },
-        {
-            title:"Bus Stations",
-            description:
-                "Locate nearby bus stations and bus terminals.",
-            icon:"🚌",
-            search:"Bus stations"
-        },
-        {
-            title:"Airports",
-            description:
-                "Find airports near your saved destination.",
-            icon:"✈️",
-            search:"Airports"
-        }
-    ];
+    {
+        title:"Nearby Hotels",
+        subtitle:"Stay and accommodation",
+        description:
+            "Find hotels, resorts, homestays and guest houses near your destination.",
+        tip:"Compare ratings, prices and distance before booking.",
+        icon:"🏨",
+        search:"Hotels",
+        badge:"Stay"
+    },
+    {
+        title:"Restaurants",
+        subtitle:"Food and local cuisine",
+        description:
+            "Explore nearby restaurants, cafés and popular local food options.",
+        tip:"Check recent reviews, opening hours and menu photos.",
+        icon:"🍽️",
+        search:"Restaurants",
+        badge:"Food"
+    },
+    {
+        title:"Hospitals",
+        subtitle:"Medical assistance",
+        description:
+            "Locate hospitals, clinics and emergency medical services nearby.",
+        tip:"Save the closest hospital location before beginning your trip.",
+        icon:"🏥",
+        search:"Hospitals",
+        badge:"Emergency"
+    },
+    {
+        title:"ATMs",
+        subtitle:"Cash and banking",
+        description:
+            "Find nearby ATMs and banking services for quick cash withdrawal.",
+        tip:"Prefer ATMs located inside banks or trusted public locations.",
+        icon:"🏧",
+        search:"ATMs",
+        badge:"Banking"
+    },
+    {
+        title:"Petrol Pumps",
+        subtitle:"Fuel and vehicle support",
+        description:
+            "Locate petrol pumps and fuel stations close to your destination.",
+        tip:"Useful for road trips and journeys to remote locations.",
+        icon:"⛽",
+        search:"Petrol pumps",
+        badge:"Fuel"
+    },
+    {
+        title:"Railway Stations",
+        subtitle:"Train transportation",
+        description:
+            "Find nearby railway stations and important train transport links.",
+        tip:"Check travel time from your stay before planning departure.",
+        icon:"🚆",
+        search:"Railway stations",
+        badge:"Train"
+    },
+    {
+        title:"Bus Stations",
+        subtitle:"Local and intercity buses",
+        description:
+            "Locate nearby bus stations, terminals and public transport points.",
+        tip:"Confirm bus timings and the last available service.",
+        icon:"🚌",
+        search:"Bus stations",
+        badge:"Bus"
+    },
+    {
+        title:"Airports",
+        subtitle:"Flight transportation",
+        description:
+            "Find the nearest airports and available flight transport options.",
+        tip:"Check travel time, traffic and reporting time before departure.",
+        icon:"✈️",
+        search:"Airports",
+        badge:"Flight"
+    }
+];
 
     nearbyPlacesContainer.innerHTML=
         places.map((place)=>{
@@ -793,33 +817,62 @@ function renderNearbyPlaces(trip){
                 );
 
             return`
-                <article class="nearby-place-card">
-                    <div class="nearby-place-icon">
-                        ${place.icon}
-                    </div>
+    <a
+        class="nearby-place-card"
+        href="${mapsURL}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Find ${escapeHTML(
+            place.title
+        )} near ${escapeHTML(
+            destinationName
+        )}"
+    >
+        <div class="nearby-place-card-top">
+            <div class="nearby-place-icon">
+                ${place.icon}
+            </div>
 
-                    <div class="nearby-place-content">
-                        <h3>
-                            ${escapeHTML(place.title)}
-                        </h3>
+            <span class="nearby-place-badge">
+                ${escapeHTML(place.badge)}
+            </span>
+        </div>
 
-                        <p>
-                            ${escapeHTML(
-                                place.description
-                            )}
-                        </p>
+        <div class="nearby-place-content">
+            <h3>
+                ${escapeHTML(place.title)}
+            </h3>
 
-                        <a
-                            href="${mapsURL}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="nearby-place-link"
-                        >
-                            View on Google Maps
-                        </a>
-                    </div>
-                </article>
-            `;
+            <span class="nearby-place-subtitle">
+                ${escapeHTML(place.subtitle)}
+            </span>
+
+            <p>
+                ${escapeHTML(
+                    place.description
+                )}
+            </p>
+
+            <div class="nearby-place-tip">
+                <span>💡</span>
+
+                <small>
+                    ${escapeHTML(place.tip)}
+                </small>
+            </div>
+
+            <div class="nearby-place-link">
+                <span>
+                    Explore on Google Maps
+                </span>
+
+                <strong aria-hidden="true">
+                    →
+                </strong>
+            </div>
+        </div>
+    </a>
+`;
         }).join("");
 
     if(nearbyPlacesTitle){

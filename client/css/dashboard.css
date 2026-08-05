@@ -2277,8 +2277,143 @@
     }
 
     .nearby-place-card{
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f2f8fc 100%
+        );
+    border:1px solid #dce7ef;
+    border-radius:18px;
+    color:inherit;
+    display:flex;
+    flex-direction:column;
+    min-height:310px;
+    padding:20px;
+    text-decoration:none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nearby-place-card:hover{
+    border-color:#8bb9d8;
+    box-shadow:
+        0 16px 34px
+        rgba(15,76,129,0.16);
+    transform:translateY(-5px);
+}
+
+.nearby-place-card-top{
+    align-items:center;
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+
+.nearby-place-icon{
+    align-items:center;
+    background:#ffffff;
+    border:1px solid #d7e4ed;
+    border-radius:13px;
+    display:flex;
+    font-size:28px;
+    height:56px;
+    justify-content:center;
+    width:56px;
+}
+
+.nearby-place-badge{
+    background:#e6f4f7;
+    border:1px solid #c8e7eb;
+    border-radius:999px;
+    color:#157a83;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.5px;
+    padding:6px 10px;
+    text-transform:uppercase;
+}
+
+.nearby-place-content{
+    display:flex;
+    flex:1;
+    flex-direction:column;
+}
+
+.nearby-place-content h3{
+    color:#12213a;
+    font-size:20px;
+    line-height:1.3;
+    margin:0 0 5px;
+}
+
+.nearby-place-subtitle{
+    color:#14558b;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.nearby-place-content>p{
+    color:#64748b;
+    font-size:14px;
+    line-height:1.6;
+    margin:0 0 16px;
+}
+
+.nearby-place-tip{
+    align-items:flex-start;
+    background:#ffffff;
+    border:1px solid #e1e9ef;
+    border-radius:11px;
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+    padding:11px;
+}
+
+.nearby-place-tip span{
+    flex-shrink:0;
+    font-size:15px;
+}
+
+.nearby-place-tip small{
+    color:#53657a;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.nearby-place-link{
+    align-items:center;
+    border-top:1px solid #dde7ee;
+    color:#14558b;
+    display:flex;
+    font-size:14px;
+    font-weight:800;
+    justify-content:space-between;
+    margin-top:auto;
+    padding-top:15px;
+    text-decoration:none;
+}
+
+.nearby-place-link strong{
+    font-size:22px;
+    line-height:1;
+    transition:transform 0.2s ease;
+}
+
+.nearby-place-card:hover
+.nearby-place-link strong{
+    transform:translateX(5px);
+}
+
+@media(max-width:620px){
+    .nearby-place-card{
         min-height:auto;
     }
+}
 
     .nearby-map-action{
         justify-content:stretch;
