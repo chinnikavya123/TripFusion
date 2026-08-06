@@ -10,216 +10,333 @@
 
     <title>Destination Details | TripFusion</title>
 
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/destination.css">
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/destination.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
 </head>
 
 <body>
 
     <header class="navbar">
-        <a href="./index.html" class="logo">
-            TripFusion 
+
+        <a
+            href="./index.html"
+            class="logo"
+        >
+            TripFusion
         </a>
 
-        <nav class="nav-links">
-            <a href="./index.html">Home</a>
-            <a href="./destinations.html">Destinations</a>
-            <a href="./planner.html">Planner</a>
-            <a href="./my-trips.html">My Trips</a>
-            <a href="./wishlist.html">Wishlist</a>
-            <a href="./profile.html">Profile</a>
-            <a href="#">Features</a>
-            <a href="#">Contact</a>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a
+                href="./destinations.html"
+                class="active"
+            >
+                Destinations
+            </a>
+
+            <a href="./planner.html">
+                Planner
+            </a>
+
+            <a href="./my-trips.html">
+                My Trips
+            </a>
+
+            <a href="./hotels.html">
+                Hotels
+            </a>
+
+            <a href="./booking-history.html">
+                Booking History
+            </a>
+
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
         </nav>
 
         <div class="nav-actions">
-            <a href="./login.html" class="login-button">
+
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
                 Login
             </a>
 
-            <a href="./register.html" class="register-button">
-                Get Started
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
             </a>
+
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
+
         </div>
+
     </header>
 
     <main class="destination-details-page">
 
-        <section id="details-loading" class="details-loading">
+        <section
+            id="destination-details-loading"
+            class="destination-message"
+        >
             Loading destination details...
         </section>
 
         <section
-            id="details-error"
-            class="details-error"
+            id="destination-details-error"
+            class="destination-message destination-error"
             style="display:none"
         ></section>
 
-        <div id="destination-details-container"></div>
-        <section class="reviews-section">
+        <div
+            id="destination-details-container"
+            style="display:none"
+        >
 
-    <div class="reviews-section-heading">
-        <div>
-            <p>TRAVELER EXPERIENCES</p>
-            <h2>Ratings and Reviews</h2>
-        </div>
+            <section class="destination-details-hero">
 
-        <div class="reviews-rating-summary">
-            <strong id="reviews-average-rating">
-                0.0
-            </strong>
-
-            <span>★</span>
-
-            <small id="reviews-total-count">
-                0 reviews
-            </small>
-        </div>
-    </div>
-
-    <div class="reviews-layout">
-
-        <section class="review-form-card">
-
-            <p class="review-form-label">
-                SHARE YOUR EXPERIENCE
-            </p>
-
-            <h3 id="review-form-title">
-                Write a review
-            </h3>
-
-            <form id="review-form">
-
-                <div class="star-rating-input">
-                    <button
-                        type="button"
-                        data-rating="1"
-                        aria-label="1 star"
-                    >
-                        ★
-                    </button>
-
-                    <button
-                        type="button"
-                        data-rating="2"
-                        aria-label="2 stars"
-                    >
-                        ★
-                    </button>
-
-                    <button
-                        type="button"
-                        data-rating="3"
-                        aria-label="3 stars"
-                    >
-                        ★
-                    </button>
-
-                    <button
-                        type="button"
-                        data-rating="4"
-                        aria-label="4 stars"
-                    >
-                        ★
-                    </button>
-
-                    <button
-                        type="button"
-                        data-rating="5"
-                        aria-label="5 stars"
-                    >
-                        ★
-                    </button>
-                </div>
-
-                <input
-                    type="hidden"
-                    id="review-rating"
-                    value="0"
+                <img
+                    id="destination-details-image"
+                    src=""
+                    alt=""
                 >
 
-                <label for="review-comment">
-                    Your Review
-                </label>
+                <div class="destination-details-overlay">
 
-                <textarea
-                    id="review-comment"
-                    rows="6"
-                    maxlength="1000"
-                    placeholder="Tell other travelers about your experience..."
-                    required
-                ></textarea>
-
-                <p
-                    id="review-message"
-                    class="review-message"
-                ></p>
-
-                <div class="review-form-actions">
-                    <button
-                        type="submit"
-                        id="review-submit-button"
-                        class="primary-button"
+                    <a
+                        href="./destinations.html"
+                        class="destination-back-link"
                     >
-                        Submit Review
-                    </button>
+                        ← Back to Destinations
+                    </a>
 
-                    <button
-                        type="button"
-                        id="review-delete-button"
-                        class="delete-review-button"
-                        style="display:none"
-                    >
-                        Delete Review
-                    </button>
+                    <p
+                        id="destination-details-category"
+                        class="section-label"
+                    ></p>
+
+                    <h1 id="destination-details-name"></h1>
+
+                    <p id="destination-details-location"></p>
+
+                    <div class="destination-details-rating">
+
+                        <span id="destination-details-rating"></span>
+
+                        <span id="destination-details-reviews"></span>
+
+                    </div>
+
                 </div>
 
-            </form>
+            </section>
 
-        </section>
+            <section class="destination-details-content">
 
-        <section class="reviews-list-card">
+                <div class="destination-main-information">
 
-            <div
-                id="reviews-loading"
-                class="reviews-message"
-            >
-                Loading reviews...
-            </div>
+                    <article class="destination-information-card">
 
-            <div
-                id="reviews-empty"
-                class="reviews-message"
-                style="display:none"
-            >
-                No reviews yet. Be the first to review this destination.
-            </div>
+                        <h2>
+                            About this destination
+                        </h2>
 
-            <div id="reviews-container"></div>
+                        <p id="destination-details-description"></p>
 
-            <div
-                id="reviews-pagination"
-                class="reviews-pagination"
-            ></div>
+                        <div class="destination-facts-grid">
 
-        </section>
+                            <div>
+                                <span>
+                                    Best Season
+                                </span>
 
-    </div>
+                                <strong id="destination-best-season"></strong>
+                            </div>
 
-</section>
+                            <div>
+                                <span>
+                                    Recommended Duration
+                                </span>
+
+                                <strong id="destination-duration"></strong>
+                            </div>
+
+                            <div>
+                                <span>
+                                    Starting Budget
+                                </span>
+
+                                <strong id="destination-starting-price"></strong>
+                            </div>
+
+                            <div>
+                                <span>
+                                    Languages
+                                </span>
+
+                                <strong id="destination-languages"></strong>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article class="destination-information-card">
+
+                        <h2>
+                            Popular activities
+                        </h2>
+
+                        <div
+                            id="destination-activities"
+                            class="destination-activity-list"
+                        ></div>
+
+                    </article>
+
+                    <article class="destination-information-card">
+
+                        <h2>
+                            Local food
+                        </h2>
+
+                        <div
+                            id="destination-local-food"
+                            class="destination-tag-list"
+                        ></div>
+
+                    </article>
+
+                    <article class="destination-information-card">
+
+                        <h2>
+                            Safety tips
+                        </h2>
+
+                        <ul id="destination-safety-tips"></ul>
+
+                    </article>
+
+                    <article class="destination-information-card">
+
+                        <h2>
+                            Transportation
+                        </h2>
+
+                        <p id="destination-transportation"></p>
+
+                    </article>
+
+                </div>
+
+                <aside class="destination-details-sidebar">
+
+                    <div class="destination-action-card">
+
+                        <h2>
+                            Plan your visit
+                        </h2>
+
+                        <p>
+                            Generate a personalized itinerary for this
+                            destination.
+                        </p>
+
+                        <a
+                            id="plan-destination-button"
+                            href="./planner.html"
+                            class="primary-button"
+                        >
+                            Plan This Trip
+                        </a>
+
+                        <a
+                            id="view-destination-hotels"
+                            href="./hotels.html"
+                            class="destination-secondary-action"
+                        >
+                            View Hotels
+                        </a>
+
+                        <button
+                            type="button"
+                            id="destination-wishlist-button"
+                            class="destination-secondary-action"
+                        >
+                            Add to Wishlist
+                        </button>
+
+                        <p
+                            id="destination-action-message"
+                            class="destination-action-message"
+                        ></p>
+
+                    </div>
+
+                </aside>
+
+            </section>
+
+        </div>
 
     </main>
 
     <footer>
+
         <div class="footer-bottom">
             © 2026 TripFusion. Built by Chinni Kavya Sri.
         </div>
+
     </footer>
 
     <script src="./js/config.js"></script>
     <script src="./js/destination-details.js"></script>
-    <script src="./js/destination-reviews.js"></script>
+    <script src="./js/navbar-auth.js"></script>
+    <script src="./js/chat-assistant.js"></script>
 
 </body>
 </html>

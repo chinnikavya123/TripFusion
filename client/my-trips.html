@@ -2,130 +2,218 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width,initial-scale=1.0"
     >
+
     <title>My Trips | TripFusion</title>
 
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
     <link
-    rel="stylesheet"
-    href="./css/chat-assistant.css"
->
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
 </head>
 
 <body>
 
     <header class="navbar">
-        <a href="./index.html" class="logo">
-            TripFusion 
+
+        <a
+            href="./index.html"
+            class="logo"
+        >
+            TripFusion
         </a>
 
-        <nav class="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html">Destinations</a>
-    <a href="./planner.html">Planner</a>
-    <a href="./my-trips.html" class="active">My Trips</a>
-    <a href="./hotels.html">Hotels</a>
-    <a href="./booking-history.html">Booking History</a>
-    <a href="./wishlist.html">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./destinations.html">
+                Destinations
+            </a>
+
+            <a href="./planner.html">
+                Planner
+            </a>
+
+            <a
+                href="./my-trips.html"
+                class="active"
+            >
+                My Trips
+            </a>
+
+            <a href="./hotels.html">
+                Hotels
+            </a>
+
+            <a href="./booking-history.html">
+                Booking History
+            </a>
+
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
+
         <div class="nav-actions">
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
-
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
-
-    <button
-    type="button"
-    id="download-pdf-button"
-    class="primary-button"
->
-    Download PDF
-</button>
-
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
-
-</div>
-    </header>
-
-    <main class="my-trips-page">
-
-        <section class="my-trips-hero">
-            <p>YOUR JOURNEYS</p>
-            <h1>My saved trip plans</h1>
-            <span>
-                Review, manage and continue planning your upcoming trips.
-            </span>
-        </section>
-
-        <section class="my-trips-content">
-
-            <div class="my-trips-header">
-                <div>
-                    <h2>Saved itineraries</h2>
-                    <p id="trip-count">Loading trips...</p>
-                </div>
-
-                <a href="./planner.html" class="primary-button">
-                    Plan New Trip
-                </a>
-            </div>
-
-            <div
-                id="trips-loading"
-                class="trips-message"
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
             >
-                Loading saved trips...
-            </div>
+                Login
+            </a>
 
-            <div
-                id="trips-empty"
-                class="trips-message"
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
+
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
                 style="display:none"
             >
-                You have not saved any trips yet.
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+    <main class="dashboard-page">
+
+        <section class="dashboard-hero">
+
+            <p class="section-label">
+                SAVED TRIPS
+            </p>
+
+            <h1>
+                My Trips
+            </h1>
+
+            <p>
+                Review, manage and continue planning your upcoming trips.
+            </p>
+
+        </section>
+
+        <section class="dashboard-content">
+
+            <div class="dashboard-heading-row">
+
+                <div>
+
+                    <h2>
+                        Saved itineraries
+                    </h2>
+
+                    <p id="saved-trip-count">
+                        Loading trips...
+                    </p>
+
+                </div>
+
+                <a
+                    href="./planner.html"
+                    class="primary-button"
+                >
+                    Plan New Trip
+                </a>
+
             </div>
 
-            <div
-                id="trips-container"
-                class="trips-grid"
-            ></div>
+            <section
+                id="my-trips-loading"
+                class="dashboard-message"
+            >
+                Loading saved trips...
+            </section>
+
+            <section
+                id="my-trips-error"
+                class="dashboard-message dashboard-error"
+                style="display:none"
+            ></section>
+
+            <section
+                id="my-trips-empty"
+                class="dashboard-message"
+                style="display:none"
+            >
+                <h3>
+                    No saved trips yet
+                </h3>
+
+                <p>
+                    Create a personalized itinerary and save it here.
+                </p>
+
+                <a
+                    href="./planner.html"
+                    class="primary-button"
+                >
+                    Create Your First Trip
+                </a>
+            </section>
+
+            <section
+                id="my-trips-grid"
+                class="trip-card-grid"
+            ></section>
 
         </section>
 
     </main>
 
     <footer>
+
         <div class="footer-bottom">
             © 2026 TripFusion. Built by Chinni Kavya Sri.
         </div>
+
     </footer>
 
     <script src="./js/config.js"></script>
     <script src="./js/my-trips.js"></script>
+    <script src="./js/navbar-auth.js"></script>
     <script src="./js/chat-assistant.js"></script>
 
 </body>

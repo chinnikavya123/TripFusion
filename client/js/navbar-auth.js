@@ -1,88 +1,130 @@
 (function(){
-    const token=localStorage.getItem(
-        "tripfusion_token"
-    );
+    function getToken(){
+        return localStorage.getItem(
+            "tripfusion_token"
+        );
+    }
 
-    const user=localStorage.getItem(
-        "tripfusion_user"
-    );
+    function updateNavbar(){
+        const isLoggedIn=Boolean(
+            getToken()
+        );
 
-    const isLoggedIn=Boolean(
-        token&&user
-    );
+        document.querySelectorAll(
+            "[data-auth='login'],[data-auth='register']"
+        ).forEach((element)=>{
+            element.style.display=
+                isLoggedIn
+                    ?"none"
+                    :"inline-flex";
+        });
 
-    const loginLinks=document.querySelectorAll(
-        "[data-auth='login']"
-    );
+        document.querySelectorAll(
+            "[data-auth='logout']"
+        ).forEach((element)=>{
+            element.style.display=
+                isLoggedIn
+                    ?"inline-flex"
+                    :"none";
+        });
+    }
 
-    const registerLinks=document.querySelectorAll(
-        "[data-auth='register']"
-    );
+    async function logout(){
+        const token=getToken();
 
-    const logoutButtons=document.querySelectorAll(
-        "[data-auth='logout']"
-    );
+        localStorage.removeItem(
+            "tripfusion_token"
+        );
 
-    loginLinks.forEach((element)=>{
-        element.style.display=
-            isLoggedIn
-                ?"none"
-                :"inline-flex";
-    });
+        localStorage.removeItem(
+            "tripfusion_user"
+        );
 
-    registerLinks.forEach((element)=>{
-        element.style.display=
-            isLoggedIn
-                ?"none"
-                :"inline-flex";
-    });
+        updateNavbar();
 
-    logoutButtons.forEach((element)=>{
-        element.style.display=
-            isLoggedIn
-                ?"inline-flex"
-                :"none";
+        try{
+            if(
+                token&&
+                typeof API_BASE_URL!=="undefined"
+            ){
+                const controller=
+                    new AbortController();
 
-        element.addEventListener(
-            "click",
-            async()=>{
+                const timeoutId=setTimeout(
+                    ()=>controller.abort(),
+                    3000
+                );
+
                 try{
-                    if(
-                        typeof API_BASE_URL!==
-                        "undefined"
-                    ){
-                        await fetch(
-                            `${API_BASE_URL}/auth/logout`,
-                            {
-                                method:"POST",
-                                credentials:"include",
-                                headers:{
-                                    "Content-Type":
-                                        "application/json",
-                                    Authorization:
-                                        `Bearer ${token}`
-                                }
-                            }
-                        );
-                    }
-                }catch(error){
-                    console.error(
-                        "Logout error:",
-                        error
+                    await fetch(
+                        `${API_BASE_URL}/auth/logout`,
+                        {
+                            method:"POST",
+                            credentials:"include",
+                            headers:{
+                                "Accept":"application/json",
+                                "Authorization":
+                                    `Bearer ${token}`
+                            },
+                            signal:controller.signal
+                        }
                     );
                 }finally{
-                    localStorage.removeItem(
-                        "tripfusion_token"
-                    );
-
-                    localStorage.removeItem(
-                        "tripfusion_user"
-                    );
-
-                    window.location.href=
-                        "./index.html";
+                    clearTimeout(timeoutId);
                 }
             }
+        }catch(error){
+            console.warn(
+                "Logout request could not complete:",
+                error
+            );
+        }finally{
+            window.location.replace(
+                "./index.html"
+            );
+        }
+    }
+
+    function initialize(){
+        updateNavbar();
+
+        document.querySelectorAll(
+            "[data-auth='logout']"
+        ).forEach((button)=>{
+            if(
+                button.dataset
+                    .navbarLogoutBound===
+                "true"
+            ){
+                return;
+            }
+
+            button.dataset.navbarLogoutBound=
+                "true";
+
+            button.addEventListener(
+                "click",
+                logout
+            );
+        });
+    }
+
+    if(document.readyState==="loading"){
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialize
         );
-    });
+    }else{
+        initialize();
+    }
+
+    window.addEventListener(
+        "pageshow",
+        updateNavbar
+    );
+
+    window.addEventListener(
+        "storage",
+        updateNavbar
+    );
 })();

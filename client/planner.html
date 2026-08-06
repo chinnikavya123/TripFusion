@@ -8,184 +8,375 @@
         content="width=device-width,initial-scale=1.0"
     >
 
-    <title>AI Trip Planner | TripFusion</title>
+    <title>Trip Planner | TripFusion</title>
 
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/planner.css">
     <link
-    rel="stylesheet"
-    href="./css/chat-assistant.css"
->
+        rel="stylesheet"
+        href="./css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/planner.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
 </head>
 
 <body>
 
     <header class="navbar">
-        <a href="./index.html" class="logo">
-            TripFusion 
+
+        <a
+            href="./index.html"
+            class="logo"
+        >
+            TripFusion
         </a>
 
-        <nav class="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html">Destinations</a>
-    <a href="./planner.html" class="active">Planner</a>
-    <a href="./my-trips.html">My Trips</a>
-    <a href="./hotels.html">Hotels</a>
-    <a href="./booking-history.html">Booking History</a>
-    <a href="./wishlist.html">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./destinations.html">
+                Destinations
+            </a>
+
+            <a
+                href="./planner.html"
+                class="active"
+            >
+                Planner
+            </a>
+
+            <a href="./my-trips.html">
+                My Trips
+            </a>
+
+            <a href="./hotels.html">
+                Hotels
+            </a>
+
+            <a href="./booking-history.html">
+                Booking History
+            </a>
+
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
 
         <div class="nav-actions">
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
 
-</div>
+        </div>
+
     </header>
 
     <main class="planner-page">
 
-        <section class="planner-hero">
-            <p>SMART TRAVEL PLANNING</p>
+        <section class="planner-heading">
 
-            <h1>Create your personalized itinerary</h1>
+            <p class="section-label">
+                PERSONALIZED TRIP PLANNER
+            </p>
 
-            <span>
-                Tell us where you want to go, your budget, travel dates
-                and interests. TripFusion will generate a day-wise plan.
-            </span>
+            <h1>
+                Create your perfect itinerary
+            </h1>
+
+            <p>
+                Enter your destination, travel dates, budget and
+                preferences to generate a personalized trip plan.
+            </p>
+
         </section>
 
         <section class="planner-layout">
 
-            <form id="planner-form" class="planner-form-card">
+            <form
+                id="trip-planner-form"
+                class="planner-form-card"
+            >
 
-                <div class="form-heading">
-                    <p>TRIP DETAILS</p>
-                    <h2>Plan your journey</h2>
+                <div class="planner-form-section">
+
+                    <h2>
+                        Trip details
+                    </h2>
+
+                    <div class="planner-form-grid">
+
+                        <div class="planner-field planner-field-full">
+
+                            <label for="planner-destination">
+                                Destination
+                            </label>
+
+                            <select
+                                id="planner-destination"
+                                required
+                            >
+                                <option value="">
+                                    Select a destination
+                                </option>
+                            </select>
+
+                        </div>
+
+                        <div class="planner-field">
+
+                            <label for="planner-start-date">
+                                Start date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="planner-start-date"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="planner-field">
+
+                            <label for="planner-days">
+                                Number of days
+                            </label>
+
+                            <input
+                                type="number"
+                                id="planner-days"
+                                min="1"
+                                max="30"
+                                value="3"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="planner-field">
+
+                            <label for="planner-travelers">
+                                Travelers
+                            </label>
+
+                            <input
+                                type="number"
+                                id="planner-travelers"
+                                min="1"
+                                max="20"
+                                value="2"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="planner-field">
+
+                            <label for="planner-budget">
+                                Total budget
+                            </label>
+
+                            <input
+                                type="number"
+                                id="planner-budget"
+                                min="0"
+                                placeholder="₹"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="planner-form-grid">
+                <div class="planner-form-section">
 
-                    <div class="planner-field full-width">
-                        <label for="destination-input">
-                            Destination
-                        </label>
+                    <h2>
+                        Travel preferences
+                    </h2>
 
-                        <select id="destination-input" required>
-                            <option value="">
-                                Select a destination
-                            </option>
-                        </select>
+                    <div class="planner-form-grid">
+
+                        <div class="planner-field">
+
+                            <label for="planner-travel-style">
+                                Travel style
+                            </label>
+
+                            <select id="planner-travel-style">
+
+                                <option value="Relaxed">
+                                    Relaxed
+                                </option>
+
+                                <option value="Balanced">
+                                    Balanced
+                                </option>
+
+                                <option value="Fast-paced">
+                                    Fast-paced
+                                </option>
+
+                                <option value="Luxury">
+                                    Luxury
+                                </option>
+
+                                <option value="Budget">
+                                    Budget
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="planner-field">
+
+                            <label for="planner-stay-preference">
+                                Stay preference
+                            </label>
+
+                            <select id="planner-stay-preference">
+
+                                <option value="Hotel">
+                                    Hotel
+                                </option>
+
+                                <option value="Resort">
+                                    Resort
+                                </option>
+
+                                <option value="Homestay">
+                                    Homestay
+                                </option>
+
+                                <option value="Hostel">
+                                    Hostel
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="planner-field">
+
+                            <label for="planner-transport">
+                                Preferred transport
+                            </label>
+
+                            <select id="planner-transport">
+
+                                <option value="Public Transport">
+                                    Public Transport
+                                </option>
+
+                                <option value="Cab">
+                                    Cab
+                                </option>
+
+                                <option value="Self Drive">
+                                    Self Drive
+                                </option>
+
+                                <option value="Bike">
+                                    Bike
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="planner-field">
+
+                            <label for="planner-food-preference">
+                                Food preference
+                            </label>
+
+                            <select id="planner-food-preference">
+
+                                <option value="Any">
+                                    Any
+                                </option>
+
+                                <option value="Vegetarian">
+                                    Vegetarian
+                                </option>
+
+                                <option value="Non-Vegetarian">
+                                    Non-Vegetarian
+                                </option>
+
+                                <option value="Vegan">
+                                    Vegan
+                                </option>
+
+                            </select>
+
+                        </div>
+
                     </div>
 
-                    <div class="planner-field">
-                        <label for="start-date">
-                            Start Date
-                        </label>
+                </div>
 
-                        <input
-                            type="date"
-                            id="start-date"
-                            required
-                        >
-                    </div>
+                <div class="planner-form-section">
 
-                    <div class="planner-field">
-                        <label for="days-input">
-                            Number of Days
-                        </label>
+                    <h2>
+                        Interests
+                    </h2>
 
-                        <input
-                            type="number"
-                            id="days-input"
-                            min="1"
-                            max="15"
-                            value="3"
-                            required
-                        >
-                    </div>
-
-                    <div class="planner-field">
-                        <label for="travelers-input">
-                            Travelers
-                        </label>
-
-                        <input
-                            type="number"
-                            id="travelers-input"
-                            min="1"
-                            max="20"
-                            value="1"
-                            required
-                        >
-                    </div>
-
-                    <div class="planner-field">
-                        <label for="budget-input">
-                            Total Budget
-                        </label>
-
-                        <input
-                            type="number"
-                            id="budget-input"
-                            min="1000"
-                            placeholder="Example: 30000"
-                            required
-                        >
-                    </div>
-
-                    <div class="planner-field full-width">
-                        <label for="travel-style">
-                            Travel Style
-                        </label>
-
-                        <select id="travel-style" required>
-                            <option value="budget">Budget</option>
-                            <option value="comfortable">
-                                Comfortable
-                            </option>
-                            <option value="luxury">Luxury</option>
-                            <option value="adventure">
-                                Adventure
-                            </option>
-                            <option value="relaxation">
-                                Relaxation
-                            </option>
-                        </select>
-                    </div>
-
-                    <fieldset class="interest-section full-width">
-                        <legend>Interests</legend>
+                    <div class="planner-interest-grid">
 
                         <label>
                             <input
                                 type="checkbox"
+                                name="planner-interest"
                                 value="Nature"
-                                name="interests"
                             >
                             Nature
                         </label>
@@ -193,8 +384,8 @@
                         <label>
                             <input
                                 type="checkbox"
+                                name="planner-interest"
                                 value="Adventure"
-                                name="interests"
                             >
                             Adventure
                         </label>
@@ -202,8 +393,17 @@
                         <label>
                             <input
                                 type="checkbox"
+                                name="planner-interest"
+                                value="Heritage"
+                            >
+                            Heritage
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="planner-interest"
                                 value="Food"
-                                name="interests"
                             >
                             Food
                         </label>
@@ -211,17 +411,8 @@
                         <label>
                             <input
                                 type="checkbox"
-                                value="Culture"
-                                name="interests"
-                            >
-                            Culture
-                        </label>
-
-                        <label>
-                            <input
-                                type="checkbox"
+                                name="planner-interest"
                                 value="Shopping"
-                                name="interests"
                             >
                             Shopping
                         </label>
@@ -229,12 +420,13 @@
                         <label>
                             <input
                                 type="checkbox"
-                                value="Photography"
-                                name="interests"
+                                name="planner-interest"
+                                value="Relaxation"
                             >
-                            Photography
+                            Relaxation
                         </label>
-                    </fieldset>
+
+                    </div>
 
                 </div>
 
@@ -245,100 +437,133 @@
 
                 <button
                     type="submit"
+                    id="generate-trip-button"
                     class="primary-button planner-submit-button"
                 >
-                    Generate Itinerary
+                    Generate Trip Plan
                 </button>
 
             </form>
 
-            <section class="planner-preview-card">
-                <p>YOUR PLAN</p>
-                <h2>Trip summary</h2>
+            <aside class="planner-summary-card">
 
-                <div class="preview-item">
-                    <span>Destination</span>
-                    <strong id="preview-destination">
-                        Not selected
-                    </strong>
+                <p class="section-label">
+                    TRIP PREVIEW
+                </p>
+
+                <h2>
+                    Your plan summary
+                </h2>
+
+                <div class="planner-summary-list">
+
+                    <div>
+                        <span>
+                            Destination
+                        </span>
+
+                        <strong id="summary-destination">
+                            Not selected
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Duration
+                        </span>
+
+                        <strong id="summary-duration">
+                            3 days
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Travelers
+                        </span>
+
+                        <strong id="summary-travelers">
+                            2
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Budget
+                        </span>
+
+                        <strong id="summary-budget">
+                            ₹0
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>
+                            Style
+                        </span>
+
+                        <strong id="summary-style">
+                            Relaxed
+                        </strong>
+                    </div>
+
                 </div>
 
-                <div class="preview-item">
-                    <span>Duration</span>
-                    <strong id="preview-days">3 days</strong>
-                </div>
+                <p class="planner-summary-note">
+                    Log in before saving a generated trip to your account.
+                </p>
 
-                <div class="preview-item">
-                    <span>Travelers</span>
-                    <strong id="preview-travelers">
-                        1 traveler
-                    </strong>
-                </div>
-
-                <div class="preview-item">
-                    <span>Budget</span>
-                    <strong id="preview-budget">
-                        Not entered
-                    </strong>
-                </div>
-
-                <div class="preview-item">
-                    <span>Style</span>
-                    <strong id="preview-style">
-                        Budget
-                    </strong>
-                </div>
-            </section>
+            </aside>
 
         </section>
 
         <section
-            id="itinerary-section"
-            class="itinerary-section"
+            id="generated-trip-section"
+            class="generated-trip-section"
             style="display:none"
         >
-            <div class="itinerary-heading">
-                <p>PERSONALIZED ITINERARY</p>
-                <h2 id="itinerary-title"></h2>
-                <span id="itinerary-summary"></span>
+
+            <div class="generated-trip-header">
+
+                <div>
+
+                    <p class="section-label">
+                        GENERATED ITINERARY
+                    </p>
+
+                    <h2>
+                        Your personalized trip plan
+                    </h2>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="save-trip-button"
+                    class="primary-button"
+                >
+                    Save Trip
+                </button>
+
             </div>
 
-            <div
-                id="budget-breakdown"
-                class="budget-breakdown"
-            ></div>
+            <div id="generated-trip-container"></div>
 
-            <div
-                id="itinerary-container"
-                class="itinerary-container"
-            ></div>
-            <div class="save-trip-wrapper">
-    <button
-        type="button"
-        id="save-trip-button"
-        class="primary-button"
-        style="display:none"
-    >
-        Save Trip Plan
-    </button>
-
-    <p
-        id="save-trip-message"
-        class="planner-message"
-    ></p>
-</div>
         </section>
 
     </main>
 
     <footer>
+
         <div class="footer-bottom">
             © 2026 TripFusion. Built by Chinni Kavya Sri.
         </div>
+
     </footer>
 
     <script src="./js/config.js"></script>
     <script src="./js/planner.js"></script>
+    <script src="./js/navbar-auth.js"></script>
     <script src="./js/chat-assistant.js"></script>
 
 </body>

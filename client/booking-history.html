@@ -34,6 +34,7 @@
 <body>
 
     <header class="navbar">
+
         <a
             href="./index.html"
             class="logo"
@@ -41,50 +42,90 @@
             TripFusion
         </a>
 
-        <nav class="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html">Destinations</a>
-    <a href="./planner.html">Planner</a>
-    <a href="./my-trips.html">My Trips</a>
-    <a href="./hotels.html">Hotels</a>
-    <a href="./booking-history.html" class="active">Booking History</a>
-    <a href="./wishlist.html">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./destinations.html">
+                Destinations
+            </a>
+
+            <a href="./planner.html">
+                Planner
+            </a>
+
+            <a href="./my-trips.html">
+                My Trips
+            </a>
+
+            <a href="./hotels.html">
+                Hotels
+            </a>
+
+            <a
+                href="./booking-history.html"
+                class="active"
+            >
+                Booking History
+            </a>
+
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
 
         <div class="nav-actions">
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
 
-</div>
+        </div>
+
     </header>
 
     <main class="booking-history-page">
 
         <section class="booking-history-header">
+
             <p class="booking-history-label">
                 YOUR RESERVATIONS
             </p>
@@ -96,6 +137,7 @@
             <p>
                 View upcoming, completed, cancelled and removed bookings.
             </p>
+
         </section>
 
         <section class="booking-history-tabs">
@@ -170,8 +212,17 @@
 
     </main>
 
+    <footer>
+
+        <div class="footer-bottom">
+            © 2026 TripFusion. Built by Chinni Kavya Sri.
+        </div>
+
+    </footer>
+
     <script src="./js/config.js"></script>
     <script src="./js/booking-history.js"></script>
+    <script src="./js/navbar-auth.js"></script>
     <script src="./js/chat-assistant.js"></script>
 
 </body>

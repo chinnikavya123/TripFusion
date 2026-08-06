@@ -298,7 +298,7 @@ changePasswordForm.addEventListener(
     }
 );
 
-logoutButton.addEventListener("click",async()=>{
+logoutButton?.addEventListener("click",async()=>{
     try{
         await fetch(`${API_BASE_URL}/auth/logout`,{
             method:"POST",

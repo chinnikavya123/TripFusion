@@ -8,151 +8,148 @@
         content="width=device-width,initial-scale=1.0"
     >
 
-    <meta
-        name="description"
-        content="View and manage your saved TripFusion destinations."
+    <title>Wishlist | TripFusion</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
     >
 
-    <title>My Wishlist | TripFusion</title>
-
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/destination.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
     <link
-    rel="stylesheet"
-    href="./css/chat-assistant.css"
->
+        rel="stylesheet"
+        href="./css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
 </head>
 
 <body>
 
     <header class="navbar">
-        <a href="./index.html" class="logo">
-            TripFusion 
+
+        <a
+            href="./index.html"
+            class="logo"
+        >
+            TripFusion
         </a>
 
-        <nav class="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html">Destinations</a>
-    <a href="./planner.html">Planner</a>
-    <a href="./my-trips.html">My Trips</a>
-    <a href="./hotels.html">Hotels</a>
-    <a href="./booking-history.html">Booking History</a>
-    <a href="./wishlist.html" class="active">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./destinations.html">
+                Destinations
+            </a>
+
+            <a href="./planner.html">
+                Planner
+            </a>
+
+            <a href="./my-trips.html">
+                My Trips
+            </a>
+
+            <a href="./hotels.html">
+                Hotels
+            </a>
+
+            <a href="./booking-history.html">
+                Booking History
+            </a>
+
+            <a
+                href="./wishlist.html"
+                class="active"
+            >
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
 
         <div class="nav-actions">
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
 
-</div>
+        </div>
+
     </header>
 
-    <main class="wishlist-page">
+    <main class="dashboard-page">
 
-        <section class="wishlist-hero">
+        <section class="dashboard-hero">
 
-            <div class="wishlist-hero-content">
+            <p class="section-label">
+                SAVED DESTINATIONS
+            </p>
 
-                <p class="wishlist-eyebrow">
-                    SAVED DESTINATIONS
-                </p>
+            <h1>
+                My Wishlist
+            </h1>
 
-                <h1>Your travel wishlist</h1>
-
-                <span>
-                    Keep all your favourite destinations in one place,
-                    compare them and start planning when you are ready.
-                </span>
-
-            </div>
+            <p>
+                Keep track of destinations you want to explore later.
+            </p>
 
         </section>
 
-        <section class="wishlist-content">
+        <section class="dashboard-content">
 
-            <div class="wishlist-toolbar">
+            <div class="dashboard-heading-row">
 
                 <div>
-                    <p class="wishlist-section-label">
-                        YOUR COLLECTION
-                    </p>
 
-                    <h2>Favourite destinations</h2>
+                    <h2>
+                        Favorite destinations
+                    </h2>
 
                     <p id="wishlist-count">
-                        Loading your saved destinations...
+                        Loading wishlist...
                     </p>
-                </div>
-
-                <div class="wishlist-toolbar-actions">
-
-                    <a
-                        href="./destinations.html"
-                        class="wishlist-secondary-link"
-                    >
-                        Browse More
-                    </a>
-
-                    <a
-                        href="./planner.html"
-                        class="primary-button"
-                    >
-                        Plan a Trip
-                    </a>
 
                 </div>
-
-            </div>
-
-            <div
-                id="wishlist-loading"
-                class="wishlist-status-card"
-            >
-                <div class="wishlist-loader"></div>
-
-                <p>Loading your wishlist...</p>
-            </div>
-
-            <div
-                id="wishlist-empty"
-                class="wishlist-empty"
-                style="display:none"
-            >
-                <div class="wishlist-empty-icon">
-                    ♡
-                </div>
-
-                <h2>Your wishlist is empty</h2>
-
-                <p>
-                    Explore destinations and click the heart icon to
-                    save the places you would love to visit.
-                </p>
 
                 <a
                     href="./destinations.html"
@@ -160,25 +157,64 @@
                 >
                     Explore Destinations
                 </a>
+
             </div>
 
-            <div
-                id="wishlist-container"
-                class="wishlist-grid"
-            ></div>
+            <section
+                id="wishlist-loading"
+                class="dashboard-message"
+            >
+                Loading wishlist...
+            </section>
+
+            <section
+                id="wishlist-error"
+                class="dashboard-message dashboard-error"
+                style="display:none"
+            ></section>
+
+            <section
+                id="wishlist-empty"
+                class="dashboard-message"
+                style="display:none"
+            >
+                <h3>
+                    Your wishlist is empty
+                </h3>
+
+                <p>
+                    Browse destinations and save the places you would
+                    like to visit.
+                </p>
+
+                <a
+                    href="./destinations.html"
+                    class="primary-button"
+                >
+                    Browse Destinations
+                </a>
+            </section>
+
+            <section
+                id="wishlist-grid"
+                class="destination-list-grid"
+            ></section>
 
         </section>
 
     </main>
 
     <footer>
+
         <div class="footer-bottom">
             © 2026 TripFusion. Built by Chinni Kavya Sri.
         </div>
+
     </footer>
 
     <script src="./js/config.js"></script>
     <script src="./js/wishlist.js"></script>
+    <script src="./js/navbar-auth.js"></script>
     <script src="./js/chat-assistant.js"></script>
 
 </body>

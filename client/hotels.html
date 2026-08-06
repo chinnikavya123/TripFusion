@@ -1,106 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
 
-<meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1.0"
+    >
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Recommendations | TripFusion</title>
 
-<title>Hotel Recommendations | TripFusion</title>
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
+    >
 
-<link rel="stylesheet" href="./css/style.css">
-<link rel="stylesheet" href="./css/dashboard.css">
-<link rel="stylesheet" href="./css/hotels.css">
+    <link
+        rel="stylesheet"
+        href="./css/dashboard.css"
+    >
 
+    <link
+        rel="stylesheet"
+        href="./css/hotels.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
 </head>
 
 <body>
 
-<header class="navbar">
+    <header class="navbar">
 
-<a href="./index.html" class="logo">
-TripFusion
-</a>
+        <a
+            href="./index.html"
+            class="logo"
+        >
+            TripFusion
+        </a>
 
-<nav class="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html">Destinations</a>
-    <a href="./planner.html">Planner</a>
-    <a href="./my-trips.html">My Trips</a>
-    <a href="./hotels.html" class="active">Hotels</a>
-    <a href="./booking-history.html">Booking History</a>
-    <a href="./wishlist.html">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
 
-</header>
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
 
-<section class="hotel-page">
+            <a href="./destinations.html">
+                Destinations
+            </a>
 
-<div class="hotel-header">
+            <a href="./planner.html">
+                Planner
+            </a>
 
-<h1>
-Recommended Hotels
-</h1>
+            <a href="./my-trips.html">
+                My Trips
+            </a>
 
-<p>
-Choose the perfect hotel for your trip.
-</p>
+            <a
+                href="./hotels.html"
+                class="active"
+            >
+                Hotels
+            </a>
 
-</div>
+            <a href="./booking-history.html">
+                Booking History
+            </a>
 
-<div class="hotel-filter-bar">
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
 
-<input
-type="text"
-id="destination-input"
-placeholder="Destination">
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
 
-<select id="sort-select">
+        <div class="nav-actions">
 
-<option value="">
-Sort By
-</option>
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-<option value="rating">
-Highest Rating
-</option>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-<option value="price-low">
-Lowest Price
-</option>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
 
-<option value="price-high">
-Highest Price
-</option>
+        </div>
 
-</select>
+    </header>
 
-<button id="search-hotels-button">
+    <main class="hotel-page">
 
-Search
+        <section class="hotel-header">
 
-</button>
+            <p class="section-label">
+                HOTEL RECOMMENDATIONS
+            </p>
 
-</div>
+            <h1>
+                Recommended Hotels
+            </h1>
 
-<div class="hotel-disclaimer">
-    Demo recommendations — prices and availability are shown for project demonstration and are not live hotel inventory.
-</div>
+            <p>
+                Choose a comfortable stay based on your destination,
+                budget and travel preferences.
+            </p>
 
-<div
-id="hotel-list"
-class="hotel-grid"
->
+        </section>
 
-</div>
+        <section class="hotel-filter-bar">
 
-</section>
+            <input
+                type="text"
+                id="destination-input"
+                placeholder="Enter destination"
+            >
 
-<script src="./js/config.js"></script>
-<script src="./js/hotels.js"></script>
+            <select id="sort-select">
+
+                <option value="">
+                    Sort By
+                </option>
+
+                <option value="rating">
+                    Highest Rating
+                </option>
+
+                <option value="price-low">
+                    Lowest Price
+                </option>
+
+                <option value="price-high">
+                    Highest Price
+                </option>
+
+            </select>
+
+            <button
+                type="button"
+                id="search-hotels-button"
+            >
+                Search
+            </button>
+
+        </section>
+
+        <section class="hotel-disclaimer">
+            Demo recommendations — prices, ratings and availability are
+            shown for project demonstration and are not live hotel inventory.
+        </section>
+
+        <section
+            id="hotel-list"
+            class="hotel-grid"
+        >
+            <div class="hotel-message hotel-loading">
+                Loading hotel recommendations...
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="footer-bottom">
+            © 2026 TripFusion. Built by Chinni Kavya Sri.
+        </div>
+
+    </footer>
+
+    <script src="./js/config.js"></script>
+    <script src="./js/hotels.js"></script>
+    <script src="./js/navbar-auth.js"></script>
+    <script src="./js/chat-assistant.js"></script>
 
 </body>
-
 </html>

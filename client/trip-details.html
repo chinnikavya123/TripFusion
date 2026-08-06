@@ -17,18 +17,19 @@
 
     <link
         rel="stylesheet"
-        href="./css/dashboard.css"
+        href="./css/dashboard.css?v=6"
     >
 
     <link
-    rel="stylesheet"
-    href="./css/chat-assistant.css"
->
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
 </head>
 
 <body>
 
     <header class="navbar">
+
         <a
             href="./index.html"
             class="logo"
@@ -36,45 +37,84 @@
             TripFusion
         </a>
 
-        <nav class="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html">Destinations</a>
-    <a href="./planner.html">Planner</a>
-    <a href="./my-trips.html" class="active">My Trips</a>
-    <a href="./hotels.html">Hotels</a>
-    <a href="./booking-history.html">Booking History</a>
-    <a href="./wishlist.html">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./destinations.html">
+                Destinations
+            </a>
+
+            <a href="./planner.html">
+                Planner
+            </a>
+
+            <a
+                href="./my-trips.html"
+                class="active"
+            >
+                My Trips
+            </a>
+
+            <a href="./hotels.html">
+                Hotels
+            </a>
+
+            <a href="./booking-history.html">
+                Booking History
+            </a>
+
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
 
         <div class="nav-actions">
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
 
-</div>
+        </div>
+
     </header>
 
     <section class="trip-action-bar">
@@ -121,6 +161,7 @@
             </button>
 
         </div>
+
     </section>
 
     <main class="trip-details-page">
@@ -150,8 +191,11 @@
             class="weather-section"
             style="display:none"
         >
+
             <div class="weather-section-header">
+
                 <div>
+
                     <p class="section-label">
                         DESTINATION WEATHER
                     </p>
@@ -159,6 +203,7 @@
                     <h2 id="weather-title">
                         Weather Forecast
                     </h2>
+
                 </div>
 
                 <button
@@ -168,6 +213,7 @@
                 >
                     Close
                 </button>
+
             </div>
 
             <div
@@ -187,6 +233,7 @@
                 id="weather-container"
                 class="weather-grid"
             ></div>
+
         </section>
 
         <section
@@ -194,8 +241,11 @@
             class="packing-section"
             style="display:none"
         >
+
             <div class="packing-section-header">
+
                 <div>
+
                     <p class="section-label">
                         SMART PACKING CHECKLIST
                     </p>
@@ -205,8 +255,10 @@
                     </h2>
 
                     <p class="packing-subtitle">
-                        Tick items as you pack. Your progress is saved automatically for this trip.
+                        Tick items as you pack. Your progress is saved
+                        automatically for this trip.
                     </p>
+
                 </div>
 
                 <button
@@ -216,10 +268,13 @@
                 >
                     Close
                 </button>
+
             </div>
 
             <div class="packing-progress-panel">
+
                 <div class="packing-progress-info">
+
                     <span id="packing-progress-text">
                         0 of 0 items packed
                     </span>
@@ -227,17 +282,22 @@
                     <strong id="packing-progress-percent">
                         0%
                     </strong>
+
                 </div>
 
                 <div class="packing-progress-track">
+
                     <span
                         id="packing-progress-fill"
                         class="packing-progress-fill"
                     ></span>
+
                 </div>
+
             </div>
 
             <div class="packing-add-item">
+
                 <input
                     type="text"
                     id="packing-item-input"
@@ -246,6 +306,7 @@
                 >
 
                 <select id="packing-category-select">
+
                     <option value="Essentials">
                         Essentials
                     </option>
@@ -269,6 +330,7 @@
                     <option value="Other">
                         Other
                     </option>
+
                 </select>
 
                 <button
@@ -278,6 +340,7 @@
                 >
                     Add Item
                 </button>
+
             </div>
 
             <div
@@ -286,6 +349,7 @@
             ></div>
 
             <div class="packing-footer-actions">
+
                 <button
                     type="button"
                     id="reset-packing-button"
@@ -293,8 +357,10 @@
                 >
                     Reset Checklist
                 </button>
+
             </div>
-                </section>
+
+        </section>
 
         <section
             id="nearby-places-section"
@@ -332,6 +398,7 @@
                     id="open-destination-map"
                     href="#"
                     target="_blank"
+                    rel="noopener noreferrer"
                     class="nearby-main-map-link"
                 >
                     Open Destination in Google Maps
@@ -344,16 +411,19 @@
     </main>
 
     <footer>
+
         <div class="footer-bottom">
             © 2026 TripFusion. Built by Chinni Kavya Sri.
         </div>
+
     </footer>
 
     <script src="./js/config.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <script src="./js/trip-details.js"></script>
+    <script src="./js/trip-details.js?v=6"></script>
+    <script src="./js/navbar-auth.js"></script>
     <script src="./js/chat-assistant.js"></script>
 
 </body>

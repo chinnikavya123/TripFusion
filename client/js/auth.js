@@ -116,7 +116,15 @@ async function parseResponse(response){
 }
 
 function saveLoggedInUser(result){
-    const user=result.data?.user;
+    const user=
+        result?.data?.user||
+        result?.user||
+        null;
+
+    const token=
+        result?.token||
+        result?.data?.token||
+        "";
 
     if(user){
         localStorage.setItem(
@@ -125,10 +133,10 @@ function saveLoggedInUser(result){
         );
     }
 
-    if(result.token){
+    if(token){
         localStorage.setItem(
             "tripfusion_token",
-            result.token
+            token
         );
     }
 }

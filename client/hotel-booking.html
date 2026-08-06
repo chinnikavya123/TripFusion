@@ -34,6 +34,7 @@
 <body>
 
     <header class="navbar">
+
         <a
             href="./index.html"
             class="logo"
@@ -41,45 +42,84 @@
             TripFusion
         </a>
 
-        <nav class="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html">Destinations</a>
-    <a href="./planner.html">Planner</a>
-    <a href="./my-trips.html">My Trips</a>
-    <a href="./hotels.html" class="active">Hotels</a>
-    <a href="./booking-history.html">Booking History</a>
-    <a href="./wishlist.html">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>
+        <button
+            type="button"
+            class="menu-button"
+            id="menu-button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a href="./destinations.html">
+                Destinations
+            </a>
+
+            <a href="./planner.html">
+                Planner
+            </a>
+
+            <a href="./my-trips.html">
+                My Trips
+            </a>
+
+            <a
+                href="./hotels.html"
+                class="active"
+            >
+                Hotels
+            </a>
+
+            <a href="./booking-history.html">
+                Booking History
+            </a>
+
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
 
         <div class="nav-actions">
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
 
-</div>
+        </div>
+
     </header>
 
     <main class="hotel-booking-page">
@@ -126,7 +166,7 @@
                 </h1>
 
                 <p class="booking-subtitle">
-                    Select your stay dates, guests and rooms.
+                    Select your stay dates, number of guests and rooms.
                 </p>
 
                 <form id="hotel-booking-form">
@@ -134,6 +174,7 @@
                     <div class="booking-form-grid">
 
                         <div class="booking-field">
+
                             <label for="booking-check-in">
                                 Check-in date
                             </label>
@@ -143,9 +184,11 @@
                                 id="booking-check-in"
                                 required
                             >
+
                         </div>
 
                         <div class="booking-field">
+
                             <label for="booking-check-out">
                                 Check-out date
                             </label>
@@ -155,9 +198,11 @@
                                 id="booking-check-out"
                                 required
                             >
+
                         </div>
 
                         <div class="booking-field">
+
                             <label for="booking-guests">
                                 Guests
                             </label>
@@ -170,9 +215,11 @@
                                 value="2"
                                 required
                             >
+
                         </div>
 
                         <div class="booking-field">
+
                             <label for="booking-rooms">
                                 Rooms
                             </label>
@@ -185,9 +232,11 @@
                                 value="1"
                                 required
                             >
+
                         </div>
 
                         <div class="booking-field booking-field-full">
+
                             <label for="booking-room-type">
                                 Room type
                             </label>
@@ -196,9 +245,11 @@
                                 id="booking-room-type"
                                 required
                             ></select>
+
                         </div>
 
                         <div class="booking-field booking-field-full">
+
                             <label for="booking-special-request">
                                 Special request
                             </label>
@@ -209,45 +260,62 @@
                                 maxlength="500"
                                 placeholder="Optional requests such as early check-in or accessibility support"
                             ></textarea>
+
                         </div>
 
                     </div>
 
-                    <div class="booking-price-summary">
+                    <section class="booking-price-summary">
 
                         <div>
-                            <span>Price per room/night</span>
+
+                            <span>
+                                Price per room/night
+                            </span>
 
                             <strong id="booking-price-per-night">
                                 ₹0
                             </strong>
+
                         </div>
 
                         <div>
-                            <span>Number of nights</span>
+
+                            <span>
+                                Number of nights
+                            </span>
 
                             <strong id="booking-night-count">
                                 0
                             </strong>
+
                         </div>
 
                         <div>
-                            <span>Rooms</span>
+
+                            <span>
+                                Rooms
+                            </span>
 
                             <strong id="booking-room-count">
                                 1
                             </strong>
+
                         </div>
 
                         <div class="booking-total-row">
-                            <span>Estimated total</span>
+
+                            <span>
+                                Estimated total
+                            </span>
 
                             <strong id="booking-total-amount">
                                 ₹0
                             </strong>
+
                         </div>
 
-                    </div>
+                    </section>
 
                     <p
                         id="booking-form-message"
@@ -263,7 +331,8 @@
                     </button>
 
                     <p class="booking-demo-note">
-                        Demo reservation — no real payment or hotel inventory confirmation is performed.
+                        Demo reservation — no real payment or hotel
+                        confirmation is performed.
                     </p>
 
                 </form>
@@ -274,8 +343,17 @@
 
     </main>
 
+    <footer>
+
+        <div class="footer-bottom">
+            © 2026 TripFusion. Built by Chinni Kavya Sri.
+        </div>
+
+    </footer>
+
     <script src="./js/config.js"></script>
     <script src="./js/hotel-booking.js"></script>
+    <script src="./js/navbar-auth.js"></script>
     <script src="./js/chat-assistant.js"></script>
 
 </body>

@@ -8,29 +8,37 @@
         content="width=device-width,initial-scale=1.0"
     >
 
-    <meta
-        name="description"
-        content="Explore travel destinations across India with TripFusion."
+    <title>Destinations | TripFusion</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/style.css"
     >
 
-    <title>Explore Destinations | TripFusion</title>
-
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/destination.css">
     <link
-    rel="stylesheet"
-    href="./css/chat-assistant.css"
->
+        rel="stylesheet"
+        href="./css/destination.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/chat-assistant.css"
+    >
 </head>
 
 <body>
 
     <header class="navbar">
-        <a href="./index.html" class="logo">
-            TripFusion 
+
+        <a
+            href="./index.html"
+            class="logo"
+        >
+            TripFusion
         </a>
 
         <button
+            type="button"
             class="menu-button"
             id="menu-button"
             aria-label="Open navigation menu"
@@ -38,181 +46,221 @@
             ☰
         </button>
 
-        <nav class="nav-links" id="nav-links">
-    <a href="./index.html">Home</a>
-    <a href="./destinations.html" class="active">Destinations</a>
-    <a href="./planner.html">Planner</a>
-    <a href="./my-trips.html">My Trips</a>
-    <a href="./hotels.html">Hotels</a>
-    <a href="./booking-history.html">Booking History</a>
-    <a href="./wishlist.html">Wishlist</a>
-    <a href="./profile.html">Profile</a>
-</nav>  
+        <nav
+            class="nav-links"
+            id="nav-links"
+        >
+            <a href="./index.html">
+                Home
+            </a>
+
+            <a
+                href="./destinations.html"
+                class="active"
+            >
+                Destinations
+            </a>
+
+            <a href="./planner.html">
+                Planner
+            </a>
+
+            <a href="./my-trips.html">
+                My Trips
+            </a>
+
+            <a href="./hotels.html">
+                Hotels
+            </a>
+
+            <a href="./booking-history.html">
+                Booking History
+            </a>
+
+            <a href="./wishlist.html">
+                Wishlist
+            </a>
+
+            <a href="./profile.html">
+                Profile
+            </a>
+        </nav>
 
         <div class="nav-actions">
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
 
-</div>
+        </div>
+
     </header>
 
     <main class="destinations-page">
 
         <section class="destinations-hero">
 
-            <p>EXPLORE INDIA</p>
+            <p class="section-label">
+                EXPLORE INDIA
+            </p>
 
             <h1>
-                Find your next unforgettable destination
+                Popular Destinations
             </h1>
 
-            <span>
-                Browse beaches, hill stations, heritage locations,
-                adventure destinations and peaceful nature escapes.
-            </span>
+            <p>
+                From serene beaches to majestic mountains, explore
+                beautiful places and discover your next journey.
+            </p>
 
         </section>
 
         <section class="destination-controls">
 
-            <div class="search-control">
+            <div class="destination-search">
 
-                <label for="search-input">
-                    Search
-                </label>
+                <span>
+                    🔍
+                </span>
 
                 <input
-                    id="search-input"
                     type="text"
-                    placeholder="Search by destination, city or state"
-                    autocomplete="off"
+                    id="destination-search-input"
+                    placeholder="Search destinations..."
                 >
 
             </div>
 
-            <div class="filter-control">
+            <select id="destination-category-filter">
 
-                <label for="category-filter">
-                    Category
-                </label>
+                <option value="">
+                    All Categories
+                </option>
 
-                <select id="category-filter">
-                    <option value="">All Categories</option>
-                    <option value="Beach">Beach</option>
-                    <option value="Hill Station">
-                        Hill Station
-                    </option>
-                    <option value="Heritage">Heritage</option>
-                    <option value="Adventure">Adventure</option>
-                    <option value="Nature">Nature</option>
-                    <option value="Wildlife">Wildlife</option>
-                    <option value="Pilgrimage">Pilgrimage</option>
-                    <option value="Honeymoon">Honeymoon</option>
-                    <option value="Cultural">Cultural</option>
-                    <option value="Weekend Getaway">
-                        Weekend Getaway
-                    </option>
-                </select>
+                <option value="Beach">
+                    Beach
+                </option>
 
-            </div>
+                <option value="Nature">
+                    Nature
+                </option>
 
-            <div class="filter-control">
+                <option value="Adventure">
+                    Adventure
+                </option>
 
-                <label for="sort-filter">
-                    Sort By
-                </label>
+                <option value="Heritage">
+                    Heritage
+                </option>
 
-                <select id="sort-filter">
-                    <option value="newest">
-                        Recently Added
-                    </option>
+                <option value="Spiritual">
+                    Spiritual
+                </option>
 
-                    <option value="rating">
-                        Highest Rated
-                    </option>
+                <option value="Wildlife">
+                    Wildlife
+                </option>
 
-                    <option value="priceLow">
-                        Price: Low to High
-                    </option>
+                <option value="Hill Station">
+                    Hill Station
+                </option>
 
-                    <option value="priceHigh">
-                        Price: High to Low
-                    </option>
+            </select>
 
-                    <option value="nameAsc">
-                        Name: A to Z
-                    </option>
+            <select id="destination-sort-select">
 
-                    <option value="nameDesc">
-                        Name: Z to A
-                    </option>
-                </select>
+                <option value="popular">
+                    Sort By: Popular
+                </option>
 
-            </div>
+                <option value="rating">
+                    Highest Rating
+                </option>
+
+                <option value="price-low">
+                    Lowest Price
+                </option>
+
+                <option value="price-high">
+                    Highest Price
+                </option>
+
+                <option value="name">
+                    Name A–Z
+                </option>
+
+            </select>
 
         </section>
 
-        <section class="destination-results-section">
+        <section
+            id="destination-loading"
+            class="destination-message"
+        >
+            Loading destinations...
+        </section>
 
-            <div class="results-header">
+        <section
+            id="destination-error"
+            class="destination-message destination-error"
+            style="display:none"
+        ></section>
 
-                <h2>
-                    Available destinations
-                </h2>
+        <section
+            id="destination-empty"
+            class="destination-message"
+            style="display:none"
+        >
+            No destinations matched your search.
+        </section>
 
-                <p id="results-text">
-                    Loading destinations...
-                </p>
+        <section
+            id="destination-grid"
+            class="destination-list-grid"
+        ></section>
 
-            </div>
+        <section class="destination-pagination">
 
-            <div
-                id="loading-message"
-                class="loading-message"
+            <button
+                type="button"
+                id="previous-page-button"
+                class="pagination-button"
             >
-                Loading destinations...
-            </div>
+                Previous
+            </button>
 
-            <div
-                id="empty-message"
-                class="empty-message"
-                style="display:none"
+            <span id="pagination-information">
+                Page 1
+            </span>
+
+            <button
+                type="button"
+                id="next-page-button"
+                class="pagination-button"
             >
-                No destinations match your filters.
-            </div>
-
-            <div
-                id="destinations-container"
-                class="destination-grid"
-            ></div>
-
-            <div
-                id="pagination-container"
-                class="pagination-container"
-            ></div>
+                Next
+            </button>
 
         </section>
 
@@ -223,24 +271,38 @@
         <div class="footer-content">
 
             <div>
+
                 <a
                     href="./index.html"
                     class="logo footer-logo"
                 >
-                    TripFusion 
+                    TripFusion
                 </a>
 
                 <p>
-                    Explore, plan and experience smarter journeys.
+                    Discover, plan and manage memorable journeys.
                 </p>
+
             </div>
 
             <div class="footer-links">
-                <a href="./index.html">Home</a>
-                <a href="./destinations.html">Destinations</a>
-                <a href="./my-trips.html">My Trips</a>
-                <a href="#">Planner</a>
-                <a href="#">Contact</a>
+
+                <a href="./index.html">
+                    Home
+                </a>
+
+                <a href="./planner.html">
+                    Planner
+                </a>
+
+                <a href="./my-trips.html">
+                    My Trips
+                </a>
+
+                <a href="./hotels.html">
+                    Hotels
+                </a>
+
             </div>
 
         </div>
@@ -253,6 +315,7 @@
 
     <script src="./js/config.js"></script>
     <script src="./js/destinations.js"></script>
+    <script src="./js/navbar-auth.js"></script>
     <script src="./js/chat-assistant.js"></script>
 
 </body>

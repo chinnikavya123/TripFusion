@@ -453,7 +453,7 @@ async function removeDestination(
     }
 }
 
-logoutButton.addEventListener(
+logoutButton?.addEventListener(
     "click",
     async()=>{
         try{
