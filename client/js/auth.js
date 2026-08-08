@@ -8,15 +8,18 @@ function isValidEmail(email){
 }
 
 function clearFieldError(id){
-    const errorElement=getElement(
-        `${id}-error`
-    );
+
+    const errorElement=
+        getElement(
+            `${id}-error`
+        );
 
     if(errorElement){
         errorElement.textContent="";
     }
 
-    const input=getElement(id);
+    const input=
+        getElement(id);
 
     if(input){
         input.classList.remove(
@@ -29,11 +32,14 @@ function showFieldError(
     id,
     message
 ){
-    const input=getElement(id);
 
-    const errorElement=getElement(
-        `${id}-error`
-    );
+    const input=
+        getElement(id);
+
+    const errorElement=
+        getElement(
+            `${id}-error`
+        );
 
     if(input){
         input.classList.add(
@@ -42,23 +48,30 @@ function showFieldError(
     }
 
     if(errorElement){
-        errorElement.textContent=message;
+        errorElement.textContent=
+            message;
     }
 }
 
 function clearFormErrors(form){
-    form.querySelectorAll("input")
+
+    form
+        .querySelectorAll(
+            "input"
+        )
         .forEach((input)=>{
             input.classList.remove(
                 "input-error"
             );
         });
 
-    form.querySelectorAll(
-        ".field-error"
-    ).forEach((element)=>{
-        element.textContent="";
-    });
+    form
+        .querySelectorAll(
+            ".field-error"
+        )
+        .forEach((element)=>{
+            element.textContent="";
+        });
 }
 
 function showMessage(
@@ -66,11 +79,13 @@ function showMessage(
     message,
     type
 ){
+
     if(!element){
         return;
     }
 
-    element.textContent=message;
+    element.textContent=
+        message;
 
     element.className=
         `auth-message ${type||""}`;
@@ -82,18 +97,24 @@ function setButtonLoading(
     loadingText,
     normalText
 ){
+
     if(!button){
         return;
     }
 
-    button.disabled=isLoading;
+    button.disabled=
+        isLoading;
 
-    button.textContent=isLoading
-        ?loadingText
-        :normalText;
+    button.textContent=
+        isLoading
+            ?loadingText
+            :normalText;
 }
 
-async function parseResponse(response){
+async function parseResponse(
+    response
+){
+
     const contentType=
         response.headers.get(
             "content-type"
@@ -116,7 +137,7 @@ async function parseResponse(response){
 }
 
 function saveLoggedInUser(result){
-<<<<<<< HEAD
+
     const user=
         result?.data?.user||
         result?.user||
@@ -125,12 +146,12 @@ function saveLoggedInUser(result){
     const token=
         result?.token||
         result?.data?.token||
+        result?.accessToken||
+        result?.data?.accessToken||
         "";
-=======
-    const user=result.data?.user||result.user||null;
-    const token=result.token||result.data?.token||"";
 
     if(!token){
+
         throw new Error(
             "Login succeeded but the authentication token was missing."
         );
@@ -140,24 +161,23 @@ function saveLoggedInUser(result){
         "tripfusion_token",
         token
     );
->>>>>>> 0eb78a4 (Fixed login and logout buttons functionality)
 
     if(user){
+
         localStorage.setItem(
             "tripfusion_user",
             JSON.stringify(user)
         );
     }
-<<<<<<< HEAD
 
-    if(token){
-        localStorage.setItem(
-            "tripfusion_token",
-            token
-        );
-    }
-=======
->>>>>>> 0eb78a4 (Fixed login and logout buttons functionality)
+    /*
+        Tells navbar-auth.js that authentication
+        happened during the current browser session.
+    */
+    sessionStorage.setItem(
+        "tripfusion_session_started",
+        "true"
+    );
 }
 
 async function fetchWithTimeout(
@@ -165,40 +185,57 @@ async function fetchWithTimeout(
     options={},
     timeout=30000
 ){
+
     const controller=
         new AbortController();
 
-    const timeoutId=setTimeout(()=>{
-        controller.abort();
-    },timeout);
+    const timeoutId=
+        setTimeout(
+            ()=>{
+                controller.abort();
+            },
+            timeout
+        );
 
     try{
+
         return await fetch(
             url,
             {
                 ...options,
-                signal:controller.signal
+                signal:
+                    controller.signal
             }
         );
+
     }finally{
-        clearTimeout(timeoutId);
+
+        clearTimeout(
+            timeoutId
+        );
     }
 }
 
 async function registerUser(event){
+
     event.preventDefault();
 
-    const form=event.currentTarget;
+    const form=
+        event.currentTarget;
 
-    const messageElement=getElement(
-        "register-message"
+    const messageElement=
+        getElement(
+            "register-message"
+        );
+
+    const submitButton=
+        getElement(
+            "register-button"
+        );
+
+    clearFormErrors(
+        form
     );
-
-    const submitButton=getElement(
-        "register-button"
-    );
-
-    clearFormErrors(form);
 
     showMessage(
         messageElement,
@@ -206,36 +243,43 @@ async function registerUser(event){
         ""
     );
 
-    const fullName=getElement(
-        "register-name"
-    ).value.trim();
+    const fullName=
+        getElement(
+            "register-name"
+        ).value.trim();
 
-    const email=getElement(
-        "register-email"
-    )
-        .value
-        .trim()
-        .toLowerCase();
+    const email=
+        getElement(
+            "register-email"
+        )
+            .value
+            .trim()
+            .toLowerCase();
 
-    const phone=getElement(
-        "register-phone"
-    ).value.trim();
+    const phone=
+        getElement(
+            "register-phone"
+        ).value.trim();
 
-    const password=getElement(
-        "register-password"
-    ).value;
+    const password=
+        getElement(
+            "register-password"
+        ).value;
 
-    const confirmPassword=getElement(
-        "register-confirm-password"
-    ).value;
+    const confirmPassword=
+        getElement(
+            "register-confirm-password"
+        ).value;
 
-    const acceptedTerms=getElement(
-        "register-terms"
-    ).checked;
+    const acceptedTerms=
+        getElement(
+            "register-terms"
+        ).checked;
 
     let hasError=false;
 
     if(fullName.length<2){
+
         showFieldError(
             "register-name",
             "Please enter at least 2 characters."
@@ -245,6 +289,7 @@ async function registerUser(event){
     }
 
     if(!isValidEmail(email)){
+
         showFieldError(
             "register-email",
             "Please enter a valid email address."
@@ -258,6 +303,7 @@ async function registerUser(event){
         !/^(\+91)?[6-9]\d{9}$/
             .test(phone)
     ){
+
         showFieldError(
             "register-phone",
             "Please enter a valid Indian mobile number."
@@ -267,6 +313,7 @@ async function registerUser(event){
     }
 
     if(password.length<8){
+
         showFieldError(
             "register-password",
             "Password must contain at least 8 characters."
@@ -275,7 +322,11 @@ async function registerUser(event){
         hasError=true;
     }
 
-    if(password!==confirmPassword){
+    if(
+        password!==
+        confirmPassword
+    ){
+
         showFieldError(
             "register-confirm-password",
             "Passwords do not match."
@@ -285,6 +336,7 @@ async function registerUser(event){
     }
 
     if(!acceptedTerms){
+
         showMessage(
             messageElement,
             "Please accept the Terms of Service.",
@@ -308,6 +360,7 @@ async function registerUser(event){
     let redirecting=false;
 
     try{
+
         const response=
             await fetchWithTimeout(
                 `${API_BASE_URL}/auth/register`,
@@ -322,31 +375,39 @@ async function registerUser(event){
                             "application/json"
                     },
 
-                    credentials:"include",
+                    credentials:
+                        "include",
 
-                    body:JSON.stringify({
-                        fullName,
-                        email,
-                        phone,
-                        password,
-                        country:"India",
-                        preferredCurrency:"INR"
-                    })
+                    body:
+                        JSON.stringify({
+                            fullName,
+                            email,
+                            phone,
+                            password,
+                            country:"India",
+                            preferredCurrency:
+                                "INR"
+                        })
                 },
                 30000
             );
 
         const result=
-            await parseResponse(response);
+            await parseResponse(
+                response
+            );
 
         if(!response.ok){
+
             throw new Error(
                 result.message||
                 "Registration failed. Please try again."
             );
         }
 
-        saveLoggedInUser(result);
+        saveLoggedInUser(
+            result
+        );
 
         showMessage(
             messageElement,
@@ -359,27 +420,39 @@ async function registerUser(event){
         const redirectURL=
             sessionStorage.getItem(
                 "tripfusion_redirect_after_login"
-            )||"./index.html";
+            )||
+            "./index.html";
 
         sessionStorage.removeItem(
             "tripfusion_redirect_after_login"
         );
 
-        window.location.replace(redirectURL);
+        window.location.replace(
+            redirectURL
+        );
+
     }catch(error){
+
         let message=
             error.message||
             "Registration failed.";
 
-        if(error.name==="AbortError"){
+        if(
+            error.name===
+            "AbortError"
+        ){
+
             message=
                 "Registration took too long. Please try again.";
         }
 
         if(
             error instanceof TypeError&&
-            error.message.includes("fetch")
+            error.message.includes(
+                "fetch"
+            )
         ){
+
             message=
                 "Unable to reach the TripFusion server. Please try again shortly.";
         }
@@ -389,8 +462,11 @@ async function registerUser(event){
             message,
             "error"
         );
+
     }finally{
+
         if(!redirecting){
+
             setButtonLoading(
                 submitButton,
                 false,
@@ -402,19 +478,25 @@ async function registerUser(event){
 }
 
 async function loginUser(event){
+
     event.preventDefault();
 
-    const form=event.currentTarget;
+    const form=
+        event.currentTarget;
 
-    const messageElement=getElement(
-        "login-message"
+    const messageElement=
+        getElement(
+            "login-message"
+        );
+
+    const submitButton=
+        getElement(
+            "login-button"
+        );
+
+    clearFormErrors(
+        form
     );
-
-    const submitButton=getElement(
-        "login-button"
-    );
-
-    clearFormErrors(form);
 
     showMessage(
         messageElement,
@@ -422,24 +504,28 @@ async function loginUser(event){
         ""
     );
 
-    const email=getElement(
-        "login-email"
-    )
-        .value
-        .trim()
-        .toLowerCase();
+    const email=
+        getElement(
+            "login-email"
+        )
+            .value
+            .trim()
+            .toLowerCase();
 
-    const password=getElement(
-        "login-password"
-    ).value;
+    const password=
+        getElement(
+            "login-password"
+        ).value;
 
-    const rememberUser=getElement(
-        "remember-user"
-    ).checked;
+    const rememberUser=
+        getElement(
+            "remember-user"
+        ).checked;
 
     let hasError=false;
 
     if(!isValidEmail(email)){
+
         showFieldError(
             "login-email",
             "Please enter a valid email address."
@@ -449,6 +535,7 @@ async function loginUser(event){
     }
 
     if(!password){
+
         showFieldError(
             "login-password",
             "Please enter your password."
@@ -471,6 +558,7 @@ async function loginUser(event){
     let redirecting=false;
 
     try{
+
         const response=
             await fetchWithTimeout(
                 `${API_BASE_URL}/auth/login`,
@@ -485,34 +573,44 @@ async function loginUser(event){
                             "application/json"
                     },
 
-                    credentials:"include",
+                    credentials:
+                        "include",
 
-                    body:JSON.stringify({
-                        email,
-                        password
-                    })
+                    body:
+                        JSON.stringify({
+                            email,
+                            password
+                        })
                 },
                 30000
             );
 
         const result=
-            await parseResponse(response);
+            await parseResponse(
+                response
+            );
 
         if(!response.ok){
+
             throw new Error(
                 result.message||
                 "Login failed. Please check your credentials."
             );
         }
 
-        saveLoggedInUser(result);
+        saveLoggedInUser(
+            result
+        );
 
         if(rememberUser){
+
             localStorage.setItem(
                 "tripfusion_saved_email",
                 email
             );
+
         }else{
+
             localStorage.removeItem(
                 "tripfusion_saved_email"
             );
@@ -529,27 +627,39 @@ async function loginUser(event){
         const redirectURL=
             sessionStorage.getItem(
                 "tripfusion_redirect_after_login"
-            )||"./index.html";
+            )||
+            "./index.html";
 
         sessionStorage.removeItem(
             "tripfusion_redirect_after_login"
         );
 
-        window.location.replace(redirectURL);
+        window.location.replace(
+            redirectURL
+        );
+
     }catch(error){
+
         let message=
             error.message||
             "Login failed.";
 
-        if(error.name==="AbortError"){
+        if(
+            error.name===
+            "AbortError"
+        ){
+
             message=
                 "Login took too long. Please try again.";
         }
 
         if(
             error instanceof TypeError&&
-            error.message.includes("fetch")
+            error.message.includes(
+                "fetch"
+            )
         ){
+
             message=
                 "Unable to reach the TripFusion server. Please try again shortly.";
         }
@@ -559,8 +669,11 @@ async function loginUser(event){
             message,
             "error"
         );
+
     }finally{
+
         if(!redirecting){
+
             setButtonLoading(
                 submitButton,
                 false,
@@ -572,46 +685,57 @@ async function loginUser(event){
 }
 
 function initializePasswordToggles(){
+
     document
         .querySelectorAll(
             ".password-toggle"
         )
         .forEach((button)=>{
+
             button.addEventListener(
                 "click",
                 ()=>{
-                    const input=getElement(
-                        button.dataset.target
-                    );
+
+                    const input=
+                        getElement(
+                            button.dataset
+                                .target
+                        );
 
                     if(!input){
                         return;
                     }
 
                     const isVisible=
-                        input.type==="text";
+                        input.type===
+                        "text";
 
-                    input.type=isVisible
-                        ?"password"
-                        :"text";
+                    input.type=
+                        isVisible
+                            ?"password"
+                            :"text";
 
-                    button.textContent=isVisible
-                        ?"Show"
-                        :"Hide";
+                    button.textContent=
+                        isVisible
+                            ?"Show"
+                            :"Hide";
                 }
             );
         });
 }
 
 function initializeInputCleanup(){
+
     document
         .querySelectorAll(
             ".auth-field input"
         )
         .forEach((input)=>{
+
             input.addEventListener(
                 "input",
                 ()=>{
+
                     clearFieldError(
                         input.id
                     );
@@ -621,15 +745,21 @@ function initializeInputCleanup(){
 }
 
 function initializeSavedEmail(){
-    const emailInput=getElement(
-        "login-email"
-    );
 
-    const rememberInput=getElement(
-        "remember-user"
-    );
+    const emailInput=
+        getElement(
+            "login-email"
+        );
 
-    if(!emailInput||!rememberInput){
+    const rememberInput=
+        getElement(
+            "remember-user"
+        );
+
+    if(
+        !emailInput||
+        !rememberInput
+    ){
         return;
     }
 
@@ -639,46 +769,65 @@ function initializeSavedEmail(){
         );
 
     if(savedEmail){
-        emailInput.value=savedEmail;
-        rememberInput.checked=true;
+
+        emailInput.value=
+            savedEmail;
+
+        rememberInput.checked=
+            true;
     }
 }
 
-
 async function warmBackend(){
+
     try{
+
         await fetchWithTimeout(
             `${API_BASE_URL}/health`,
             {
                 method:"GET",
+
                 headers:{
-                    "Accept":"application/json"
+                    "Accept":
+                        "application/json"
                 }
             },
             8000
         );
+
     }catch(error){
-        // Do not block the login/register form while Render wakes up.
+
+        /*
+            Do not block login/register.
+            Render may simply be waking up.
+        */
     }
 }
 
 document.addEventListener(
     "DOMContentLoaded",
     ()=>{
+
         warmBackend();
+
         initializePasswordToggles();
+
         initializeInputCleanup();
+
         initializeSavedEmail();
 
-        const registerForm=getElement(
-            "register-form"
-        );
+        const registerForm=
+            getElement(
+                "register-form"
+            );
 
-        const loginForm=getElement(
-            "login-form"
-        );
+        const loginForm=
+            getElement(
+                "login-form"
+            );
 
         if(registerForm){
+
             registerForm.addEventListener(
                 "submit",
                 registerUser
@@ -686,6 +835,7 @@ document.addEventListener(
         }
 
         if(loginForm){
+
             loginForm.addEventListener(
                 "submit",
                 loginUser
