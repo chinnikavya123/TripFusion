@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -24,9 +26,14 @@
         rel="stylesheet"
         href="./css/chat-assistant.css"
     >
+
 </head>
 
 <body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
     <header class="navbar">
 
@@ -119,7 +126,14 @@
 
     </header>
 
+
+    <!-- =========================
+         DESTINATION DETAILS
+    ========================== -->
+
     <main class="destination-details-page">
+
+        <!-- Loading -->
 
         <section
             id="destination-details-loading"
@@ -128,23 +142,34 @@
             Loading destination details...
         </section>
 
+
+        <!-- Error -->
+
         <section
             id="destination-details-error"
             class="destination-message destination-error"
             style="display:none"
-        ></section>
+        >
+        </section>
+
+
+        <!-- Destination Content -->
 
         <div
             id="destination-details-container"
             style="display:none"
         >
 
+            <!-- =========================
+                 HERO
+            ========================== -->
+
             <section class="destination-details-hero">
 
                 <img
                     id="destination-details-image"
                     src=""
-                    alt=""
+                    alt="Destination"
                 >
 
                 <div class="destination-details-overlay">
@@ -159,17 +184,30 @@
                     <p
                         id="destination-details-category"
                         class="section-label"
-                    ></p>
+                    >
+                    </p>
 
-                    <h1 id="destination-details-name"></h1>
+                    <h1
+                        id="destination-details-name"
+                    >
+                    </h1>
 
-                    <p id="destination-details-location"></p>
+                    <p
+                        id="destination-details-location"
+                    >
+                    </p>
 
                     <div class="destination-details-rating">
 
-                        <span id="destination-details-rating"></span>
+                        <span
+                            id="destination-details-rating"
+                        >
+                        </span>
 
-                        <span id="destination-details-reviews"></span>
+                        <span
+                            id="destination-details-reviews"
+                        >
+                        </span>
 
                     </div>
 
@@ -177,9 +215,17 @@
 
             </section>
 
+
+            <!-- =========================
+                 MAIN CONTENT
+            ========================== -->
+
             <section class="destination-details-content">
 
                 <div class="destination-main-information">
+
+
+                    <!-- ABOUT -->
 
                     <article class="destination-information-card">
 
@@ -187,45 +233,74 @@
                             About this destination
                         </h2>
 
-                        <p id="destination-details-description"></p>
+                        <p
+                            id="destination-details-description"
+                        >
+                        </p>
 
                         <div class="destination-facts-grid">
 
                             <div>
+
                                 <span>
                                     Best Season
                                 </span>
 
-                                <strong id="destination-best-season"></strong>
+                                <strong
+                                    id="destination-best-season"
+                                >
+                                </strong>
+
                             </div>
 
+
                             <div>
+
                                 <span>
                                     Recommended Duration
                                 </span>
 
-                                <strong id="destination-duration"></strong>
+                                <strong
+                                    id="destination-duration"
+                                >
+                                </strong>
+
                             </div>
 
+
                             <div>
+
                                 <span>
                                     Starting Budget
                                 </span>
 
-                                <strong id="destination-starting-price"></strong>
+                                <strong
+                                    id="destination-starting-price"
+                                >
+                                </strong>
+
                             </div>
 
+
                             <div>
+
                                 <span>
                                     Languages
                                 </span>
 
-                                <strong id="destination-languages"></strong>
+                                <strong
+                                    id="destination-languages"
+                                >
+                                </strong>
+
                             </div>
 
                         </div>
 
                     </article>
+
+
+                    <!-- ACTIVITIES -->
 
                     <article class="destination-information-card">
 
@@ -236,9 +311,13 @@
                         <div
                             id="destination-activities"
                             class="destination-activity-list"
-                        ></div>
+                        >
+                        </div>
 
                     </article>
+
+
+                    <!-- LOCAL FOOD -->
 
                     <article class="destination-information-card">
 
@@ -249,9 +328,13 @@
                         <div
                             id="destination-local-food"
                             class="destination-tag-list"
-                        ></div>
+                        >
+                        </div>
 
                     </article>
+
+
+                    <!-- SAFETY -->
 
                     <article class="destination-information-card">
 
@@ -259,9 +342,15 @@
                             Safety tips
                         </h2>
 
-                        <ul id="destination-safety-tips"></ul>
+                        <ul
+                            id="destination-safety-tips"
+                        >
+                        </ul>
 
                     </article>
+
+
+                    <!-- TRANSPORTATION -->
 
                     <article class="destination-information-card">
 
@@ -269,11 +358,19 @@
                             Transportation
                         </h2>
 
-                        <p id="destination-transportation"></p>
+                        <p
+                            id="destination-transportation"
+                        >
+                        </p>
 
                     </article>
 
                 </div>
+
+
+                <!-- =========================
+                     SIDEBAR
+                ========================== -->
 
                 <aside class="destination-details-sidebar">
 
@@ -284,9 +381,10 @@
                         </h2>
 
                         <p>
-                            Generate a personalized itinerary for this
-                            destination.
+                            Generate a personalized itinerary
+                            for this destination.
                         </p>
+
 
                         <a
                             id="plan-destination-button"
@@ -296,6 +394,7 @@
                             Plan This Trip
                         </a>
 
+
                         <a
                             id="view-destination-hotels"
                             href="./hotels.html"
@@ -303,6 +402,7 @@
                         >
                             View Hotels
                         </a>
+
 
                         <button
                             type="button"
@@ -312,10 +412,12 @@
                             Add to Wishlist
                         </button>
 
+
                         <p
                             id="destination-action-message"
                             class="destination-action-message"
-                        ></p>
+                        >
+                        </p>
 
                     </div>
 
@@ -327,6 +429,11 @@
 
     </main>
 
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
     <footer>
 
         <div class="footer-bottom">
@@ -335,11 +442,21 @@
 
     </footer>
 
-    <script src="./js/config.js?v=10"></script>
-    <script src="./js/destination-details.js?v=10"></script>
-    <script src="./js/destination-reviews.js?v=10"></script>
-    <script src="./js/navbar-auth.js?v=10"></script>
-    <script src="./js/chat-assistant.js?v=10"></script>
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="./js/config.js?v=11"></script>
+
+    <script src="./js/destination-details.js?v=11"></script>
+
+    <script src="./js/destination-reviews.js?v=11"></script>
+
+    <script src="./js/navbar-auth.js?v=11"></script>
+
+    <script src="./js/chat-assistant.js?v=11"></script>
 
 </body>
+
 </html>

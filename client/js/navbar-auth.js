@@ -4,49 +4,28 @@
         "tripfusion_session_started";
 
     function clearStoredAuth(){
-
-        localStorage.removeItem(
-            "tripfusion_token"
-        );
-
-        localStorage.removeItem(
-            "tripfusion_user"
-        );
-
-        localStorage.removeItem(
-            "token"
-        );
-
-        localStorage.removeItem(
-            "authToken"
-        );
+        localStorage.removeItem("tripfusion_token");
+        localStorage.removeItem("tripfusion_user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("authToken");
     }
 
     function getToken(){
-
         return(
-            localStorage.getItem(
-                "tripfusion_token"
-            )||
-            localStorage.getItem(
-                "token"
-            )||
-            localStorage.getItem(
-                "authToken"
-            )||
+            localStorage.getItem("tripfusion_token")||
+            localStorage.getItem("token")||
+            localStorage.getItem("authToken")||
             ""
         );
     }
 
     function initializeSession(){
-
         const sessionStarted=
             sessionStorage.getItem(
                 SESSION_KEY
             );
 
         if(!sessionStarted){
-
             clearStoredAuth();
 
             sessionStorage.setItem(
@@ -57,23 +36,15 @@
     }
 
     function isLoggedIn(){
-
-        return Boolean(
-            getToken()
-        );
+        return Boolean(getToken());
     }
 
     function updateNavbarAuth(){
-
-        const loggedIn=
-            isLoggedIn();
+        const loggedIn=isLoggedIn();
 
         document
-            .querySelectorAll(
-                "[data-auth='login']"
-            )
+            .querySelectorAll("[data-auth='login']")
             .forEach((button)=>{
-
                 button.style.display=
                     loggedIn
                         ?"none"
@@ -81,11 +52,8 @@
             });
 
         document
-            .querySelectorAll(
-                "[data-auth='register']"
-            )
+            .querySelectorAll("[data-auth='register']")
             .forEach((button)=>{
-
                 button.style.display=
                     loggedIn
                         ?"none"
@@ -93,11 +61,8 @@
             });
 
         document
-            .querySelectorAll(
-                "[data-auth='logout']"
-            )
+            .querySelectorAll("[data-auth='logout']")
             .forEach((button)=>{
-
                 button.style.display=
                     loggedIn
                         ?"inline-flex"
@@ -106,76 +71,49 @@
     }
 
     async function logoutUser(){
-
-        const token=
-            getToken();
+        const token=getToken();
 
         clearStoredAuth();
-
         updateNavbarAuth();
 
         try{
-
             if(
                 token&&
-                typeof API_BASE_URL!==
-                "undefined"
+                typeof API_BASE_URL!=="undefined"
             ){
-
                 const controller=
                     new AbortController();
 
                 const timeoutId=
                     setTimeout(
-                        ()=>{
-                            controller.abort();
-                        },
+                        ()=>controller.abort(),
                         3000
                     );
 
                 try{
-
                     await fetch(
                         `${API_BASE_URL}/auth/logout`,
                         {
                             method:"POST",
-
-                            credentials:
-                                "include",
-
+                            credentials:"include",
                             headers:{
-                                "Accept":
-                                    "application/json",
-
-                                "Content-Type":
-                                    "application/json",
-
-                                "Authorization":
-                                    `Bearer ${token}`
+                                "Accept":"application/json",
+                                "Content-Type":"application/json",
+                                "Authorization":`Bearer ${token}`
                             },
-
-                            signal:
-                                controller.signal
+                            signal:controller.signal
                         }
                     );
-
                 }finally{
-
-                    clearTimeout(
-                        timeoutId
-                    );
+                    clearTimeout(timeoutId);
                 }
             }
-
         }catch(error){
-
             console.warn(
                 "Logout request could not complete:",
                 error
             );
-
         }finally{
-
             window.location.replace(
                 "./index.html"
             );
@@ -183,24 +121,17 @@
     }
 
     function bindLogoutButtons(){
-
         document
-            .querySelectorAll(
-                "[data-auth='logout']"
-            )
+            .querySelectorAll("[data-auth='logout']")
             .forEach((button)=>{
-
                 if(
-                    button.dataset
-                        .navbarLogoutBound===
+                    button.dataset.navbarLogoutBound===
                     "true"
                 ){
                     return;
                 }
 
-                button.dataset
-                    .navbarLogoutBound=
-                    "true";
+                button.dataset.navbarLogoutBound="true";
 
                 button.addEventListener(
                     "click",
@@ -210,26 +141,17 @@
     }
 
     function initialize(){
-
         initializeSession();
-
         updateNavbarAuth();
-
         bindLogoutButtons();
     }
 
-    if(
-        document.readyState===
-        "loading"
-    ){
-
+    if(document.readyState==="loading"){
         document.addEventListener(
             "DOMContentLoaded",
             initialize
         );
-
     }else{
-
         initialize();
     }
 

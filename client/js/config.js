@@ -29,21 +29,14 @@ async function fetchTripFusionAPI(
         );
 
     try{
-        const response=
-            await fetch(
-                url,
-                {
-                    ...options,
-                    signal:
-                        controller.signal
-                }
-            );
-
-        return response;
-
-    }finally{
-        clearTimeout(
-            timeoutId
+        return await fetch(
+            url,
+            {
+                ...options,
+                signal:controller.signal
+            }
         );
+    }finally{
+        clearTimeout(timeoutId);
     }
 }

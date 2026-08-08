@@ -3,11 +3,11 @@ const detailsContainer=document.getElementById(
 );
 
 const loadingElement=document.getElementById(
-    "details-loading"
+    "destination-details-loading"
 );
 
 const errorElement=document.getElementById(
-    "details-error"
+    "destination-details-error"
 );
 
 const fallbackImage=
@@ -821,7 +821,12 @@ async function loadDestinationDetails(){
             `${API_BASE_URL}/destinations/${
                 encodeURIComponent(destinationId)
             }`,
-            {},
+            {
+                method:"GET",
+                headers:{
+                    "Accept":"application/json"
+                }
+            },
             15000
         );
 
@@ -834,25 +839,49 @@ async function loadDestinationDetails(){
             );
         }
 
-        loadingElement.style.display="none";
-        errorElement.style.display="none";
+        const destination=result?.data?.destination;
 
-        renderDestination(
-            result.data.destination
-        );
+        if(!destination){
+            throw new Error(
+                "Destination information was not returned by the server."
+            );
+        }
+
+        renderDestination(destination);
+
+        if(loadingElement){
+            loadingElement.style.display="none";
+        }
+
+        if(errorElement){
+            errorElement.style.display="none";
+        }
+
+        if(detailsContainer){
+            detailsContainer.style.display="block";
+        }
     }catch(error){
-        loadingElement.style.display="none";
-
-        errorElement.style.display="block";
-        errorElement.textContent=
-            error.name==="AbortError"
-                ?"The server is taking longer than expected. Please refresh once."
-                :error.message;
-
         console.error(
             "Destination details error:",
             error
         );
+
+        if(loadingElement){
+            loadingElement.style.display="none";
+        }
+
+        if(detailsContainer){
+            detailsContainer.style.display="none";
+        }
+
+        if(errorElement){
+            errorElement.style.display="block";
+            errorElement.textContent=
+                error.name==="AbortError"
+                    ?"The server is taking longer than expected. Please try again."
+                    :error.message||
+                        "Unable to load destination details.";
+        }
     }
 }
 
