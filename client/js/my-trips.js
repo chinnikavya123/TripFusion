@@ -111,13 +111,14 @@ function createTripCard(trip){
 
 async function loadTrips(){
     try{
-        const response=await fetch(
+        const response=await fetchTripFusionAPI(
             `${API_BASE_URL}/trip-plans/my-trips`,
             {
                 method:"GET",
                 credentials:"include",
                 headers:getAuthHeaders()
-            }
+            },
+            15000
         );
 
         const result=await response.json();
@@ -150,7 +151,10 @@ async function loadTrips(){
 
         attachTripEvents();
     }catch(error){
-        tripsLoading.textContent=error.message;
+        tripsLoading.textContent=
+            error.name==="AbortError"
+                ?"The server is taking longer than expected. Please refresh once."
+                :error.message;
         console.error(error);
     }
 }

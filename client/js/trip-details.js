@@ -18,6 +18,10 @@ const downloadPdfButton=document.getElementById(
     "download-pdf-button"
 );
 
+const smsTripButton=document.getElementById(
+    "sms-trip-button"
+);
+
 const weatherButton=document.getElementById(
     "weather-button"
 );
@@ -1702,7 +1706,7 @@ async function loadTripDetails(){
             );
         }
 
-        const response=await fetch(
+        const response=await fetchTripFusionAPI(
             `${API_BASE_URL}/trip-plans/${
                 encodeURIComponent(tripId)
             }`,
@@ -1710,7 +1714,8 @@ async function loadTripDetails(){
                 method:"GET",
                 credentials:"include",
                 headers:getAuthHeaders()
-            }
+            },
+            15000
         );
 
         const result=await response.json();
@@ -1763,7 +1768,9 @@ async function loadTripDetails(){
                 "block";
 
             errorElement.textContent=
-                error.message;
+                error.name==="AbortError"
+                    ?"The server is taking longer than expected. Please refresh once."
+                    :error.message;
         }
 
         console.error(

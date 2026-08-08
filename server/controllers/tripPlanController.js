@@ -177,43 +177,11 @@ const emailTripPlan=asyncHandler(async(req,res)=>{
     }
 });
 
-const smsTripPlan=asyncHandler(async(req,res)=>{
-    const tripPlan=await TripPlan.findOne({
-        _id:req.params.id,
-        user:req.user._id
-    });
-
-    if(!tripPlan){
-        return res.status(404).json({
-            success:false,
-            message:"Trip plan not found"
-        });
-    }
-
-    if(!req.user.phone){
-        return res.status(400).json({
-            success:false,
-            message:
-                "No phone number is registered with your account"
-        });
-    }
-
-    res.status(200).json({
-        success:true,
-        message:
-            `Trip summary was sent to ${smsResult.recipient}`,
-        data:{
-            messageSid:smsResult.sid,
-            status:smsResult.status
-        }
-    });
-});
 
 module.exports={
     createTripPlan,
     getMyTripPlans,
     getTripPlanById,
     deleteTripPlan,
-    emailTripPlan,
-    smsTripPlan
+    emailTripPlan
 };

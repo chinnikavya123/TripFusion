@@ -116,6 +116,7 @@ async function parseResponse(response){
 }
 
 function saveLoggedInUser(result){
+<<<<<<< HEAD
     const user=
         result?.data?.user||
         result?.user||
@@ -125,6 +126,21 @@ function saveLoggedInUser(result){
         result?.token||
         result?.data?.token||
         "";
+=======
+    const user=result.data?.user||result.user||null;
+    const token=result.token||result.data?.token||"";
+
+    if(!token){
+        throw new Error(
+            "Login succeeded but the authentication token was missing."
+        );
+    }
+
+    localStorage.setItem(
+        "tripfusion_token",
+        token
+    );
+>>>>>>> 0eb78a4 (Fixed login and logout buttons functionality)
 
     if(user){
         localStorage.setItem(
@@ -132,6 +148,7 @@ function saveLoggedInUser(result){
             JSON.stringify(user)
         );
     }
+<<<<<<< HEAD
 
     if(token){
         localStorage.setItem(
@@ -139,6 +156,8 @@ function saveLoggedInUser(result){
             token
         );
     }
+=======
+>>>>>>> 0eb78a4 (Fixed login and logout buttons functionality)
 }
 
 async function fetchWithTimeout(
@@ -337,10 +356,16 @@ async function registerUser(event){
 
         redirecting=true;
 
-        setTimeout(()=>{
-            window.location.href=
-                "./planner.html";
-        },800);
+        const redirectURL=
+            sessionStorage.getItem(
+                "tripfusion_redirect_after_login"
+            )||"./index.html";
+
+        sessionStorage.removeItem(
+            "tripfusion_redirect_after_login"
+        );
+
+        window.location.replace(redirectURL);
     }catch(error){
         let message=
             error.message||
@@ -501,10 +526,16 @@ async function loginUser(event){
 
         redirecting=true;
 
-        setTimeout(()=>{
-            window.location.href=
-                "./planner.html";
-        },800);
+        const redirectURL=
+            sessionStorage.getItem(
+                "tripfusion_redirect_after_login"
+            )||"./index.html";
+
+        sessionStorage.removeItem(
+            "tripfusion_redirect_after_login"
+        );
+
+        window.location.replace(redirectURL);
     }catch(error){
         let message=
             error.message||
@@ -613,9 +644,28 @@ function initializeSavedEmail(){
     }
 }
 
+
+async function warmBackend(){
+    try{
+        await fetchWithTimeout(
+            `${API_BASE_URL}/health`,
+            {
+                method:"GET",
+                headers:{
+                    "Accept":"application/json"
+                }
+            },
+            8000
+        );
+    }catch(error){
+        // Do not block the login/register form while Render wakes up.
+    }
+}
+
 document.addEventListener(
     "DOMContentLoaded",
     ()=>{
+        warmBackend();
         initializePasswordToggles();
         initializeInputCleanup();
         initializeSavedEmail();

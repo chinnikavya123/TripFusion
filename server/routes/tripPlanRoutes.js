@@ -5,8 +5,7 @@ const{
     getMyTripPlans,
     getTripPlanById,
     deleteTripPlan,
-    emailTripPlan,
-    smsTripPlan
+    emailTripPlan
 }=require("../controllers/tripPlanController");
 
 const{
@@ -22,10 +21,6 @@ router.get("/my-trips",getMyTripPlans);
 router.post(
     "/:id/email",
     emailTripPlan
-);
-router.post(
-    "/:id/sms",
-    smsTripPlan
 );
 router.get("/:id",getTripPlanById);
 router.delete("/:id",deleteTripPlan);

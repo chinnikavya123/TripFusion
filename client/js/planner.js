@@ -15,11 +15,17 @@ const saveTripMessage=document.getElementById(
 let generatedTripPlan=null;
 
 const startDateInput=document.getElementById("start-date");
+
 const daysInput=document.getElementById("days-input");
+
 const travelersInput=document.getElementById(
     "travelers-input"
 );
-const budgetInput=document.getElementById("budget-input");
+
+const budgetInput=document.getElementById(
+    "budget-input"
+);
+
 const travelStyleInput=document.getElementById(
     "travel-style"
 );
@@ -43,11 +49,14 @@ const budgetBreakdown=document.getElementById(
 let destinations=[];
 
 function formatCurrency(value){
-    return new Intl.NumberFormat("en-IN",{
-        style:"currency",
-        currency:"INR",
-        maximumFractionDigits:0
-    }).format(Number(value)||0);
+    return new Intl.NumberFormat(
+        "en-IN",
+        {
+            style:"currency",
+            currency:"INR",
+            maximumFractionDigits:0
+        }
+    ).format(Number(value)||0);
 }
 
 async function loadDestinationOptions(){
@@ -81,8 +90,12 @@ async function loadDestinationOptions(){
             }).join("")}
         `;
     }catch(error){
-        plannerMessage.textContent=error.message;
-        plannerMessage.classList.add("error");
+        plannerMessage.textContent=
+            error.message;
+
+        plannerMessage.classList.add(
+            "error"
+        );
     }
 }
 
@@ -91,7 +104,9 @@ function getSelectedInterests(){
         ...document.querySelectorAll(
             'input[name="interests"]:checked'
         )
-    ].map((item)=>item.value);
+    ].map(
+        (item)=>item.value
+    );
 }
 
 function updatePreview(){
@@ -107,27 +122,39 @@ function updatePreview(){
             ?selectedOption.textContent.trim()
             :"Not selected";
 
-    const days=Number(daysInput.value)||0;
+    const days=
+        Number(daysInput.value)||0;
 
     document.getElementById(
         "preview-days"
     ).textContent=
-        `${days} ${days===1?"day":"days"}`;
+        `${days} ${
+            days===1
+                ?"day"
+                :"days"
+        }`;
 
-    const travelers=Number(travelersInput.value)||0;
+    const travelers=
+        Number(
+            travelersInput.value
+        )||0;
 
     document.getElementById(
         "preview-travelers"
     ).textContent=
         `${travelers} ${
-            travelers===1?"traveler":"travelers"
+            travelers===1
+                ?"traveler"
+                :"travelers"
         }`;
 
     document.getElementById(
         "preview-budget"
     ).textContent=
         budgetInput.value
-            ?formatCurrency(budgetInput.value)
+            ?formatCurrency(
+                budgetInput.value
+            )
             :"Not entered";
 
     document.getElementById(
@@ -138,13 +165,34 @@ function updatePreview(){
         ].textContent.trim();
 }
 
-function calculateBudget(totalBudget){
+function calculateBudget(
+    totalBudget
+){
     return{
-        accommodation:Math.round(totalBudget*0.35),
-        food:Math.round(totalBudget*0.20),
-        localTransport:Math.round(totalBudget*0.15),
-        activities:Math.round(totalBudget*0.20),
-        emergency:Math.round(totalBudget*0.10)
+        accommodation:
+            Math.round(
+                totalBudget*0.35
+            ),
+
+        food:
+            Math.round(
+                totalBudget*0.20
+            ),
+
+        localTransport:
+            Math.round(
+                totalBudget*0.15
+            ),
+
+        activities:
+            Math.round(
+                totalBudget*0.20
+            ),
+
+        emergency:
+            Math.round(
+                totalBudget*0.10
+            )
     };
 }
 
@@ -154,70 +202,98 @@ function generateDayPlan(
     interests,
     totalDays
 ){
-    const activities=Array.isArray(destination.activities)
-        ?destination.activities
-        :[];
+    const activities=
+        Array.isArray(
+            destination.activities
+        )
+            ?destination.activities
+            :[];
 
-    const nearbyPlaces=Array.isArray(destination.nearbyPlaces)
-        ?destination.nearbyPlaces
-        :[];
+    const nearbyPlaces=
+        Array.isArray(
+            destination.nearbyPlaces
+        )
+            ?destination.nearbyPlaces
+            :[];
 
-    const localFood=Array.isArray(destination.localFood)
-        ?destination.localFood
-        :[];
+    const localFood=
+        Array.isArray(
+            destination.localFood
+        )
+            ?destination.localFood
+            :[];
 
     const morningOptions=[
         `Start the day with breakfast and explore the main attractions of ${destination.name}`,
+
         `Visit a scenic viewpoint and enjoy the morning atmosphere of ${destination.name}`,
+
         `Take a guided local sightseeing tour around ${destination.city}`,
+
         `Explore a famous heritage or cultural attraction in ${destination.name}`,
+
         `Begin with a peaceful nature walk and photography session`,
+
         `Visit a local temple, monument or landmark before the crowds arrive`
     ];
 
     const afternoonOptions=[
         `Enjoy local sightseeing and explore nearby markets in ${destination.name}`,
+
         `Visit a popular nearby attraction and spend time exploring the area`,
+
         `Try a regional lunch followed by a relaxed city tour`,
+
         `Explore museums, gardens or cultural attractions in ${destination.city}`,
+
         `Spend the afternoon experiencing local traditions and handicrafts`,
+
         `Visit a nearby lake, waterfall, beach or hill viewpoint`
     ];
 
     const eveningOptions=[
         `Enjoy sunset views and relax at a popular viewpoint`,
+
         `Explore the local market and shop for souvenirs`,
+
         `Try traditional food at a recommended local restaurant`,
+
         `Take an evening walk and enjoy the atmosphere of ${destination.name}`,
+
         `Attend a cultural performance or local experience`,
+
         `Relax at the hotel and prepare for the next day's journey`
     ];
 
     const activity=
         activities.length>0
             ?activities[
-                (dayNumber-1)%activities.length
+                (dayNumber-1)%
+                activities.length
             ]
             :null;
 
     const secondActivity=
         activities.length>1
             ?activities[
-                dayNumber%activities.length
+                dayNumber%
+                activities.length
             ]
             :null;
 
     const nearbyPlace=
         nearbyPlaces.length>0
             ?nearbyPlaces[
-                (dayNumber-1)%nearbyPlaces.length
+                (dayNumber-1)%
+                nearbyPlaces.length
             ]
             :null;
 
     const food=
         localFood.length>0
             ?localFood[
-                (dayNumber-1)%localFood.length
+                (dayNumber-1)%
+                localFood.length
             ]
             :"regional cuisine";
 
@@ -232,7 +308,8 @@ function generateDayPlan(
     let title;
 
     if(dayNumber===1){
-        title=`Arrival and introduction to ${destination.name}`;
+        title=
+            `Arrival and introduction to ${destination.name}`;
 
         morning=
             `Arrive in ${destination.name}, travel to the hotel and complete check-in`;
@@ -242,14 +319,19 @@ function generateDayPlan(
 
         evening=
             `Enjoy a relaxed evening walk, try ${food} and review the upcoming itinerary`;
-    }else if(dayNumber===totalDays){
-        title=`Final experiences and departure from ${destination.name}`;
+
+    }else if(
+        dayNumber===totalDays
+    ){
+        title=
+            `Final experiences and departure from ${destination.name}`;
 
         morning=
             activity
                 ?`${activity.name}: ${activity.description}`
                 :morningOptions[
-                    (dayNumber-1)%morningOptions.length
+                    (dayNumber-1)%
+                    morningOptions.length
                 ];
 
         afternoon=
@@ -257,33 +339,42 @@ function generateDayPlan(
 
         evening=
             `Travel to the departure point and conclude the trip`;
+
     }else{
-        title=`Explore ${destination.name} — Day ${dayNumber}`;
+        title=
+            `Explore ${destination.name} — Day ${dayNumber}`;
 
         morning=
             activity
                 ?`${activity.name}: ${activity.description}`
                 :morningOptions[
-                    (dayNumber-1)%morningOptions.length
+                    (dayNumber-1)%
+                    morningOptions.length
                 ];
 
         if(nearbyPlace){
             afternoon=
                 `Visit ${nearbyPlace.name}. ${nearbyPlace.description}`;
+
         }else if(secondActivity){
             afternoon=
                 `${secondActivity.name}: ${secondActivity.description}`;
+
         }else{
             afternoon=
                 afternoonOptions[
-                    (dayNumber-1)%afternoonOptions.length
+                    (dayNumber-1)%
+                    afternoonOptions.length
                 ];
         }
 
         evening=
-            `${eveningOptions[
-                (dayNumber-1)%eveningOptions.length
-            ]}. Recommended dinner: ${food}. Interests covered: ${selectedInterests}`;
+            `${
+                eveningOptions[
+                    (dayNumber-1)%
+                    eveningOptions.length
+                ]
+            }. Recommended dinner: ${food}. Interests covered: ${selectedInterests}`;
     }
 
     return{
@@ -295,40 +386,67 @@ function generateDayPlan(
     };
 }
 
-function renderBudgetBreakdown(budget){
+function renderBudgetBreakdown(
+    budget
+){
     budgetBreakdown.innerHTML=`
         <article>
-            <span>Accommodation</span>
+            <span>
+                Accommodation
+            </span>
+
             <strong>
-                ${formatCurrency(budget.accommodation)}
+                ${formatCurrency(
+                    budget.accommodation
+                )}
             </strong>
         </article>
 
         <article>
-            <span>Food</span>
+            <span>
+                Food
+            </span>
+
             <strong>
-                ${formatCurrency(budget.food)}
+                ${formatCurrency(
+                    budget.food
+                )}
             </strong>
         </article>
 
         <article>
-            <span>Local Transport</span>
+            <span>
+                Local Transport
+            </span>
+
             <strong>
-                ${formatCurrency(budget.localTransport)}
+                ${formatCurrency(
+                    budget.localTransport
+                )}
             </strong>
         </article>
 
         <article>
-            <span>Activities</span>
+            <span>
+                Activities
+            </span>
+
             <strong>
-                ${formatCurrency(budget.activities)}
+                ${formatCurrency(
+                    budget.activities
+                )}
             </strong>
         </article>
 
         <article>
-            <span>Emergency Reserve</span>
+            <span>
+                Emergency Reserve
+            </span>
+
             <strong>
-                ${formatCurrency(budget.emergency)}
+                ${formatCurrency(
+                    budget.emergency
+                )}
             </strong>
         </article>
     `;
@@ -350,7 +468,9 @@ function renderItinerary(
         "itinerary-summary"
     ).textContent=
         `${travelers} traveler(s) • ${
-            formatCurrency(budget)
+            formatCurrency(
+                budget
+            )
         } total budget • ${
             interests.length
                 ?interests.join(", ")
@@ -359,131 +479,213 @@ function renderItinerary(
 
     const dayPlans=[];
 
-    const calculatedBudget=calculateBudget(budget);
+    const calculatedBudget=
+        calculateBudget(
+            budget
+        );
 
-generatedTripPlan={
-    destinationId:destination._id,
-    startDate:startDateInput.value,
-    days,
-    travelers,
-    totalBudget:budget,
-    travelStyle:travelStyleInput.value,
-    interests,
-    budgetBreakdown:calculatedBudget,
-    itinerary:dayPlans
-};
-
-    for(let day=1;day<=days;day++){
+    for(
+        let day=1;
+        day<=days;
+        day++
+    ){
         dayPlans.push(
             generateDayPlan(
-    destination,
-    day,
-    interests,
-    days
-)
+                destination,
+                day,
+                interests,
+                days
+            )
         );
     }
 
-    itineraryContainer.innerHTML=dayPlans
-        .map((plan)=>{
-            return`
-                <article class="itinerary-day-card">
-                    <div class="day-number">
-                        Day ${plan.day}
-                    </div>
+    generatedTripPlan={
+        destinationId:
+            destination._id,
 
-                    <div class="day-content">
-                        <h3>${plan.title}</h3>
+        startDate:
+            startDateInput.value,
 
-                        <div class="day-schedule">
-                            <p>
-                                <strong>Morning:</strong>
-                                ${plan.morning}
-                            </p>
+        days,
 
-                            <p>
-                                <strong>Afternoon:</strong>
-                                ${plan.afternoon}
-                            </p>
+        travelers,
 
-                            <p>
-                                <strong>Evening:</strong>
-                                ${plan.evening}
-                            </p>
+        totalBudget:
+            budget,
+
+        travelStyle:
+            travelStyleInput.value,
+
+        interests,
+
+        budgetBreakdown:
+            calculatedBudget,
+
+        itinerary:
+            dayPlans
+    };
+
+    itineraryContainer.innerHTML=
+        dayPlans
+            .map((plan)=>{
+                return`
+                    <article class="itinerary-day-card">
+
+                        <div class="day-number">
+                            Day ${plan.day}
                         </div>
-                    </div>
-                </article>
-            `;
-        })
-        .join("");
 
-    renderBudgetBreakdown(calculatedBudget);
+                        <div class="day-content">
 
-    itinerarySection.style.display="block";
+                            <h3>
+                                ${plan.title}
+                            </h3>
+
+                            <div class="day-schedule">
+
+                                <p>
+                                    <strong>
+                                        Morning:
+                                    </strong>
+
+                                    ${plan.morning}
+                                </p>
+
+                                <p>
+                                    <strong>
+                                        Afternoon:
+                                    </strong>
+
+                                    ${plan.afternoon}
+                                </p>
+
+                                <p>
+                                    <strong>
+                                        Evening:
+                                    </strong>
+
+                                    ${plan.evening}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+                `;
+            })
+            .join("");
+
+    renderBudgetBreakdown(
+        calculatedBudget
+    );
+
+    itinerarySection.style.display=
+        "block";
 
     itinerarySection.scrollIntoView({
         behavior:"smooth"
     });
 }
 
-plannerForm.addEventListener("submit",(event)=>{
-    event.preventDefault();
+plannerForm.addEventListener(
+    "submit",
+    (event)=>{
+        event.preventDefault();
 
-    plannerMessage.textContent="";
-    plannerMessage.className="planner-message";
+        plannerMessage.textContent="";
+        plannerMessage.className=
+            "planner-message";
 
-    const destination=destinations.find((item)=>{
-        return item._id===destinationInput.value;
-    });
+        const destination=
+            destinations.find(
+                (item)=>{
+                    return(
+                        item._id===
+                        destinationInput.value
+                    );
+                }
+            );
 
-    const days=Number(daysInput.value);
-    const travelers=Number(travelersInput.value);
-    const budget=Number(budgetInput.value);
-    const interests=getSelectedInterests();
+        const days=
+            Number(
+                daysInput.value
+            );
 
-    if(!destination){
-        plannerMessage.textContent=
-            "Please select a destination.";
+        const travelers=
+            Number(
+                travelersInput.value
+            );
 
-        plannerMessage.classList.add("error");
-        return;
+        const budget=
+            Number(
+                budgetInput.value
+            );
+
+        const interests=
+            getSelectedInterests();
+
+        if(!destination){
+            plannerMessage.textContent=
+                "Please select a destination.";
+
+            plannerMessage.classList.add(
+                "error"
+            );
+
+            return;
+        }
+
+        if(
+            days<1||
+            days>15
+        ){
+            plannerMessage.textContent=
+                "Number of days must be between 1 and 15.";
+
+            plannerMessage.classList.add(
+                "error"
+            );
+
+            return;
+        }
+
+        if(travelers<1){
+            plannerMessage.textContent=
+                "At least one traveler is required.";
+
+            plannerMessage.classList.add(
+                "error"
+            );
+
+            return;
+        }
+
+        if(budget<1000){
+            plannerMessage.textContent=
+                "Please enter a valid travel budget.";
+
+            plannerMessage.classList.add(
+                "error"
+            );
+
+            return;
+        }
+
+        renderItinerary(
+            destination,
+            days,
+            travelers,
+            budget,
+            interests
+        );
+
+        saveTripButton.style.display=
+            "inline-flex";
+
+        saveTripMessage.textContent="";
     }
-
-    if(days<1||days>15){
-        plannerMessage.textContent=
-            "Number of days must be between 1 and 15.";
-
-        plannerMessage.classList.add("error");
-        return;
-    }
-
-    if(travelers<1){
-        plannerMessage.textContent=
-            "At least one traveler is required.";
-
-        plannerMessage.classList.add("error");
-        return;
-    }
-
-    if(budget<1000){
-        plannerMessage.textContent=
-            "Please enter a valid travel budget.";
-
-        plannerMessage.classList.add("error");
-        return;
-    }
-
-    renderItinerary(
-        destination,
-        days,
-        travelers,
-        budget,
-        interests
-    );
-
-    saveTripButton.style.display="inline-flex";
-    saveTripMessage.textContent="";
-});
+);
 
 [
     destinationInput,
@@ -492,65 +694,178 @@ plannerForm.addEventListener("submit",(event)=>{
     budgetInput,
     travelStyleInput
 ].forEach((element)=>{
-    element.addEventListener("input",updatePreview);
-    element.addEventListener("change",updatePreview);
+    element.addEventListener(
+        "input",
+        updatePreview
+    );
+
+    element.addEventListener(
+        "change",
+        updatePreview
+    );
 });
 
-document.addEventListener("DOMContentLoaded",()=>{
-    const today=new Date().toISOString().split("T")[0];
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+        const today=
+            new Date()
+                .toISOString()
+                .split("T")[0];
 
-    startDateInput.min=today;
-    startDateInput.value=today;
+        startDateInput.min=
+            today;
 
-    updatePreview();
-    loadDestinationOptions();
-});
+        startDateInput.value=
+            today;
 
-saveTripButton.addEventListener("click",async()=>{
-    if(!generatedTripPlan){
-        return;
+        updatePreview();
+
+        loadDestinationOptions();
     }
+);
 
-    saveTripButton.disabled=true;
-    saveTripButton.textContent="Saving...";
-    saveTripMessage.textContent="";
+function getStoredAuthToken(){
+    return(
+        localStorage.getItem(
+            "tripfusion_token"
+        )||
+        localStorage.getItem(
+            "token"
+        )||
+        localStorage.getItem(
+            "authToken"
+        )||
+        ""
+    );
+}
 
-    try{
-        const response=await fetch(
-            `${API_BASE_URL}/trip-plans`,
-            {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                credentials:"include",
-                body:JSON.stringify(generatedTripPlan)
-            }
-        );
-
-        const result=await response.json();
-
-        if(!response.ok){
-            throw new Error(
-                result.message||
-                "Unable to save trip plan"
-            );
+saveTripButton.addEventListener(
+    "click",
+    async()=>{
+        if(!generatedTripPlan){
+            return;
         }
 
+        const token=
+            getStoredAuthToken();
+
+        if(!token){
+            saveTripMessage.textContent=
+                "Please log in before saving your trip.";
+
+            saveTripMessage.className=
+                "planner-message error";
+
+            setTimeout(()=>{
+                window.location.href=
+                    "./login.html";
+            },700);
+
+            return;
+        }
+
+        saveTripButton.disabled=
+            true;
+
+        saveTripButton.textContent=
+            "Saving...";
+
         saveTripMessage.textContent=
-            "Trip plan saved successfully.";
+            "";
 
-        saveTripMessage.className=
-            "planner-message success";
+        try{
+            const response=await fetch(
+                `${API_BASE_URL}/trip-plans`,
+                {
+                    method:"POST",
 
-        saveTripButton.textContent="Trip Saved";
-    }catch(error){
-        saveTripMessage.textContent=error.message;
+                    headers:{
+                        "Content-Type":
+                            "application/json",
 
-        saveTripMessage.className=
-            "planner-message error";
+                        "Accept":
+                            "application/json",
 
-        saveTripButton.disabled=false;
-        saveTripButton.textContent="Save Trip Plan";
+                        "Authorization":
+                            `Bearer ${token}`
+                    },
+
+                    credentials:
+                        "include",
+
+                    body:JSON.stringify(
+                        generatedTripPlan
+                    )
+                }
+            );
+
+            const result=
+                await response.json();
+
+            if(
+                response.status===401
+            ){
+                localStorage.removeItem(
+                    "tripfusion_token"
+                );
+
+                localStorage.removeItem(
+                    "token"
+                );
+
+                localStorage.removeItem(
+                    "authToken"
+                );
+
+                localStorage.removeItem(
+                    "tripfusion_user"
+                );
+
+                saveTripMessage.textContent=
+                    result.message||
+                    "Your login session has expired. Please log in again.";
+
+                saveTripMessage.className=
+                    "planner-message error";
+
+                setTimeout(()=>{
+                    window.location.href=
+                        "./login.html";
+                },900);
+
+                return;
+            }
+
+            if(!response.ok){
+                throw new Error(
+                    result.message||
+                    "Unable to save trip plan"
+                );
+            }
+
+            saveTripMessage.textContent=
+                "Trip plan saved successfully.";
+
+            saveTripMessage.className=
+                "planner-message success";
+
+            saveTripButton.textContent=
+                "Trip Saved";
+
+        }catch(error){
+            saveTripMessage.textContent=
+                error.message||
+                "Unable to save trip plan";
+
+            saveTripMessage.className=
+                "planner-message error";
+
+            saveTripButton.disabled=
+                false;
+
+            saveTripButton.textContent=
+                "Save Trip Plan";
+        }
     }
-});
+);

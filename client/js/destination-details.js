@@ -817,10 +817,12 @@ async function loadDestinationDetails(){
             );
         }
 
-        const response=await fetch(
+        const response=await fetchTripFusionAPI(
             `${API_BASE_URL}/destinations/${
                 encodeURIComponent(destinationId)
-            }`
+            }`,
+            {},
+            15000
         );
 
         const result=await response.json();
@@ -842,7 +844,10 @@ async function loadDestinationDetails(){
         loadingElement.style.display="none";
 
         errorElement.style.display="block";
-        errorElement.textContent=error.message;
+        errorElement.textContent=
+            error.name==="AbortError"
+                ?"The server is taking longer than expected. Please refresh once."
+                :error.message;
 
         console.error(
             "Destination details error:",

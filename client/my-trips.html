@@ -34,41 +34,31 @@
     <a href="./profile.html">Profile</a>
 </nav>
         <div class="nav-actions">
+            <a
+                href="./login.html"
+                class="login-button"
+                data-auth="login"
+            >
+                Login
+            </a>
 
-    <a
-        href="./login.html"
-        class="login-button"
-        data-auth="login"
-    >
-        Login
-    </a>
+            <a
+                href="./register.html"
+                class="register-button"
+                data-auth="register"
+            >
+                Register
+            </a>
 
-    <a
-        href="./register.html"
-        class="register-button"
-        data-auth="register"
-    >
-        Register
-    </a>
-
-    <button
-    type="button"
-    id="download-pdf-button"
-    class="primary-button"
->
-    Download PDF
-</button>
-
-    <button
-        type="button"
-        class="login-button"
-        data-auth="logout"
-        style="display:none"
-    >
-        Logout
-    </button>
-
-</div>
+            <button
+                type="button"
+                class="login-button"
+                data-auth="logout"
+                style="display:none"
+            >
+                Logout
+            </button>
+        </div>
     </header>
 
     <main class="my-trips-page">
@@ -124,9 +114,11 @@
         </div>
     </footer>
 
-    <script src="./js/config.js"></script>
-    <script src="./js/my-trips.js"></script>
+    <script src="./js/config.js?v=8"></script>
+    <script src="./js/my-trips.js?v=8"></script>
     <script src="./js/chat-assistant.js"></script>
+
+    <script src="./js/navbar-auth.js?v=8"></script>
 
 </body>
 </html>
