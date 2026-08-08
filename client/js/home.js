@@ -1,52 +1,109 @@
-const menuButton=document.getElementById("menu-button");
-const navigation=document.getElementById("nav-links");
-const statusText=document.getElementById("server-status");
-const statusDot=document.getElementById("status-dot");
+const menuButton=
+    document.getElementById(
+        "menu-button"
+    );
 
-menuButton?.addEventListener("click",()=>{
-    navigation?.classList.toggle("active");
-});
+const navigation=
+    document.getElementById(
+        "nav-links"
+    );
 
-document.querySelectorAll(".nav-links a").forEach((link)=>{
-    link.addEventListener("click",()=>{
-        navigation?.classList.remove("active");
+const statusText=
+    document.getElementById(
+        "server-status-text"
+    );
+
+const statusDot=
+    document.getElementById(
+        "server-status-dot"
+    );
+
+menuButton?.addEventListener(
+    "click",
+    ()=>{
+        navigation?.classList.toggle(
+            "active"
+        );
+    }
+);
+
+document
+    .querySelectorAll(
+        ".nav-links a"
+    )
+    .forEach((link)=>{
+
+        link.addEventListener(
+            "click",
+            ()=>{
+                navigation?.classList.remove(
+                    "active"
+                );
+            }
+        );
     });
-});
 
 async function checkBackendConnection(){
-    if(!statusText||!statusDot){
+
+    if(
+        !statusText||
+        !statusDot
+    ){
         return;
     }
 
     statusText.textContent=
         "Connecting to TripFusion...";
 
-    const controller=new AbortController();
-    const timeoutId=setTimeout(
-        ()=>controller.abort(),
-        15000
+    statusDot.classList.remove(
+        "connected",
+        "disconnected"
     );
 
-    try{
-        const response=await fetch(
-            `${API_BASE_URL}/health`,
-            {
-                signal:controller.signal,
-                cache:"no-store"
-            }
+    const controller=
+        new AbortController();
+
+    const timeoutId=
+        setTimeout(
+            ()=>{
+                controller.abort();
+            },
+            15000
         );
 
+    try{
+
+        const response=
+            await fetch(
+                `${API_BASE_URL}/health`,
+                {
+                    method:"GET",
+
+                    headers:{
+                        "Accept":
+                            "application/json"
+                    },
+
+                    signal:
+                        controller.signal,
+
+                    cache:
+                        "no-store"
+                }
+            );
+
         if(!response.ok){
+
             throw new Error(
                 "Backend returned an error"
             );
         }
 
-        const data=await response.json();
+        const data=
+            await response.json();
 
         statusText.textContent=
-            data.message||
-            "TripFusion backend is connected";
+            "Successfully connected to server";
 
         statusDot.classList.add(
             "connected"
@@ -55,11 +112,27 @@ async function checkBackendConnection(){
         statusDot.classList.remove(
             "disconnected"
         );
+
+        console.log(
+            "TripFusion backend connected:",
+            data
+        );
+
     }catch(error){
-        statusText.textContent=
-            error.name==="AbortError"
-                ?"Server is waking up. You can continue using the website and try again shortly."
-                :"Unable to connect to the TripFusion backend";
+
+        if(
+            error.name===
+            "AbortError"
+        ){
+
+            statusText.textContent=
+                "Server is taking longer than expected to respond.";
+
+        }else{
+
+            statusText.textContent=
+                "Unable to connect to server";
+        }
 
         statusDot.classList.add(
             "disconnected"
@@ -73,9 +146,16 @@ async function checkBackendConnection(){
             "Backend connection error:",
             error
         );
+
     }finally{
-        clearTimeout(timeoutId);
+
+        clearTimeout(
+            timeoutId
+        );
     }
 }
 
-checkBackendConnection();
+document.addEventListener(
+    "DOMContentLoaded",
+    checkBackendConnection
+);
